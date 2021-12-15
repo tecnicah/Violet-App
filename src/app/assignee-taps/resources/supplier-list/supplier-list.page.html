@@ -1,0 +1,73 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Supplier List</p>
+    <img src="/assets/icon/bot_n_supplier_list.svg" style="width: 45px;" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Supplier List</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/bot_n_supplier_list.svg" style="width: 45px;" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="8">
+        <ion-searchbar mode="ios" [(ngModel)]="userFilter.supplierPartner"></ion-searchbar>
+        <ion-icon name="search-outline" id="search_icon"></ion-icon>
+      </ion-col>
+      <ion-col size="2"  class="align__end padding flex_filter">
+        <button mat-icon-button (click)="reload()" style="background-color: transparent;">
+          <mat-icon>cached</mat-icon>
+        </button>
+      </ion-col>
+      <ion-col size="2" class="align__end padding flex_filter" (click)="openFilter()">
+        <img src="/assets/icon/icon_filters.svg" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+
+
+
+    <!--ion-item *ngFor="let item of data | filterBy: userFilter;">
+        <ion-label>
+          <p class="h4">{{item.supplierPartner}}</p>
+          <p class="h4">{{item.supplierPartnerType}}</p>
+          <p class="h4">{{item.name}}</p>
+        </ion-label>
+      </ion-item-->
+
+    <ion-card *ngFor="let item of data | filterBy: userFilter;" matRipple matRippleColor="rgba(158, 53, 149, 0.5)"
+      (click)='viewSupplier(item)'>
+      <ion-row>
+        <ion-col size="12">
+          <div class="topdiv">
+            <b class="h15 gray">Supplier Partner</b><br>
+            <span class="h12 top">{{item.supplierPartner}}<br></span>
+            <span class="h15 top blue">{{item.supplierPartnerType}}<br></span>
+            <span class="h15 top blue">{{item.city}}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-item *ngIf="(data | filterBy: userFilter).length === 0">
+      <ion-label>
+        <h2>No matching elements</h2>
+      </ion-label>
+    </ion-item>
+
+
+  </div>
+
+</ion-content>

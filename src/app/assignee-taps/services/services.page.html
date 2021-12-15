@@ -1,0 +1,132 @@
+<ion-header mode="ios">
+  <div class="header_imm" *ngIf="servicesType == 1" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Immigration Services</p>
+    <img src="/assets/icon/immigration_services.svg" style="width: 45px;" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Immigration Services</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/immigration_services.svg" style="width: 45px;" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="header_rel" *ngIf="servicesType == 2" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Relocation Services</p>
+    <img src="/assets/icon/relocation_services.svg" style="width: 45px;" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Relocation Services</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/relocation_services.svg" style="width: 45px;" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="services" [ngClass]="{'pading_ios': service.padingios}">
+    <ion-row>
+      <ion-col size="8" offset="2">
+        <ion-segment [(ngModel)]="servicesType" (ngModelChange)="change()">
+          <ion-segment-button [value]="1">
+            Immigration
+          </ion-segment-button>
+          <ion-segment-button [value]="2">
+            Relocation
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="6">
+        <ion-item class="filter">
+          <ion-label position="floating">Delivered To</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="All" [(ngModel)]="filtes.deliveryTo" (ngModelChange)="change()">
+            <ion-select-option value="null">All</ion-select-option>
+            <ion-select-option *ngFor="let item of caDependet" [value]="item.id">{{item.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item class="filter">
+          <ion-label position="floating">Status</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="All" [(ngModel)]="filtes.status" (ngModelChange)="change()">
+            <ion-select-option value="null">All</ion-select-option>
+            <ion-select-option *ngFor="let item of caStatus" [value]="item.id">{{item.status}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+    <br>
+
+    <ion-row>
+      <ion-col size="12">
+        <span class="title_general_black">Home Country: {{getNationality(userData.homeCountryId)}}</span>
+      </ion-col>
+    </ion-row>
+
+    <br>
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" *ngFor="let item of services.home" (click)="switchModal(item, 1)">
+      <ion-row>
+        <ion-col size="2">
+          <img src="/assets/icon/imm.svg" *ngIf="servicesType == 1" class="avatar">
+          <img src="/assets/icon/relocation.svg" *ngIf="servicesType == 2" class="avatar">
+        </ion-col>
+        <ion-col size="10">
+          <span class="subtitle_general_black">{{item.service_name}}</span><br>
+          <span class="h15 gray" *ngIf="show_name_assignee">Delivered To <span class="h12">{{item.deliveredTo}} /
+              {{(getName(item.deliveredToId).length>13) ?  (getName(item.deliveredToId) | slice:0:13)+'..': getName(item.deliveredToId)}}</span><br></span>
+          <span class="h15 gray" *ngIf="!show_name_assignee">Delivered To <span class="h12">{{item.deliveredTo}} /
+              {{getName(item.deliveredToId)}}</span><br></span>
+          <span class="h15 gray">Status <span class="h12">{{item.statusService}}</span></span><br>
+          <span class="h15 gray">Country <span class="h12">{{item.country}}</span></span><br>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <br>
+
+    <ion-row>
+      <ion-col size="12">
+        <span class="title_general_black">Host Country {{getNationality(userData.hostCountry)}}</span>
+      </ion-col>
+    </ion-row>
+
+    <br>
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" *ngFor="let item of services.host" (click)="switchModal(item, 2)">
+      <ion-row>
+        <ion-col size="2">
+          <img src="/assets/icon/imm.svg" *ngIf="servicesType == 1" class="avatar">
+          <img src="/assets/icon/relocation.svg" *ngIf="servicesType == 2" class="avatar">
+        </ion-col>
+        <ion-col size="10">
+          <span class="subtitle_general_black">{{item.service_name}}</span><br>
+          <span class="h15 gray" *ngIf="show_name_assignee">Delivered To <span class="h12">{{item.deliveredTo}} /
+              {{(getName(item.deliveredToId).length>13) ?  (getName(item.deliveredToId) | slice:0:13)+'..': getName(item.deliveredToId)}}</span><br></span>
+          <span class="h15 gray" *ngIf="!show_name_assignee">Delivered To <span class="h12">{{item.deliveredTo}} /
+              {{getName(item.deliveredToId)}}</span><br></span>
+          <span class="h15 gray">Status: <span class="h12">{{item.statusService}}</span></span><br>
+          <span class="h15 gray">Country: <span class="h12">{{item.country}}</span></span><br>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+</ion-content>

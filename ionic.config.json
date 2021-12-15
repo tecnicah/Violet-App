@@ -1,0 +1,7 @@
+{
+  "name": "premier-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

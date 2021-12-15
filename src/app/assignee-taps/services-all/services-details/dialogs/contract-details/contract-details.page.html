@@ -1,0 +1,185 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Contract Details</p>
+    <img src="/assets/icon/contract.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Lease Start Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="data_.leaseStartDate">
+          </ion-datetime>
+          <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Lease End Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="data_.leaseEndDate">
+          </ion-datetime>
+          <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Payments Due</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="data_.paymentsDue">
+          </ion-datetime>
+          <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6"></ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">List Rent Price </ion-label>
+          <ion-input placeholder="List Rent Price" type="number" [(ngModel)]="data_.listRentPrice">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Currency</ion-label>
+          <ion-select interface="action-sheet" mode="ios" [(ngModel)]="data_.currency">
+            <ion-select-option *ngFor="let item of ca_currency" [value]="item.id">{{item.currency}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Final Rent Price </ion-label>
+          <ion-input placeholder="Final Rent Price " type="number" [(ngModel)]="data_.finalRentPrice">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Currency</ion-label>
+          <ion-select interface="action-sheet" mode="ios" [(ngModel)]="data_.currencyFinal">
+            <ion-select-option *ngFor="let item of ca_currency" [value]="item.id">{{item.currency}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <br>
+    <br>
+    <ion-row>
+      <ion-col size="7">
+        <span class="title_general_black">Property Expenses</span>
+      </ion-col>
+      <ion-col size="3" class="flexdosts"></ion-col>
+      <ion-col size="2">
+        <img src="/assets/icon/icon_add.svg" *ngIf="!addReminder_" (click)="addReminder_ = !addReminder_"
+          style="height: 100%;" class="btn_size">
+        <img src="/assets/icon/icon_cancel.svg" *ngIf="addReminder_" (click)="addReminder_ = !addReminder_"
+          style="height: 100%; transform: rotate(45deg);" class="btn_size">
+      </ion-col>
+
+      <!---------------------------------------------------------------------------->
+      <!--MODAL PARA AGREGAR EXPENSES-->
+      <div class="editable" *ngIf="addReminder_">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Expense</ion-label>
+              <ion-input placeholder="Expense" type="text" [(ngModel)]="reminder_data.expense">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Amount</ion-label>
+              <ion-input placeholder="Amount" type="number" [(ngModel)]="reminder_data.amount">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Currency</ion-label>
+              <ion-select interface="action-sheet" mode="ios" [(ngModel)]="reminder_data.currency">
+                <ion-select-option *ngFor="let item of ca_currency" [value]="item.id">{{item.currency}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Recurrence</ion-label>
+              <ion-select interface="action-sheet" mode="ios" [(ngModel)]="reminder_data.recurrence">
+                <ion-select-option *ngFor="let item of ca_duration" [value]="item.id">{{item.recurrence}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Included</ion-label>
+              <ion-select interface="action-sheet" mode="ios" [(ngModel)]="reminder_data.included">
+                <ion-select-option [value]=true>Yes</ion-select-option>
+                <ion-select-option [value]=false>No</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6" offset="3">
+            <ion-button class="buttom buttom__btn_login" [disabled]="reminder_data.expense == null || reminder_data.amount == undefined || reminder_data.amount == undefined
+                || reminder_data.included == undefined || reminder_data.included == recurrence" (click)="addExpense()">
+              Add
+              Expense</ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!---------------------------------------------------------------------------->
+
+      <ion-col size="12">
+        <div class="activitie" *ngFor="let item of data_.propertyExpenses">
+          <ion-list lines="none">
+            <ion-item-sliding>
+              <ion-item>
+                <ion-row class="width">
+                  <ion-col size="3">
+                    <img src="/assets/icon/payment_C.svg" class="avatar">
+                  </ion-col>
+                  <ion-col size="9">
+                    <span class="h15 gray">Expense
+                      <span class="h12">{{item.expense}}</span>
+                    </span><br>
+                    <span class="h15 gray">Amount
+                      <span class="h12">{{item.amount | currency}}</span>
+                    </span><br>
+                    <span class="h15 gray">Recurrence
+                      <span class="gray">{{getRecurrence(item.recurrence)}}</span>
+                    </span>
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+              <ion-item-options (click)="deleteDocument(item.id, i)">
+                <ion-item-option color="danger">
+                  <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+    <!------------------------------------------------------------------------------------------->
+    <ion-row>
+      <ion-col size="6" offset="2.5">
+        <ion-button class="buttom_ buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

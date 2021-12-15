@@ -1,0 +1,718 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Profile</p>
+    <img src="/assets/icon/group_2.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+<ion-content *ngIf="profileConsultant != undefined" [scrollEvents]="true" (ionScroll)="Scroll($event)">
+  <div class="appointments">
+    <!-- user -->
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-row>
+            <ion-col size="12">
+              <span class="h9">ID - {{profileConsultant.id}}</span>
+            </ion-col>
+            <ion-col size="4">
+              <div class="avatares">
+                <div class="content">
+                  <img src="{{service.url_images}}{{profileConsultant.photo}}" fallimg="avatar" class="img __border__">
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <span class="h15 gray">Name <span class="h12"> {{profileConsultant.name}}</span></span><br>
+              <span class="h15 gray">Title <span class="h12">
+                  {{profileConsultant.titleNavigation.title}}</span></span><br>
+              <span class="h15 gray" *ngxPermissionsOnly="['2', '3']">Supplier Partner <span class="h12">
+                  {{profileConsultant.supplierPartner}}</span><br></span>
+              <span class="h15 gray">Total Services <span class="h12"> {{profileConsultant.name}}</span> </span><br>
+              <span class="h15 gray">Vip <span class="h12">{{profileConsultant.vip}}</span></span><br>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <br>
+    <br>
+    <!-- my team -->
+    <ion-row *ngxPermissionsOnly="['1', '2', '19']">
+      <ion-col size="9">
+        <span class="title_general_black"> My Team</span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)="addOperationLeader()">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+      <ion-col size="12">
+        <span class="subtitle_general_black">Operation Leaders</span>
+      </ion-col>
+      <!-- card -->
+      <ion-col size="12">
+        <ion-card *ngFor="let item of profileConsultant.operationLeaderCreatedByNavigations">
+          <ion-row>
+            <ion-col size="3">
+              <div class="avatares">
+                <div class="content">
+                  <img src="{{service.url_images}}{{item?.consultantNavigation?.photo}}" fallimg="avatar"
+                  class="img-second img __border__">
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size="5">
+              <span class="h15 gray" *ngIf="!show_name_assignee">Manager <br> <span
+                  class="h12">{{item?.consultantNavigation?.name}}
+                  {{item?.consultantNavigation?.lastName}}</span><br></span>
+              <span class="h15 gray" *ngIf="!show_name_assignee">Country <br> <span
+                  class="h12">{{nameCountry(item?.consultantNavigation?.country)}}</span><br></span>
+              <span class="h15 gray" *ngIf="show_name_assignee">Manager <br> <span
+                  class="h12">{{item?.consultantNavigation?.name}}
+                  {{item?.consultantNavigation?.lastName}}</span><br></span>
+              <span class="h15 gray" *ngIf="show_name_assignee">Country <br> <span
+                  class="h12">{{nameCountry(item?.consultantNavigation?.country)}}</span><br></span>
+            </ion-col>
+            <ion-col size="2" class="flexdosts">
+              <ion-fab>
+                <ion-fab-button size="small" class="btn_fab_size">
+                  <ion-icon name="call" class="btn_fab_size__icon"
+                    (click)="call(item?.consultantNavigation.phoneNumber, 'cell phone number of '+item?.consultantNavigation.name)">
+                  </ion-icon>
+                </ion-fab-button>
+              </ion-fab>
+            </ion-col>
+            <ion-col size="2" class="flexdosts">
+              <ion-fab>
+                <ion-fab-button size="small" class="btn_fab_size"
+                  (click)="sendMessage(item?.consultantNavigation.userId)">
+                  <ion-icon name="chatbox" class="btn_fab_size__icon"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <br>
+      <br>
+    </ion-row>
+
+
+    <!-- Assigned Team -->
+    <ion-row *ngxPermissionsOnly="['1', '19']">
+      <ion-col size="9">
+        <span class="title_general_black"> Assigned Team </span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)="addAssignedTea()">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+      <!-- card -->
+      <ion-col size="12">
+        <ion-card *ngFor="let item of profileConsultant.operationLeaderConsultantNavigations">
+          <ion-row>
+            <ion-col size="3">
+              <div class="avatares">
+                <div class="content">
+                  <img src="{{service.url_images}}{{item?.photo}}" fallimg="avatar" class="img img-second __border__">
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size="5">
+              <span class="h15 gray">Name <br> <span class="h12">{{item.consultant}}</span><br></span>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <br>
+      <br>
+    </ion-row>
+
+    <!-- Client -->
+    <ion-row *ngxPermissionsOnly="['1', '2', '19']">
+      <ion-col size="12">
+        <span class="title_general_black"> Clients </span>
+      </ion-col>
+      <!-- card -->
+      <ion-col size="12">
+        <ion-card *ngFor="let item of ca_cliente">
+          <ion-row>
+            <ion-col size="3">
+              <div class="avatares">
+                <div class="content">
+                  <img src="{{service.url_images}}{{item?.photo}}" fallimg="avatar" class="img __border__">
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size="5">
+              <span class="h15 gray">Name <br> <span class="h12">{{item.name}}</span><br></span>
+              <span class="h15 gray">Country <br> <span class="h12">{{item.country}}</span><br></span>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <br>
+      <br>
+    </ion-row>
+
+    <!-- Offices -->
+    <ion-row *ngxPermissionsOnly="['1', '2', '19']">
+      <ion-col size="9">
+        <span class="title_general_black"> Offices </span>
+      </ion-col>
+
+      <ion-col size="3" class="align__end" (click)="addOffice()">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+      <!-- card -->
+      <ion-col size="12">
+        <ion-card *ngFor="let item of profileConsultant.offices">
+          <ion-row>
+            <ion-col size="3">
+              <div class="avatares">
+                <div class="content">
+                  <img src="{{service.url_images}}{{getPhoto(item.office1)}}" fallimg="avatar" class="img __border__">
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size="5">
+              <span class="h15 gray">Office <br> <span class="h12">{{getOffice(item.office1)}}</span><br></span>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <br>
+      <br>
+    </ion-row>
+
+    <!-- County services -->
+    <ion-row *ngxPermissionsOnly="['1', '2', '19']">
+      <ion-col size="9">
+        <span class="title_general_black"> Country of Services</span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)="addCountry()">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+      <!-- card -->
+      <ion-col size="12">
+        <ion-card *ngFor="let item of profileConsultant.countryServices">
+          <ion-row>
+            <ion-col size="3">
+              <div class="avatares">
+                <div class="content">
+                  <img src="{{service.url_images}}{{item?.photo}}" fallimg="avatar" class="img __border__">
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size="5">
+              <span class="h15 gray">Country <br> <span class="h12">{{getCountry(item.country)}}</span><br></span>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <br>
+      <br>
+    </ion-row>
+
+    <!-- vehicle -->
+    <ion-row>
+      <ion-col size="9" class="flexdosts">
+        <span class="title_general_black"> Vehicle</span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)="addVehicle()">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+      <!-- inf vehicle -->
+      <ion-col size="12">
+        <div class="activitie" *ngFor="let item of vehicleConsultants; let i = index">
+          <ion-list lines="none">
+            <ion-item-sliding>
+              <ion-item (click)="editVehicle(item, i)">
+                <ion-row style="width: 100%;">
+                  <ion-col size="2" style="margin: auto;">
+                    <div class="avatares">
+                      <div class="content">
+                        <img src="/assets/icon/vehicle.svg" class="img">
+                      </div>
+                    </div>
+                  </ion-col>
+                  <ion-col size="10">
+                    <span class="h15 gray">Vehicle Type <span class="h12"> {{item.vehicleType}}</span> </span><br>
+                    <span class="h15 gray">Make <span class="h12">{{item.vehicleMake}}</span></span><br>
+                    <span class="h15 gray">Capacity <span class="h12">{{item.capacity}}</span> </span><br>
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+              <ion-item-options>
+                <ion-item-option color="danger">
+                  <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <br>
+    <br>
+
+    <!-- Personal Information -->
+    <ion-row>
+      <ion-col size="12">
+        <span class="title_general_black"> Personal Information </span>
+      </ion-col>
+    </ion-row>
+
+    <br>
+
+    <mat-accordion class="documentos">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <ion-row>
+              <ion-col size="12">
+                Personal Information
+              </ion-col>
+            </ion-row>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="appointments">
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Current Address</ion-label>
+                <ion-textarea [(ngModel)]="profileConsultant.personalInformation.currentAddress"></ion-textarea>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Country</ion-label>
+                <ion-select interface="action-sheet" mode="ios" placeholder="Country" (ngModelChange)="getCity()"
+                  [(ngModel)]="profileConsultant.personalInformation.country">
+                  <ion-select-option *ngFor="let data of ca_country" [value]="data.id">{{data.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">City</ion-label>
+                <ion-select interface="action-sheet" mode="ios" placeholder="City"
+                  [(ngModel)]="profileConsultant.personalInformation.city">
+                  <ion-select-option *ngFor="let data of ca_city" [value]="data.id">{{data.city}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Zip Code</ion-label>
+                <ion-input [(ngModel)]="profileConsultant.personalInformation.zipCode"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Date of Birth</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios"
+                  [(ngModel)]="profileConsultant.personalInformation.dateBirth"></ion-datetime>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Nationality</ion-label>
+                <ion-input placeholder="Nationality" [(ngModel)]="profileConsultant.personalInformation.nationality">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input placeholder="E-mail" type="text"
+                  [(ngModel)]="profileConsultant.personalInformation.personalEmail"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Personal Phone</ion-label>
+                <ion-input placeholder="Personal Phone" type="text"
+                  [(ngModel)]="profileConsultant.personalInformation.personalPhone"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Allergies</ion-label>
+                <ion-textarea placeholder="Allergies" type="text"
+                  [(ngModel)]="profileConsultant.personalInformation.allergies"></ion-textarea>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <br>
+    <br>
+
+    <!-- Education -->
+    <ion-row>
+      <ion-col size="12">
+        <span class="title_general_black"> Education </span>
+      </ion-col>
+    </ion-row>
+
+    <br>
+
+    <mat-accordion class="documentos">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <ion-row>
+              <ion-col size="12">
+                Education
+              </ion-col>
+            </ion-row>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="appointments">
+          <ion-row>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">School</ion-label>
+                <ion-input placeholder="School" type="text" [(ngModel)]="profileConsultant.personalInformation.school">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Mayor</ion-label>
+                <ion-input placeholder="Major" type="text" [(ngModel)]="profileConsultant.personalInformation.major">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Graduation Year</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios" placeholder="Graduation Year"
+                  [(ngModel)]="profileConsultant.personalInformation.graduation"></ion-datetime>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <br>
+    <br>
+
+
+    <!-- Hobbies -->
+    <ion-row>
+      <ion-col size="12">
+        <span class="title_general_black"> Hobbies & Passions </span>
+      </ion-col>
+    </ion-row>
+
+    <br>
+
+    <mat-accordion class="documentos">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <ion-row>
+              <ion-col size="12">
+                Hobbies & Passions
+              </ion-col>
+            </ion-row>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="appointments">
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Hobbies & Passions</ion-label>
+                <ion-textarea placeholder="Hobbies & Passions" type="text"
+                  [(ngModel)]="profileConsultant.personalInformation.hobbiesPassions"></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <br>
+    <br>
+
+    <!-- Emergency contact -->
+    <ion-row>
+      <ion-col size="9" class="flexdosts">
+        <span class="title_general_black"> Emergency Contact</span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)="addContact()">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+      <!-- inf  -->
+      <ion-col size="12">
+        <div class="activitie" *ngFor="let item of emergencyContacts; let i = index">
+          <ion-list lines="none">
+            <ion-item-sliding>
+              <ion-item (click)="editEmergencia(item,i)">
+                <ion-row style="width: 100%;">
+                  <ion-col size="2" style="margin: auto;">
+                    <div class="avatares">
+                      <div class="content">
+                        <img src="/assets/icon/icon_call_activo.svg" class="img">
+                      </div>
+                    </div>
+                  </ion-col>
+                  <ion-col size="10">
+                    <span class="h15 gray">Contact Name <span class="h12"> {{item.contactName}}</span> </span><br>
+                    <span class="h15 gray">Relationship <span
+                        class="h12">{{item?.relationshipNavigation?.relationship}}</span></span><br>
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+              <ion-item-options>
+                <ion-item-option color="danger">
+                  <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+    <!-- pricing -->
+
+    <br>
+    <br>
+
+
+    <!-- Personal Information -->
+    <ion-row>
+      <ion-col size="12">
+        <span class="title_general_black"> Payment Information </span>
+      </ion-col>
+    </ion-row>
+
+    <br>
+
+    <mat-accordion class="documentos">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <ion-row>
+              <ion-col size="12">
+                Payment Information
+              </ion-col>
+            </ion-row>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="appointments">
+          <ion-row *ngFor="let item_ of profileConsultant.personalInformation.paymentInformationProfiles">
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Account Type</ion-label>
+                <ion-select interface="action-sheet" mode="ios" placeholder="Account Type"
+                  [(ngModel)]="item_.accountType">
+                  <ion-select-option *ngFor="let item of ca_accountType" [value]="item.id">{{item.accountType}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Account Holders Name</ion-label>
+                <ion-input placeholder="Account Holders Name" type="text" [(ngModel)]="item_.accountHoldersName">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Bank Name</ion-label>
+                <ion-input placeholder="Bank Name" type="text" [(ngModel)]="item_.bankName"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Account Number</ion-label>
+                <ion-input placeholder="Account Number" type="number" [(ngModel)]="item_.accountNumber"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Routing Number (ABA)</ion-label>
+                <ion-input placeholder="Routing Number (ABA)" type="number" [(ngModel)]="item_.routingNumber">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">SWIFT/BIC Code (If Applies)</ion-label>
+                <ion-input placeholder="SWIFT / BIC Code ( If Applies)" [(ngModel)]="item_.swiftBicCode"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Currency</ion-label>
+                <ion-select interface="action-sheet" mode="ios" placeholder="Country" [(ngModel)]="item_.currency">
+                  <ion-select-option *ngFor="let data of ca_currency" [value]="data.id">{{data.currency}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Wire Fee Aprox</ion-label>
+                <ion-input placeholder="Wire Fee Approx" type="number" [(ngModel)]="item_.wireFeeApprox"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Bank Address</ion-label>
+                <ion-textarea placeholder="Bank Address" type="text" [(ngModel)]="item_.bankAddress"></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <br>
+    <br>
+
+    <!--ion-row>
+      <ion-col size="12">
+        <span class="title_general_black">Pricing</span>
+      </ion-col>
+      <ion-col size="12">
+        <ion-card>
+          <ion-row>
+            <ion-col size="2">
+              <img src="./assets/logo/icon-menu.svg" fallimg="avatar" class="img-second">
+            </ion-col>
+            <ion-col size="10">
+              <span class="h15 gray">Amount Per Hour <span
+                  class="h12">{{profileConsultant.amountPerHour | currency}}</span> </span><br>
+              <span class="h15 gray">Currency <span class="h12">{{profileConsultant.currency}}</span></span><br>
+              <span class="h15 gray">Credit Terms <span class="h12">{{profileConsultant.creditTerms}}</span> </span><br>
+              <span class="h15 gray">Taxes Percentage <span class="h12">{{profileConsultant.taxesPercentage}}</span>
+              </span><br>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row-->
+
+    <!-- payment
+    <br>
+    <br>
+    -->
+
+    <!--ion-row>
+      <ion-col size="12">
+        <span class="title_general_black">Payment</span>
+      </ion-col>
+      <ion-col size="12">
+        <ion-card>
+          <ion-row>
+            <ion-col size="2">
+              <img src="./assets/logo/group_2.svg" fallimg="avatar" class="img-second">
+            </ion-col>
+            <ion-col size="10">
+              <span class="h15 gray">Credit Card <span class="h12"></span></span><br>
+              <span class="h15 gray">Wire Transfer <span
+                  class="h12">{{ paymentInf.wireTransfer == paymentInf.wireTransfer ? "Yes" : "No" }}</span></span><br>
+              <span class="h15 gray">Checks <span class="h12"></span></span><br>
+              <span class="h15 gray">Cash <span class="h12"></span></span><br>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row-->
+    
+    <!--
+    <br>
+    <br>
+    -->
+
+    <!-- Documents -->
+    <ion-row>
+      <ion-col size="9">
+        <span class="title_general_black">Documents</span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)='docs()'>
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+      <!-- inf Documents -->
+      <ion-col size="12">
+        <div class="activitie" *ngFor="let item of documentConsultant">
+          <ion-list lines="none">
+            <ion-item-sliding>
+              <ion-item (click)="viewDoc(item.filePath)">
+                <ion-row style="width: 100%;">
+                  <ion-col size="2" style="margin: auto;">
+                    <div class="avatares">
+                      <div class="content">
+                        <img src="/assets/icon/document_2.svg" class="img">
+                      </div>
+                    </div>
+                  </ion-col>
+                  <ion-col size="10">
+                    <span class="h15 gray">Document Type <span
+                        class="h12">{{ item.documentTypeNavigation.documentType}}</span>
+                    </span><br>
+                    <span class="h15 gray">
+                      <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+                      Uploaded
+                      <span class="h12">{{item.updatedDate | date : 'dd MMM yyy'}}</span>
+                    </span><br>
+                    <span class="h15 gray">
+                      <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+                      Expiration
+                      <span class="h12">{{item.expirationDate | date : 'dd MMM yyy'}}</span>
+                    </span><br>
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+              <ion-item-options>
+                <ion-item-option color="danger">
+                  <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        </div>
+      </ion-col>
+
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom buttom__btn_login" (click)="update_data();">Save</ion-button>
+      </ion-col>
+
+    </ion-row>
+
+  </div>
+</ion-content>

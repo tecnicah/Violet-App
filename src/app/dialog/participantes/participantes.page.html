@@ -1,0 +1,60 @@
+<ion-header>
+  <div [ngClass]="{'pading_ios': _services.padingios}">
+    <ion-row>
+      <ion-col size="2">
+        <div class="ct">
+          <ion-icon name="chevron-back" class="backicon" (click)="myBackButton()"></ion-icon>
+        </div>
+      </ion-col>
+
+      <ion-col size="8">
+        <div class="ct">
+          <span class="title">Participants</span>
+        </div>
+      </ion-col>
+
+      <ion-col size="2"></ion-col>
+    </ion-row>
+  </div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+    <span class="title_general_black">{{getName(homeCountry)}} - {{cadena_text}}</span>
+  </div>
+  
+  <div *ngFor="let item of participantes">
+    <ion-card>
+      <ion-row>
+        <ion-col size="2">
+          <div class="avatares">
+            <div class="content">
+              <img class="img" src="{{_services.url_images}}{{item.photo}}" fallimg="avatar">
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="6">
+          <span class="h15 gray">Coordinador</span>
+          <br>
+          <span class="h12">{{item.name}}</span>
+        </ion-col>
+
+        <ion-col size="2">
+
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-fab>
+            <ion-fab-button size="small" class="btn_fab_size" (click)="call(item.phoneNumber, item.name)">
+              <ion-icon name="call" class="btn_fab_size__icon"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-col>
+
+      </ion-row>
+    </ion-card>
+  </div>
+
+</ion-content>

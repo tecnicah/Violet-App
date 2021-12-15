@@ -1,0 +1,644 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="acordeon" *ngIf="view">
+    <!--------------------------assingne-------------------------------------->
+    <mat-accordion class="documentos" *ngIf="data.type == 5">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title (keydown.Space)="$event.stopImmediatePropagation();">
+            <ion-row>
+              <ion-col size="12">
+                <br>
+                <p class="title_general_black header2">Assignee</p>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Name (as shown on passport)</ion-label>
+                  <ion-input type="text" [(ngModel)]="info.assigneeName"></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="6" style="display: flex; justify-content: center; align-items: center;" (click)="photo()">
+                <div class='box'>
+                  <div class="content">
+                    <img src="../../../../assets/icon/icon_edit.svg" class="icon">
+                    <img src="{{service.url_images}}{{info.photo}}" *ngIf="info.photo != null && info.photo != ''"
+                      class="img __border__" fallimg="avatar">
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">Date of Birth</ion-label>
+                  <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.birth"
+                    (ngModelChange)="getAge(info.birth)"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Age</ion-label>
+                  <ion-input type="tel" [(ngModel)]="info.age"></ion-input>
+                </ion-item>
+                <br>
+              </ion-col>
+            </ion-row>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="documents">
+          <ion-row>
+            <ion-col size="10">
+              <p class="h8">Sex</p>
+              <mat-radio-group [(ngModel)]="info.sexId">
+                <mat-radio-button [value]=1>Female</mat-radio-button>
+                <mat-radio-button [value]=2>Male</mat-radio-button>
+              </mat-radio-group>
+            </ion-col>
+
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label stacked>Languages Spoken</ion-label>
+                <ion-select multiple="true" [(ngModel)]="info.family" mode="ios">
+                  <ion-select-option *ngFor="let item of caLanguages" [value]="item.id">{{item.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Nationality</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.nationalityId">
+                  <ion-select-option *ngFor="let item of caCountry" [value]="item.id">{{item.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Marital Status</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.maritalStatusId">
+                  <ion-select-option *ngFor="let item of caMaritalstatus" [value]="item.id">{{item.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">E-mail</ion-label>
+                <ion-input type="email" [(ngModel)]="info.email"></ion-input>
+                <mat-icon matSuffix class="email-icon">mail_outline</mat-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Mobile Phone</ion-label>
+                <ion-input type="tel" [(ngModel)]="info.mobilePhone"></ion-input>
+                <mat-icon matSuffix class="email-icon">local_phone</mat-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Work Phone</ion-label>
+                <ion-input type="tel" [(ngModel)]="info.workPhone"></ion-input>
+                <mat-icon matSuffix class="email-icon">local_phone</mat-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Current Job Position</ion-label>
+                <ion-input type="text" [(ngModel)]="info.currentPosition"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">New Job Position</ion-label>
+                <ion-input type="text" [(ngModel)]="info.newPosition"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Home Country (Current Residence)</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.homeCountryId">
+                  <ion-select-option *ngFor="let item of caCountry" [value]="item.id">{{item.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Home City (Current Residence)</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.homeCityId">
+                  <ion-select-option *ngFor="let item of caCity" [value]="item.id">{{item.city}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Host Country</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.hostCountry">
+                  <ion-select-option *ngFor="let item of caCountry" [value]="item.id">{{item.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Host City</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.hostCityId">
+                  <ion-select-option *ngFor="let item of caCity" [value]="item.id">{{item.city}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Policy Type</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.policyTypeId">
+                  <ion-select-option *ngFor="let item of caPolicyType" [value]="item.id">{{item.policyType}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Assignment Duration</ion-label>
+                <ion-input type="tel" [(ngModel)]="info.assignmentDuration"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Time</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.assignmentDurationTime">
+                  <ion-select-option *ngFor="let item of caDuration" [value]="item.id">{{item.duration}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Initial Arrival Date</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.initialArrival"></ion-datetime>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Final Move Date</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.finalMove"></ion-datetime>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!----------------------------spose--------------------------------------->
+    <mat-accordion class="documentos" *ngIf="data.type == 1">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title (keydown.Space)="$event.stopImmediatePropagation();">
+            <ion-row>
+              <ion-col size="12">
+                <br>
+                <p class="title_general_black header2">{{getRelationShip(info.relationshipId)}}</p>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Name (as shown on passport)</ion-label>
+                  <ion-input type="text" [(ngModel)]="info.name"></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="6" style="    display: flex; justify-content: center; align-items: center;" (click)="photo()">
+                <div class='box'>
+                  <div class="content">
+                    <img src="../../../../assets/icon/icon_edit.svg" class="icon">
+                    <img src="{{service.url_images}}{{info.photo}}" fallimg="avatar" class="img __border__">
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">Date of Birth</ion-label>
+                  <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.birth"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Age</ion-label>
+                  <ion-input type="tel" [(ngModel)]="info.age"></ion-input>
+                </ion-item>
+                <br>
+              </ion-col>
+            </ion-row>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="documents">
+          <ion-row>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label stacked>Languages Spoken</ion-label>
+                <ion-select multiple="true" [(ngModel)]="info.family" mode="ios">
+                  <ion-select-option *ngFor="let item of caLanguages" [value]="item.id">{{item.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Nationality</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.nationalityId">
+                  <ion-select-option *ngFor="let item of caCountry" [value]="item.id">{{item.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">E-mail</ion-label>
+                <ion-input type="email" [(ngModel)]="info.email"></ion-input>
+                <mat-icon matSuffix class="email-icon">mail_outline</mat-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Phone Number</ion-label>
+                <ion-input type="tel" [(ngModel)]="info.phone"></ion-input>
+                <mat-icon matSuffix class="email-icon">local_phone</mat-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-label style="color: gray;" class="h12" position="floating">Additional Comments</ion-label>
+              <ion-item class="ion-textarea">
+                <ion-textarea rows="4" [(ngModel)]="info.aditionalComments" maxlength="300"></ion-textarea>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!----------------------------child--------------------------------------->
+    <mat-accordion class="documentos" *ngIf="data.type == 2">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title (keydown.Space)="$event.stopImmediatePropagation();">
+            <ion-row>
+              <ion-col size="12">
+                <br>
+                <p class="title_general_black header2">{{getRelationShip(info.relationshipId)}}</p>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Name (as shown on passport)</ion-label>
+                  <ion-input type="text" [(ngModel)]="info.name"></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="6" (click)="photo()" style="display: flex; justify-content: center; align-items: center;">
+                <div class='box'>
+                  <div class="content">
+                    <img src="../../../../assets/icon/icon_edit.svg" class="icon">
+                    <img src="{{service.url_images}}{{info.photo}}" fallimg="avatar" class="img __border__">
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">Date of Birth</ion-label>
+                  <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.birth"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Age</ion-label>
+                  <ion-input type="tel" [(ngModel)]="info.age"></ion-input>
+                </ion-item>
+                <br>
+              </ion-col>
+            </ion-row>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="documents">
+          <ion-row>
+            <ion-col size="10">
+              <p class="h8">Sex</p>
+              <mat-radio-group aria-label="Select an option" [(ngModel)]="info.sex">
+                <mat-radio-button [value]=1>Female</mat-radio-button>
+                <mat-radio-button [value]=2>Male</mat-radio-button>
+              </mat-radio-group>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label stacked>Languages Spoken</ion-label>
+                <ion-select multiple="true" [(ngModel)]="info.family" mode="ios">
+                  <ion-select-option *ngFor="let item of caLanguages" [value]="item.id">{{item.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Nationality</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.nationalityId">
+                  <ion-select-option *ngFor="let item of caCountry" [value]="item.id">{{item.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Current Grade</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.currentGrade">
+                  <ion-select-option *ngFor="let item of caGrade" [value]="item.id">{{item.grade}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-label style="color: gray;" class="h12" position="floating">Additional Comments</ion-label>
+              <ion-item class="ion-textarea">
+                <ion-textarea rows="4" [(ngModel)]="info.aditionalComments" maxlength="300"></ion-textarea>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!----------------------------other--------------------------------------->
+    <mat-accordion class="documentos" *ngIf="data.type == 3">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title (keydown.Space)="$event.stopImmediatePropagation();">
+            <ion-row>
+              <ion-col size="12">
+                <br>
+                <p class="title_general_black header2">{{info.ifOther}}</p>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Name (as shown on passport)</ion-label>
+                  <ion-input type="text" [(ngModel)]="info.name"></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="6" style="    display: flex; justify-content: center; align-items: center;">
+                <div class='box'>
+                  <div class="content">
+                    <img src="../../../../assets/icon/icon_edit.svg" class="icon">
+                    <img src="{{service.url_images}}{{info.photo}}" fallimg="avatar" class="img __border__">
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">Date of Birth</ion-label>
+                  <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.birth"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Age</ion-label>
+                  <ion-input type="tel" [(ngModel)]="info.age"></ion-input>
+                </ion-item>
+                <br>
+              </ion-col>
+            </ion-row>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="documents">
+          <ion-row>
+            <ion-col size="10" hidden>
+              <p class="h8">Sex</p>
+              <mat-radio-group aria-label="Select an option" [(ngModel)]="info.sexId">
+                <mat-radio-button value="1">Female</mat-radio-button>
+                <mat-radio-button value="2">Male</mat-radio-button>
+              </mat-radio-group>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Languages Spoken</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.languagesId">
+                  <ion-select-option *ngFor="let item of caLanguages" [value]="item.id">{{item.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Nationality</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.nationalityId">
+                  <ion-select-option *ngFor="let item of caCountry" [value]="item.id">{{item.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12" hidden>
+              <ion-item>
+                <ion-label position="floating">Current Grade</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One">
+                  <ion-select-option *ngFor="let item of caGrade" [value]="item.id">{{item.grade}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-label style="margin-left: -20px; color: gray;" position="floating">Additional Comments</ion-label>
+              <ion-item class="ion-textarea">
+                <ion-textarea rows="6"
+                  placeholder="Schooling Preferences, Specific Educational Programs, Medical Conditions, etc."
+                  [(ngModel)]="info.aditionalComments"></ion-textarea>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!--------------------------------pet------------------------------------>
+    <mat-accordion class="documentos" *ngIf="data.type == 4">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title (keydown.Space)="$event.stopImmediatePropagation();">
+            <ion-row>
+              <ion-col size="12">
+                <br>
+                <p class="title_general_black header2">Pet</p>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Pet Name</ion-label>
+                  <ion-input type="text" [(ngModel)]="info.name"></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="6" (click)="photo()" style="display: flex; justify-content: center; align-items: center;">
+                <div class='box'>
+                  <div class="content">
+                    <img src="../../../../assets/icon/icon_edit.svg" class="icon">
+                    <img src="{{service.url_images}}{{info.photo}}" fallimg="avatar" class="img __border__">
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">Pet Type</ion-label>
+                  <ion-select mode="ios" placeholder="Select One" [interfaceOptions]="customActionSheetOptions"
+                    interface="action-sheet" [(ngModel)]="info.petTypeId" (ngModelChange)="getBreed()">
+                    <ion-select-option *ngFor="let item of caPetType" [value]="item.id">{{item.petType}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <br>
+              </ion-col>
+            </ion-row>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="documents">
+          <ion-row>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Breed</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.breedId">
+                  <ion-select-option *ngFor="let item of caBreed" [value]="item.id">{{item.breed}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Age</ion-label>
+                <ion-input type="tel" [(ngModel)]="info.age"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Size</ion-label>
+                <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="info.sizeId">
+                  <ion-select-option *ngFor="let item of caSize" [value]="item.id">{{item.size}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Weight</ion-label>
+                <ion-input type="tel" [(ngModel)]="info.weight"></ion-input>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!-----------------------------documents--------------------------------->
+    <div class="appointments">
+      <div class="documents2">
+        <ion-row>
+          <ion-col size="10" class="flex">
+            <p class="title_general_black">Documents</p>
+          </ion-col>
+          <ion-col size="2" class="align__end">
+            <img src="/assets/icon/icon_add.svg" style="height: 100%;" (click)="documentDialog()" class="btn_size">
+          </ion-col>
+        </ion-row>
+
+        <div class="activitie" *ngFor="let item of documents; let i = index">
+          <ion-list lines="none">
+            <ion-item-sliding (click)="viewDoc(item.id)">
+              <ion-item>
+                <ion-row class="width">
+                  <ion-col size="2">
+                    <img src="/assets/icon/document_2.svg" class="avatar">
+                  </ion-col>
+                  <ion-col size="10">
+                    <span class="subtitle_general_black">Document Type</span><br>
+                    <span class="h15 gray">
+                      <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Uploaded
+                      <span class="h12"> {{item.createdDate | date: 'dd MMM yyyy'}}</span>
+                    </span><br>
+                    <span class="h15 gray">
+                      <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Expiration
+                      <span class="h12"> {{item.expirationDate | date: 'dd MMM yyyy'}}</span>
+                    </span>
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+              <ion-item-options>
+                <ion-item-option color="danger" (click)="deleteDocument(item.id)">
+                  <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        </div>
+      </div>
+
+    </div>
+
+    <ion-row>
+      <ion-col size="6" offset="3" size-md="4" offset-md="4">
+        <ion-button class="buttom buttom__btn_login" (click)="save();">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

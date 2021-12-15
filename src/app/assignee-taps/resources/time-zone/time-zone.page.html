@@ -1,0 +1,46 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Time Zone</p>
+    <img src="/assets/icon/bot_n_time_zone.svg" alt="" class="img_header"-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Time Zone</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/bot_n_time_zone.svg" alt="" class="img_header">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+  <div *ngIf=" dataZone != undefined">
+    <ion-row>
+      <ion-col size="1"></ion-col>
+      <ion-col size="11" class="ion-text-left">
+        <span class="h5"><b> World clock </b></span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card *ngFor="let item of AllZone | orderBy: order">
+          <ion-row>
+            <ion-col size="8">
+              <span class="h11 gray">today, {{item.utc_offset}}</span><br>
+              <span class="h8"><b>{{item.timezone}}</b></span>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center flex">
+              <span class="h5 span-detail ">{{ item.datetime | slice:11:16}}</span>
+              <!-- | date:'shortTime' -->
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

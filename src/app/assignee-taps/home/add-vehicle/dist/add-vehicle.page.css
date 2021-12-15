@@ -1,0 +1,173 @@
+ion-content {
+  --background: rgb(221, 221, 221);
+}
+
+.header {
+  background-image: url("/assets/backgrounds/banner_morado.svg");
+  background-position: top;
+  background-size: cover;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  justify-content: space-between;
+  padding: 10%;
+}
+.header ion-icon {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -15px;
+}
+
+.headergray {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+  margin-top: -24px;
+}
+.headergray ::before {
+  content: " ";
+}
+
+.appointments {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+}
+.appointments .title-edit {
+  display: flex;
+  justify-content: space-between;
+}
+.appointments .title {
+  color: #4435A6;
+}
+.appointments .flex {
+  display: flex;
+  align-items: center;
+}
+.appointments ion-card {
+  border-radius: 15px;
+  padding: 5px;
+  color: #000;
+  margin: 20px 0;
+}
+
+.box {
+  width: 100%;
+  border-radius: 20%;
+  padding-top: 100%;
+  /* 1:1 Aspect Ratio */
+  position: relative;
+  /* If you want text inside of it */
+}
+.box .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 100%;
+  background-color: gray;
+}
+.box .content .img {
+  height: 100%;
+  width: 100%;
+}
+.box .content .redondo {
+  border-radius: 100%;
+}
+
+.gray {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.buttom {
+  text-transform: none;
+  border-radius: 18px;
+  width: 100%;
+}
+.buttom__btn_login {
+  background: #9D3292;
+}
+.buttom__btn_login:hover {
+  background: #56004E;
+}
+
+mat-expansion-panel-header {
+  height: 100% !important;
+}
+mat-expansion-panel-header .header2 {
+  color: #9D3292;
+}
+
+mat-expansion-panel {
+  margin-top: 0 !important;
+  border-radius: 0 0 30px 30px !important;
+}
+
+.box {
+  width: 100%;
+  border-radius: 20%;
+  padding-top: 100%;
+  /* 1:1 Aspect Ratio */
+  position: relative;
+  /* If you want text inside of it */
+}
+.box .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 100%;
+  background-color: gray;
+}
+.box .content .icon {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 30px;
+}
+.box .content .text {
+  position: absolute;
+  color: white;
+  left: 40%;
+  top: 12%;
+}
+.box .content .img {
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+}
+
+.activitie {
+  margin: 10px 0 10px 0;
+}
+.activitie ion-item-sliding {
+  border-radius: 15px;
+  padding: 15px;
+  color: #000;
+  background: white;
+}
+.activitie ion-list {
+  background: transparent;
+}
+
+.img__size {
+  width: 50%;
+  height: 50%;
+}
+
+.width {
+  width: 100%;
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+}

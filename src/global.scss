@@ -1,0 +1,789 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import '~ngx-bar-rating/themes/br-default-theme';
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import './theme/variables';
+@import './loader';
+@import './modals';
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+@font-face {
+    font-family: lato;
+    src: url("./assets/fuente/Lato-Regular.ttf");
+}
+
+.has-focus {
+    --highlight-background: #e2e2e2 !important;
+}
+
+*,
+body {
+    font-family: lato;
+    color: black;
+}
+
+ion-content {
+    --background: #ffffff;
+}
+
+.header {
+    p {
+        color: #ffffff;
+    }
+}
+
+ion-back-button {
+    color: #ffffff;
+}
+
+.h1 {
+    font-weight: bold;
+    font-size: 42px;
+}
+
+.h2 {
+    font-size: 42px;
+}
+
+.h3 {
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.h4 {
+    font-size: 32px;
+}
+
+.h5 {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 !important;
+}
+
+.h5_login {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.h6 {
+    font-size: 24px;
+}
+
+.h7 {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.h8 {
+    font-size: 14px;
+}
+
+.h9 {
+    //font-weight: bold;
+    font-size: 12px;
+}
+
+.h10 {
+    font-size: 14px;
+}
+
+.h11 {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.h12 {
+    font-size: 12px;
+}
+
+.h13 {
+    font-size: 18px;
+}
+
+.h14 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.h15 {
+    font-size: 10px;
+}
+
+.disabled {
+    background: transparent;
+}
+
+.disabled-text {
+    color: gray !important;
+}
+
+.mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: $purple-light !important;
+}
+
+.mat-form-field-type-mat-native-select .mat-form-field-infix::after {
+    color: $purple-light;
+}
+
+.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button .mat-datepicker-toggle-default-icon,
+.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button .mat-datepicker-toggle-default-icon {
+    color: $purple-light;
+}
+
+.mat-form-field-underline {
+    background-color: rgba(0, 0, 0, .1) !important;
+}
+
+/* Line on hover input */
+.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: $purple-light !important;
+    ;
+}
+
+.mat-expansion-panel-header {
+    height: 100px !important;
+}
+
+mat-expansion-panel {
+    border-radius: 25px !important;
+    margin-top: 30px !important;
+}
+
+ion-card {
+    --background: white;
+}
+
+
+.mat-expansion-indicator {
+    position: absolute !important;
+    top: 15px !important;
+    right: 25px !important;
+
+    &:after {
+        color: $purple-light !important;
+        padding: 4px !important;
+        border-width: 0px 3px 3px 0 !important;
+    }
+}
+
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-image: linear-gradient(to bottom, $purple-light, $purple-dark);
+    border-radius: 50%;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background: linear-gradient(to bottom, $purple-light, $purple-dark);
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: $purple-light;
+}
+
+[aria-checked=true].sc-ion-alert-md .alert-checkbox-icon.sc-ion-alert-md {
+    background-color: $purple-light;
+}
+
+[aria-checked=true].sc-ion-alert-ios .alert-checkbox-icon.sc-ion-alert-ios {
+    background-color: $purple-light !important;
+}
+
+[aria-checked=true].sc-ion-alert-ios .alert-checkbox-inner.sc-ion-alert-ios {
+    left: 8px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border-width: 2px;
+    border-top-width: 0;
+    border-left-width: 0;
+}
+
+[aria-checked=true].sc-ion-alert-md .alert-checkbox-inner.sc-ion-alert-md {
+    left: 8px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border-width: 2px;
+    border-top-width: 0;
+    border-left-width: 0;
+}
+
+.action-sheet-selected.sc-ion-action-sheet-ios::after {
+    background: $purple-light !important;
+}
+
+.action-sheet-selected.sc-ion-action-sheet-ios {
+    .action-sheet-button-inner.sc-ion-action-sheet-ios {
+        color: white;
+    }
+}
+
+.sc-ion-action-sheet-ios-h {
+    --button-color-selected: #ffffff;
+}
+
+.sc-ion-action-sheet-md-h {
+    --button-color-selected: #ffffff;
+}
+
+.action-sheet-group.sc-ion-action-sheet-ios {
+    background: white;
+}
+
+.action-sheet-button.sc-ion-action-sheet-ios::after {
+    background: white;
+}
+
+.alert-checkbox-icon.sc-ion-alert-ios {
+    background: white !important;
+}
+
+.alert-checkbox-label.sc-ion-alert-ios {
+    color: black;
+}
+
+.alert-title.sc-ion-alert-ios {
+    color: black;
+}
+
+.alert-title.sc-ion-alert-ios {
+    background: white !important;
+}
+
+[aria-checked=true].sc-ion-alert-ios .alert-checkbox-inner.sc-ion-alert-ios {
+    border-color: white !important;
+}
+
+.sc-ion-picker-ios-h {
+    --background: white;
+}
+
+ion-alert {
+    --background: white !important;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+ion-datetime {
+    font-size: 16px;
+    padding: 0;
+}
+
+ion-label {
+    font-size: 15px !important;
+    --color: gray !important;
+}
+
+ion-item {
+    --background: trasparent !important;
+}
+
+ion-checkbox {
+    --border-color: #9D3292 !important;
+    --border-radius: 100% !important;
+    --background: trasparent !important;
+    --background-checked: #9D3292 !important;
+    --border-color-checked: #9D3292 !important;
+    --checkmark-color: #ffffff !important;
+    ;
+}
+
+ion-back-button {
+    display: block;
+    font-size: inherit;
+    z-index: 9999;
+    //margin-top: -10px;
+}
+
+:host {
+    --background-checked: #9D3292 !important;
+    --border-color-checked: #9D3292 !important;
+}
+
+.ngx-file-drop__content {
+    color: grey !important;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.ngx-file-drop__drop-zone {
+    border: dashed $ligth !important;
+}
+
+.tips {
+    .swiper-pagination {
+        top: 90% !important;
+    }
+}
+
+.coments {
+    .swiper-pagination {
+        top: 90% !important;
+    }
+}
+
+.app {
+    .swiper-pagination {
+        top: 85% !important;
+    }
+}
+
+.swiper-pagination {
+    top: 250px !important;
+}
+
+.swiper-slide {
+    flex-direction: column !important;
+}
+
+.swiper-pagination-bullet {
+    background: gray !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: $purple-light !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.end {
+    text-align: end;
+}
+
+.hr {
+    width: 100%;
+    border-bottom: solid 1px gray;
+    position: absolute;
+    margin: 0 0 0 -20px;
+}
+
+ion-button {
+    text-transform: none;
+    --border-radius: 18px;
+    width: 100%;
+    color: white;
+}
+
+ion-checkbox {
+    margin: 0 5px 0 0;
+}
+
+ion-toolbar {
+    --background-color: transparent;
+    --ion-color-base: transparent !important;
+}
+
+.header-ios ion-toolbar:last-of-type {
+    --border-width: 0 !important;
+}
+
+ion-fab-button {
+    --background: #9D3292;
+    --color: white;
+    margin: -5px 0 0 0;
+
+    ion-icon {
+        font-size: 21px;
+        color: white;
+    }
+}
+
+ion-footer {
+    ion-fab-button {
+        --background: #4435A6;
+        --color: white;
+
+        ion-icon {
+            font-size: 21px;
+            color: white;
+        }
+    }
+}
+
+.br-default .br-active:after {
+    color: #9D3292;
+}
+
+.br-default .br-selected:after {
+    color: #9D3292;
+}
+
+ion-item {
+    --highlight-color-focused: #9D3292 !important;
+    --highlight-color-valid: #9D3292 !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+    //height: 4px !important;
+    //background-color: #9d9e9f !important;
+    //border: solid 1px white !important;
+}
+
+.mat-tab-label-container {
+    align-items: center !important;
+    flex-direction: column !important;
+    margin-top: 50px !important;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: transparent !important;
+}
+
+.mat-tab-label .mat-tab-label-content {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    color: white !important;
+}
+
+.mat-tab-label {
+    opacity: 1 !important;
+}
+
+.mat-tab-label-active {
+    display: none !important;
+}
+
+.mat-tab-group-inverted-header .mat-tab-nav-bar,
+.mat-tab-group-inverted-header .mat-tab-header {
+    border-top: none !important;
+}
+
+.refresh {
+    animation: refreshed 2s;
+}
+
+@keyframes refreshed {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.header {
+    height: 155px !important;
+}
+
+.item-native {
+    padding: 0px !important;
+}
+
+ion-item {
+    --padding-start: 0 !important;
+}
+
+.pading_ios {
+    //margin-top: calc(10% + 50px)!important;
+}
+
+.avatares {
+    width: 100%;
+    border-radius: 100%;
+    padding-top: 100%;
+    /// 1:1 Aspect Ratio 
+    position: relative;
+    /* If you want text inside of it */
+    /*width: 100%;
+    border-radius: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    */
+
+    .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 100%;
+        //transform: translateX(0);
+        overflow: hidden;
+        box-shadow: 0 0 2px 2px rgb(0 0 0 / 10%);
+        /*height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 0 2px 2px rgb(0 0 0 / 10%);*/
+
+
+        .img {
+            /*height: 100%;
+            width: 100%;
+            border-radius: 100%;*/
+            max-height: 100%;
+            max-width: 100%;
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
+    }
+}
+
+.avatares_80 {
+    /*width: 100%;
+    border-radius: 100%;
+    padding-top: 100%;
+    /// 1:1 Aspect Ratio 
+    position: relative;
+    /* If you want text inside of it */
+    width: 100%;
+    border-radius: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .content {
+        /*position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: gray;
+        border-radius: 100%;*/
+        transform: translateX(0);
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 0 2px 2px rgb(0 0 0 / 10%);
+
+
+        .img {
+            /*height: 100%;
+            width: 100%;
+            border-radius: 100%;*/
+            max-height: 100%;
+            max-width: 100%;
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
+    }
+}
+
+.row_style{
+    margin: 0% 0;
+}
+
+.col_style{
+    //margin: 5% 0 !important;  
+}
+
+.__top__{
+  top: 10%;
+}
+
+.headergray {
+    background: #f7f8fa !important;
+}
+
+ion-content {
+    --background: #f7f8fa !important;
+}
+
+.appointments {
+    background: transparent !important;
+}
+
+.filter {
+    background: transparent !important;
+    border-radius: 0px !important;
+    margin: 0 0 0 0px !important;
+    padding: 0 0 0 0px !important;
+}
+
+.ion-loading {
+    color: black;
+    --background: #f7f8fa;
+    --backdrop-opacity: 0.5;
+}
+
+ion-select {
+    --placeholder-color: #000000;
+}
+
+.mat-form-field-flex {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.btn_size {
+    width: 30px !important;
+    height: 30px !important;
+    ;
+}
+
+.btn_fab_size {
+    width: 30px !important;
+    height: 30px !important;
+
+    &__icon {
+        font-size: 15px;
+    }
+}
+
+.align__end {
+    text-align: end;
+}
+
+.title_general {
+    color: #4435A6;
+    width: 85%;
+    font-size: 18px;
+}
+
+.title_general_black {
+    color: black;
+    width: 85%;
+    font-size: 18px;
+}
+
+.subtitle_general_black {
+    color: black;
+    width: 85%;
+    font-size: 14px;
+}
+
+
+
+.mat-input-underline {
+    display: none !important;
+    color: white;
+}
+
+.mat-form-field-ripple {
+    display: none !important;
+    color: white;
+}
+
+//.mat-form-field-appearance-legacy .mat-form-field-underline {
+//    height: 0px !important;
+//}
+
+.padding {
+    padding: 0;
+}
+
+.flex_filter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.flex_filter_ {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.flex_title {
+    display: flex;
+    align-items: center;
+}
+
+
+.width_full {
+    width: 100%;
+}
+
+.align__ {
+    text-align: end !important;
+}
+
+.report {
+    padding: 0;
+    margin: 0;
+}
+
+.color_report {
+    color: #4435a6;
+}
+
+.img_header {
+    width: 45px;
+}
+
+._top_ {
+    margin-top: -15px !important;
+}
+
+.flex_img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.align__initial {
+    text-align: start;
+}
+
+.date_range_css {
+    .mat-form-field-underline {
+        height: 0px !important;
+    }
+}
+
+.bottom_padding {
+    padding: 15px 5% 50px 5%;
+}
+
+
+
+@import "~@mobiscroll/angular/dist/css/mobiscroll.scss";
+
+.toast_{
+    color: white !important;
+    --background: #9D3292 !important;
+    .toast-wrapper{
+       background: rgba(255, 255, 255, 0.5) !important;
+       --background: rgba(255, 255, 255, 0.5) !important;
+    }
+}
+
+
+.__border__{
+    //border-radius: 100%;
+    //background-color: white;
+}

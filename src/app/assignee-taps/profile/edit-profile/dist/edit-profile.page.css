@@ -1,0 +1,584 @@
+ion-content {
+  --background: rgb(221, 221, 221);
+}
+
+.ancho_full {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.col_header {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.header {
+  background-image: url("/assets/backgrounds/banner_morado.svg");
+  background-position: top;
+  background-size: cover;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  justify-content: space-between;
+  padding: 5%;
+}
+.header ion-icon {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -15px;
+}
+
+.headergray {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: white;
+  border-radius: 25px 25px 0 0;
+  margin-top: -24px;
+}
+.headergray ::before {
+  content: " ";
+}
+
+.appointments {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+}
+.appointments .title-edit {
+  display: flex;
+  justify-content: space-between;
+}
+.appointments .title {
+  color: #4435A6;
+}
+.appointments .flex {
+  display: flex;
+  align-items: center;
+}
+.appointments ion-card {
+  border-radius: 15px;
+  padding: 15px;
+  color: #000;
+}
+
+.box {
+  width: 100%;
+  border-radius: 20%;
+  padding-top: 100%;
+  /* 1:1 Aspect Ratio */
+  position: relative;
+  /* If you want text inside of it */
+}
+.box .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 100%;
+  background-color: gray;
+}
+.box .content .img {
+  height: 100%;
+  width: 100%;
+}
+.box .content .redondo {
+  border-radius: 100%;
+}
+
+mat-expansion-panel-header {
+  height: 100% !important;
+}
+mat-expansion-panel-header .header2 {
+  color: #9D3292;
+}
+
+mat-expansion-panel {
+  margin-top: 0 !important;
+  border-radius: 0 0 30px 30px !important;
+}
+
+mat-icon {
+  color: #9D3292;
+}
+
+.email-icon {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+}
+
+.box {
+  width: 100%;
+  border-radius: 20%;
+  padding-top: 100%;
+  /* 1:1 Aspect Ratio */
+  position: relative;
+  /* If you want text inside of it */
+}
+.box .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 100%;
+  background-color: gray;
+}
+.box .content .icon {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 30px;
+}
+.box .content .text {
+  position: absolute;
+  color: white;
+  left: 40%;
+  top: 12%;
+}
+.box .content .img {
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+}
+
+mat-radio-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.documents2 {
+  margin-top: 20px;
+}
+.documents2 .buttom {
+  text-transform: none;
+  border-radius: 18px;
+  width: 80%;
+  height: 25px;
+}
+.documents2 .buttom__btn_document {
+  background: #4435A6;
+}
+.documents2 .flex {
+  display: flex;
+  align-items: center;
+}
+.documents2 .doc_info {
+  border-radius: 25px;
+  margin-top: 10px;
+  background: #ffffff;
+  padding: 10px 10px 0px 10px;
+}
+
+.ion-textarea {
+  border: solid 1px gray;
+}
+
+.buttom {
+  text-transform: none;
+  border-radius: 18px;
+  width: 100%;
+  margin-top: 15px;
+}
+.buttom__btn_login {
+  background: #9D3292;
+}
+.buttom__btn_login:hover {
+  background: #56004E;
+}
+
+ion-content {
+  --background: rgb(221, 221, 221);
+}
+
+.header {
+  background-image: url("/assets/backgrounds/banner_morado.svg");
+  background-position: top;
+  background-size: cover;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  justify-content: space-between;
+  padding: 10%;
+}
+.header p {
+  color: #ffffff;
+}
+.header ion-back-button {
+  color: white;
+}
+.header ion-icon {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -15px;
+}
+
+.headergray {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+  margin-top: -23px;
+}
+.headergray ::before {
+  content: " ";
+}
+
+.appointments {
+  width: 100%;
+  padding: 0px 5% 10px 5%;
+  background: #dddddd;
+}
+.appointments .title-edit {
+  display: flex;
+  justify-content: space-between;
+}
+.appointments .title {
+  color: #4435A6;
+}
+.appointments .flex {
+  display: flex;
+  align-items: center;
+}
+.appointments ion-card {
+  border-radius: 15px;
+  padding: 15px;
+  color: #000;
+}
+
+.box {
+  width: 100%;
+  border-radius: 20%;
+  padding-top: 100%;
+  /* 1:1 Aspect Ratio */
+  position: relative;
+  /* If you want text inside of it */
+}
+.box .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 100%;
+  background-color: gray;
+}
+.box .content .img {
+  height: 100%;
+  width: 100%;
+}
+.box .content .redondo {
+  border-radius: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-datepicker-toggle {
+  color: #4435A6;
+}
+
+ion-item {
+  --background: transparent;
+}
+
+ion-card {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ion-card ion-icon {
+  color: #9D3292;
+  font-size: 20px !important;
+}
+
+.displaynone {
+  display: none;
+}
+
+ion-content {
+  --background: rgb(221, 221, 221);
+}
+
+.header {
+  background-image: url("/assets/backgrounds/banner_morado.svg");
+  background-position: top;
+  background-size: cover;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  justify-content: space-between;
+  padding: 10%;
+}
+.header ion-icon {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -15px;
+  color: #ffffff;
+}
+.header .img {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header .img img {
+  width: 80%;
+}
+.header p {
+  color: #ffffff;
+}
+.header ion-back-button {
+  color: white;
+}
+
+.btn_ {
+  background: #9D3292 !important;
+  width: 100px !important;
+}
+
+.buttom {
+  text-transform: none;
+  border-radius: 18px;
+  width: 100%;
+}
+.buttom__btn_login {
+  background: #9D3292;
+}
+.buttom__btn_login:hover {
+  background: #56004E;
+}
+.buttom__btn_blue {
+  background: #4435A6;
+}
+.buttom__btn_blue:hover {
+  background: #4435A6;
+}
+
+.headergray {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+  margin-top: -24px;
+}
+.headergray ::before {
+  content: " ";
+}
+
+.flexdosts {
+  display: flex;
+  align-items: center;
+}
+
+.ion-textarea {
+  border: solid 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  --background: trasparent;
+}
+
+.appointments {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+}
+.appointments .title-edit {
+  display: flex;
+  justify-content: space-between;
+}
+.appointments .title {
+  color: #4435A6;
+}
+.appointments .flex {
+  display: flex;
+  align-items: center;
+}
+.appointments ion-card {
+  border-radius: 15px;
+  padding: 15px;
+  color: #000;
+  margin: 10px 0 10px 0;
+}
+
+.purple {
+  color: #9D3292;
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.gray {
+  color: gray;
+}
+
+.filter {
+  background: white;
+  border-radius: 30px;
+  margin: 0 0 0 5px;
+}
+
+.size {
+  width: 20px;
+  height: 20px;
+}
+
+.font {
+  font-size: 12px;
+}
+
+.activitie {
+  margin: 10px 0 10px 0;
+}
+.activitie ion-item-sliding {
+  border-radius: 15px;
+  padding: 15px;
+  color: #000;
+  background: white;
+}
+.activitie ion-list {
+  background: transparent;
+}
+
+.size_letter {
+  font-size: 10px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+}
+
+.late {
+  background: #ffe0e0;
+}
+
+.buttom {
+  text-transform: none;
+  border-radius: 18px;
+  width: 100%;
+}
+.buttom__btn_login {
+  background: #9D3292;
+}
+.buttom__btn_login:hover {
+  background: #56004E;
+}
+.buttom__btn_blue {
+  background: #4435A6;
+}
+.buttom__btn_blue:hover {
+  background: #4435A6;
+}
+
+.border {
+  border: 1px solid #9D3292;
+}
+
+.editable {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  position: relative;
+  margin-top: 15px;
+}
+.editable:after {
+  content: " ";
+  width: 20px;
+  height: 20px;
+  background: white;
+  position: absolute;
+  top: -10px;
+  right: 23px;
+  transform: rotate(45deg);
+  z-index: 0;
+}
+
+.iconslot {
+  color: white;
+  font-size: 40px;
+}
+
+.card-comments {
+  height: 250px;
+}
+
+.buttom {
+  text-transform: none;
+  border-radius: 18px;
+  width: 100%;
+}
+.buttom__btn_login {
+  background: #9D3292;
+}
+.buttom__btn_login:hover {
+  background: #56004E;
+}
+
+.black {
+  color: black;
+}
+
+.urgent {
+  background: #ffe0e0 !important;
+}
+
+ion-row {
+  width: 100%;
+}
+
+.blue {
+  font-size: 15px;
+  color: #4435A6;
+}
+
+.icon-calendar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.photot {
+  display: flex;
+}
+.photot .av {
+  flex-basis: 50%;
+  margin: 15px;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.basics {
+  flex-basis: 50%;
+}
+
+.heigth {
+  height: 22px;
+}

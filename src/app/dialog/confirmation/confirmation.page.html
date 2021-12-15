@@ -1,0 +1,20 @@
+<ion-content class="content">
+  <div class="content">
+    <div class="f-modal-alert">
+
+      <div class="f-modal-icon f-modal-warning scaleWarning">
+        <span class="f-modal-body pulseWarningIns"></span>
+        <span class="f-modal-dot pulseWarningIns"></span>
+      </div>
+    </div>
+
+    <p class="h5 ligth">{{title}}</p>
+    <p class="h8">{{body}}</p>
+    
+    <div class="footer">
+      <ion-button class="cancel" (click)="cancel()">{{noText}}</ion-button>
+      <ion-button class="confirm" (click)="confirm()">{{yesText}}</ion-button>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,69 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Currency Exchange</p>
+    <img src="/assets/icon/bot_n_exchange.svg" alt="" class="img_header"-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Currency Exchange</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/bot_n_exchange.svg" alt="" class="img_header">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+  <ion-row *ngIf="currencyExcha != undefined">
+    <ion-col size="5" class="ion-text-center ion-margin-top"  *ngIf="allValCurrency != undefined"> 
+      <span class="h10 gray ion-text-center"> 1 {{currency_one}}</span>
+    </ion-col>
+    <ion-col size="2" class="h10 gray ion-text-center ion-margin-top"  *ngIf="allValCurrency != undefined">
+      <span>=</span>
+    </ion-col>
+    <ion-col size="5" *ngIf="allValCurrency == undefined"></ion-col>
+    <ion-col size="5" class="ion-text-center ion-margin-top ion-margin-bottom" *ngIf="allValCurrency != undefined">
+      <span class="h10 gray ion-text-center"> {{value |currency}} <b>{{currency}}</b></span>
+    </ion-col>
+    <br>
+    <ion-col size="12" class="ion-text-center ion-margin-top" *ngIf="amountUsd != undefined && currency != undefined">
+      <span class="h2"><b class="span-detail">{{total | currency:'USD'}}</b></span>
+    </ion-col>
+    <!-- inputs -->
+    <br>
+    <ion-col size="10" offset="1" class="ion-text-center ion-margin-top">
+      <ion-item >
+        <ion-label position="floating">Amount</ion-label>
+            <ion-input type="tel" [(ngModel)]="amountUsd" placeholder="Amount" min="1" (ngModelChange)="getValue()">
+            </ion-input>
+      </ion-item>
+    </ion-col>
+
+    <ion-col size="5" offset="1" class="ion-text-center ion-margin-top ">
+      <ion-item >
+          <ion-label position="floating">Currency</ion-label>
+          <ion-select interface="action-sheet" mode="ios"
+            placeholder="Currency" [(ngModel)]="currency_one" (ngModelChange)="getValue()">
+            <ion-select-option *ngFor="let item of currencyExcha" [value]="item.symbol">
+              {{item.symbol}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+    </ion-col>
+
+    <ion-col size="5" class="ion-text-center ion-margin-top ">
+      <ion-item >
+          <ion-label position="floating">Currency</ion-label>
+          <ion-select interface="action-sheet" mode="ios"
+            placeholder="Currency" [(ngModel)]="currency" (ngModelChange)="getValue()">
+            <ion-select-option *ngFor="let item of currencyExcha" [value]="item.symbol">
+              {{item.symbol}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-content>

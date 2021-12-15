@@ -1,0 +1,251 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">All Appointments</p>
+    <img src="/assets/icon/calendar.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+
+  <div class="appointments">
+
+    <ion-row *ngIf="userData.role.id == 1">
+      <ion-col size="12">
+        <ion-searchbar placeholder="" mode="ios" [(ngModel)]="userFilter.location"></ion-searchbar>
+        <ion-icon name="search-outline" id="search_icon"></ion-icon>
+      </ion-col>
+      <ion-col size="6" class="flex">
+        <mat-form-field appearance="legacy" style="height: 13px; width: 84%;">
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate [(ngModel)]="dates.dateIn">
+            <input matEndDate [(ngModel)]="dates.dateOut" (ngModelChange)="filterDate()">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker" style="font-size: 24px;">
+            <mat-icon matDatepickerToggleIcon style="color: #4435A6;">calendar_today</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-date-range-picker touchUi #picker></mat-date-range-picker>
+        </mat-form-field>
+      </ion-col>
+
+      <ion-col size="5" style="margin: -6px">
+        <ion-item class="filter">
+          <ion-label position="floating">Status</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="All" [(ngModel)]="dates.status" (ngModelChange)="change()">
+            <ion-select-option [value]="true">Active</ion-select-option>
+            <ion-select-option [value]="false">Finish</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="2" offset="10" class="flex">
+        <button mat-icon-button (click)="cleanFilter()">
+          <mat-icon [ngClass]="{'refresh': filteruno}">cached</mat-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+
+
+
+    <div *ngIf="userData.role.id != 4">
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-searchbar placeholder="" mode="ios" [(ngModel)]="userFilter.coordinador"></ion-searchbar>
+          <ion-icon name="search-outline" id="search_icon"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6" class="flex white">
+          <mat-form-field class="date_range_css" appearance="legacy" style="height: 40px; width: 90%;">
+            <mat-date-range-input class="date_range_css" [rangePicker]="picker">
+              <input matStartDate [(ngModel)]="dates.dateIn">
+              <input matEndDate [(ngModel)]="dates.dateOut" (ngModelChange)="filterDate()">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker" style="font-size: 20px;">
+              <mat-icon matDatepickerToggleIcon style="color: #4435A6;">calendar_today</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-date-range-picker touchUi #picker></mat-date-range-picker>
+          </mat-form-field>
+        </ion-col>
+
+        <ion-col size="2" offset="1" class="flex">
+          <button mat-icon-button (click)="cleanFilter()">
+            <mat-icon [ngClass]="{'refresh': filteruno}">cached</mat-icon>
+          </button>
+        </ion-col>
+
+      </ion-row>
+
+
+      <ion-card *ngFor="let item of apointments | filterBy: userFilter; let i = index" matRipple
+        matRippleColor="rgba(158, 53, 149, 0.5)">
+        <ion-row>
+          <ion-col size="6" (click)="viewApoitment(i+1,item)">
+            <div class="card" style="flex-direction: column;">
+              <div style="display: flex; width: 100%;">
+                <img src="{{service.url_images}}{{item.assigneeInformations[0].photo}}" fallimg="avatar" alt="" class="__border__">
+                <div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <b class="h15 gray">Assignee<br></b>
+                      <p class="h12 top" *ngIf="show_name_assignee">
+                        <br>{{(item.assigneeInformations[0].assigneeName.length>12) ?  (item.assigneeInformations[0].assigneeName | slice:0:12)+'..': item.assigneeInformations[0].assigneeName}}
+                      </p>
+                      <p class="h15 top" *ngIf="!show_name_assignee"><br>{{item.assigneeInformations[0].assigneeName}}
+                      </p>
+                      <p class="h15 top_ blue"><br>Company</p>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </div>
+
+              <div style="display: flex; width: 100%;">
+                <img fallimg="avatar" src="{{service.url_images}}{{item.avatar_consultor}}" alt="" class="__border__" style="border: 1px solid gray;">
+                <div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <b class="h15 gray">Consultant</b><br>
+                      <p class="h12 top" *ngIf="show_name_assignee && item.consultor != null">
+                        <br>{{(item?.consultor?.length>12) ?  (item?.consultor | slice:0:12)+'..': item?.consultor}}
+                      </p>
+                      <p class="h12 top" *ngIf="!show_name_assignee && item.consultor != null"><br>{{item?.consultor}}</p>
+                      <p class="h12 top" *ngIf="item.consultor == null"><br> Not available</p>
+                      <p class="h15 _top_ blue"
+                        *ngIf="show_name_assignee">{{(item.location.length>10) ?  (item.location | slice:0:10)+'..': item.location}}</p>
+                      <p class="h15 _top_ blue" *ngIf="!show_name_assignee">{{item.location}}</p>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="options">
+              <ion-row>
+                <ion-col size="12" class="icon">
+                  <div (click)="viewApoitment(i+1,item)">
+                    <span class="h15 status">{{item.status ?'Active' : 'Finish'}}&nbsp;<div class="dot"
+                        [ngClass]="{'green': item.status}"></div></span>
+                    <span class="h15" style="color: gray;">Services: <span
+                        class="h15">{{item.serviceName.length}}</span></span><br>
+                    <span class="h15" style="color: gray;" *ngIf="!show_name_assignee">Coord: <span
+                        class="h15">{{item.coordinador}}</span><br></span>
+                    <span class="h15" style="color: gray;" *ngIf="show_name_assignee">Coord: <span
+                        class="h15">{{(item.coordinador.length>12) ?  (item.coordinador | slice:0:12)+'..': item.coordinador}}</span><br></span>
+                    <span class="h15" style="color: gray;">Start&nbsp;</span>
+                    <span class="h15">
+                      <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+                      &nbsp;{{item.date | date: 'dd MMM yyy'}}
+                    </span><br>
+                    <span class="h12">
+                      <ion-icon name="time-outline"></ion-icon>
+                      <ion-icon name="triangle"></ion-icon>
+                      <span class="h15">{{item.startTime}} hrs</span>
+                    </span><br>
+                  </div>
+                  <ion-button class="buttom buttom__btn_login altura" (click)="startAppoitment(i+1,item)"
+                    *ngIf="item.start == false && item.ended == false">Start</ion-button>
+                  <ion-button class="buttom buttom__btn_blue altura" (click)="endAppoitment(i+1,item)"
+                    *ngIf="item.start == true && item.ended == false">End</ion-button>
+                </ion-col>
+
+                <!--ion-col size="12" class="icon">
+                <span class="h12">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <ion-icon name="triangle"></ion-icon>
+                  {{item.startTime}} hrs
+                </span><br>
+                <ion-button class="buttom buttom__btn_login altura">Start</ion-button>
+              </ion-col-->
+              </ion-row>
+            </div>
+          </ion-col>
+        </ion-row>
+        <!--ion-row (click)="startAppoitment(i+1,item)" *ngIf="item.start == false && item.ended == false">
+        <ion-col size="6" offset="6">
+          <ion-button class="buttom buttom__btn_login">Start</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row (click)="endAppoitment(i+1,item)" *ngIf="item.start == true && item.ended == false">
+        <ion-col size="6" offset="6">
+          <ion-button class="buttom buttom__btn_blue">
+            End
+          </ion-button>
+        </ion-col>
+      </ion-row-->
+      </ion-card>
+
+      <ion-card *ngIf="(apointments | filterBy: userFilter).length === 0">
+        No matching elements
+      </ion-card>
+    </div>
+
+    <div *ngIf="userData.role.id == 4">
+      <ion-card *ngFor="let item of apointments;let i = index" (click)="viewApoitment(i+1,item)" matRipple
+        matRippleColor="rgba(158, 53, 149, 0.5)">
+        <div class="card">
+          <div style="width: 50%;">
+            <ion-row>
+              <ion-col size="12">
+                <span class="h7">Appointment #{{i + 1}}</span><br>
+              </ion-col>
+            </ion-row>
+          </div>
+          <div class="options">
+            <ion-row>
+              <ion-col size="12" class="icon">
+                <span class="h12" style="color: gray;">start&nbsp;</span>
+                <span class="h12">
+                  <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+                  &nbsp;{{item.date | date: 'dd MMM yyy'}}
+                </span>
+                <span class="h12 status">{{item.status ?'Active' : 'Finish'}}&nbsp;<div class="dot"
+                    [ngClass]="{'green': item.status}"></div></span>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+        <div class="card">
+          <img src="{{service.url_images}}{{item.avatar_supplier}}"  class="__border__" fallimg="avatar">
+          <div style="width: 50%;">
+            <ion-row>
+              <ion-col size="12">
+                <span class="h12" style="color: gray;">Coordinator</span><br>
+                <span class="h11">{{item.supplier}}</span>
+              </ion-col>
+            </ion-row>
+          </div>
+          <div class="options">
+            <ion-row>
+              <ion-col size="12" class="icon">
+                <span class="h12">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <ion-icon name="triangle"></ion-icon>
+                  {{item.startTime}}
+                </span><br>
+                <span class="h12">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <ion-icon name="triangle" style="transform: rotate(180deg);"></ion-icon>
+                  {{item.endTime}}
+                </span>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+        <ion-row>
+          <ion-col size="12">
+            <span class="h11" style="color: gray;">Services</span>
+            <ul style="padding-left: 10px;">
+              <li>{{item.servicio}}</li>
+            </ul>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+  </div>
+
+</ion-content>

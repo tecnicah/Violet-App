@@ -1,0 +1,165 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Appointment
+      <!--#{{info.noApo}}-->
+    </p>
+    <img src="/assets/icon/calendar.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+
+    <ion-row>
+      <ion-col size="12">
+        <div class="status">
+          <span class="h12 status">{{info.status ?'Active' : 'Finish'}}&nbsp;<div class="dot"
+              [ngClass]="{'green': info.status}"></div></span>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-card *ngFor="let item of consultant">
+      <div class="card">
+        <img src="{{service.url_images}}{{item.photo}}" alt="" fallimg="avatar">
+        <div style="width: 55%;">
+          <ion-row>
+            <ion-col size="12">
+              <span class="h15" style="color: gray;">Consultant</span><br>
+              <span class="h12">{{item.name}}</span><br>
+              <span class="h15" style="color: gray;">Location</span><br>
+              <span class="h12">{{item.location}}</span>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="options">
+          <img src="/assets/icon/bot_n_llamar.svg" alt="">
+          <span>&nbsp;</span>
+          <img src="/assets/icon/bot_n_chat.svg" alt="">
+        </div>
+      </div>
+    </ion-card>
+
+    <br>
+
+    <ion-row>
+      <ion-col size="12">
+        <span style="color: gray;" class="h12">Start Date</span><br>
+        <span class="h12 icon">
+          <ion-icon class="blue" name="calendar-clear-outline"></ion-icon>&nbsp;{{data.date | date : 'dd MMM yyy'}}
+        </span>
+      </ion-col>
+
+      <ion-col size="12">
+        <span style="color: gray;" class="h12">Supplier</span><br>
+        <span class="h12 icon" *ngIf="data?.supplier?.length > 0">
+          {{data?.supplier[0].supplier}}
+        </span>
+        <span class="h12 icon" *ngIf="data?.supplier.length == 0">
+          No available
+        </span>
+      </ion-col>
+
+      <!--ion-col size="6"></ion-col-->
+
+      <!--ion-col size="6">
+        <span style="color: gray;" class="h12">Start time</span><br>
+        <span class="h12 icon">
+          <ion-icon name="time-outline" class="purple"></ion-icon>&nbsp;
+          <ion-icon name="triangle" class="purple"></ion-icon>&nbsp;
+          {{data.startTime}} hrs
+        </span>
+      </ion-col>
+
+      <ion-col size="6">
+        <span style="color: gray;" class="h12">End time</span><br>
+        <span class="h12 icon">
+          <ion-icon name="time-outline" class="purple"></ion-icon>&nbsp;
+          <ion-icon name="triangle" class="purple revers"></ion-icon>&nbsp;
+          {{data.endTime}} hrs
+        </span>
+      </ion-col-->
+      <ion-col size="6">
+        <ion-item >
+          <ion-label position="floating">Start Time</ion-label>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]="data.startTime" mode="ios" ></ion-datetime>
+          <ion-icon name="time-outline" slot="end" class="clock"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item >
+          <ion-label position="floating">End Time</ion-label>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]="data.endTime" mode="ios"></ion-datetime>
+          <ion-icon name="time-outline" slot="end" class="clock"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <span class="h12" style="color: gray;">Services</span>
+      </ion-col>
+
+      <ion-col size="6" *ngFor="let item of data.services">
+        <p class="h12">{{item.serviceNumber}}</p>
+      </ion-col>
+
+      <ion-col size="12">
+        <span class="h12" style="color: gray;">Description</span>
+      </ion-col>
+
+      <ion-col size="12">
+        <span class="h12">{{data.description}}</span>
+      </ion-col>
+    </ion-row>
+
+    <br>
+    
+    <ion-row>
+      <ion-col size="12">
+        <span class="h12" style="color: gray;">Documents</span>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-card *ngFor="let item of data.documentAppointments" matRipple matRippleColor="rgba(158, 53, 149, 0.5)"
+      (click)="viewDoc(item.fileRequest)">
+      <ion-row>
+        <ion-col size="4">
+          {{(item.fileName.length>7) ?  (item.fileName | slice:0:7)+'..': item.fileName}}
+        </ion-col>
+
+        <ion-col size="4">
+          <span class="h12 icon">
+            <ion-icon name="calendar-clear-outline"></ion-icon>&nbsp;Uploaded
+          </span>
+        </ion-col>
+
+        <ion-col size="4">
+          <span class="h12">{{item.createdDate | date : 'dd MMM yyy'}}</span>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <br>
+
+     
+    <ion-row>
+      <ion-col size="12" (click)="deleteAppointment(data)">
+        <p class="h12" style="color: #9D3292; text-align: end; cursor: pointer;">Cancel appointment</p>
+      </ion-col>
+    </ion-row>
+
+    <br>
+
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+</ion-content>

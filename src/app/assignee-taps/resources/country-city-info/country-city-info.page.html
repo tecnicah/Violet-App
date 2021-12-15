@@ -1,0 +1,229 @@
+<ion-header mode="ios">
+    <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+        <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+        <p class="h5">{{cities_[0]?.name}}</p>
+        <img src="/assets/icon/bot_n_country.svg" alt="" class="img_header"-->
+        <ion-row class="ancho_full">
+            <ion-col size="2" class="col_header" (click)="back()">
+                <ion-back-button mode="ios" text=""></ion-back-button>
+            </ion-col>
+            <ion-col size="8" class="col_header">
+                <p class="h5">{{cities_[0]?.name}}</p>
+            </ion-col>
+            <ion-col size="2" class="col_header">
+                <img src="/assets/icon/bot_n_country.svg" alt="" class="img_header">
+            </ion-col>
+        </ion-row>
+    </div>
+    <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+    <div class="appointments">
+
+        <div class="documentos" *ngFor="let item of cities_[0]?.catCities">
+            <mat-accordion multi>
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div class="user">
+                                <p class="h7">{{item.city}}</p>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="documents">
+                        <ion-slides pager="true" [options]="slideOptsOne">
+                            <ion-slide *ngFor="let about of item.cityAbouts">
+                                <div style="height:280px !important">
+                                    <img src="{{service.url_images}}{{about.photoCityAbouts[0].fileRequest}}" *ngIf="about.photoCityAbouts.length > 0" alt="">
+                                </div>
+                                <h2 class="justify">{{about.title}}</h2>
+                                <h4 class="justify">{{about.description}}</h4>
+                            </ion-slide>
+                        </ion-slides>                       
+                    </div>
+                </mat-expansion-panel>
+
+                <div class="hr" style="position: inherit; margin: 0;"></div>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div class="user">
+                                <img src="/assets/icon/world.svg" alt="">
+                                <samp>&nbsp;</samp>
+                                <span class="h7">Attractions</span>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="documents">
+                        <ion-slides>
+                            <ion-slide *ngFor="let atracciones of item.cityAttractions">
+                                <div>
+                                    <img src="{{service.url_images}}{{atracciones.photoCityAttractions[0].fileRequest}}"
+                                         *ngIf="atracciones.photoCityAttractions.length != 0" alt="">
+                                    <img src="https://dummyimage.com/325x216/a3a8a8/fff&text=No+image"
+                                         *ngIf="atracciones.photoCityAttractions.length == 0" alt="">
+                                </div>
+                                <ion-row>
+                                    <ion-col size="12" class="flex no-padding-bottom">
+                                        <h2 style="padding-bottom:0 !important; margin-bottom:0 !important">
+                                            {{atracciones.title}}
+                                        </h2>
+                                    </ion-col>
+                                    <ion-col size="12" class="flex no-padding-top">
+                                        <h5 style="color: rgba(0, 0, 0, 0.5)">
+                                            {{atracciones.subtitle}}
+                                        </h5>
+                                    </ion-col>
+
+                                    <ion-col size="12" class="flex">
+                                        <h4 class="justify">
+                                            {{atracciones.description}}
+                                        </h4>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-slide>
+                        </ion-slides>
+                    </div>
+                </mat-expansion-panel>
+
+                <div class="hr" style="position: inherit; margin: 0;"></div>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div class="user">
+                                <img src="/assets/icon/world.svg" alt="">
+                                <samp>&nbsp;</samp>
+                                <span class="h7">Emergency</span>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="documents">
+                        <ion-slides>
+                            <ion-slide *ngFor="let atracciones of item.cityEmergencies">
+                                <div>
+                                    <img src="{{service.url_images}}{{atracciones.photoCityEmergencies[0].fileRequest}}"
+                                         *ngIf="atracciones.photoCityEmergencies.length != 0" alt="">
+                                    <img src="https://dummyimage.com/325x216/a3a8a8/fff&text=No+image"
+                                         *ngIf="atracciones.photoCityEmergencies.length == 0" alt="">
+                                </div>
+                                <ion-row>
+                                    <ion-col size="12" class="flex no-padding-bottom">
+                                        <h2 style="padding-bottom:0 !important; margin-bottom:0 !important">
+                                            {{atracciones.name}}
+                                        </h2>
+                                    </ion-col>
+                                    <ion-col size="12" class="flex no-padding-top">
+                                        <h5 style="color: rgba(0, 0, 0, 0.5)">
+                                            {{atracciones.phoneNumber}}
+                                        </h5>
+                                    </ion-col>
+
+                                    <ion-col size="12" class="flex">
+                                        <h4 class="justify">
+                                            {{atracciones.description}}
+                                        </h4>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-slide>
+                        </ion-slides>
+                    </div>
+                </mat-expansion-panel>
+
+                <div class="hr" style="position: inherit; margin: 0;"></div>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div class="user">
+                                <img src="/assets/icon/world.svg" alt="">
+                                <samp>&nbsp;</samp>
+                                <span class="h7">What to do?</span>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="documents">
+                        <ion-slides>
+                            <ion-slide *ngFor="let atracciones of item.cityWhatToDos">
+                                <div>
+                                    <img src="{{service.url_images}}{{atracciones.photoWhatToDos[0].fileRequest}}"
+                                         *ngIf="atracciones.photoWhatToDos.length != 0" alt="">
+                                    <img src="https://dummyimage.com/325x216/a3a8a8/fff&text=No+image"
+                                         *ngIf="atracciones.photoWhatToDos.length == 0" alt="">
+                                </div>
+                                <ion-row>
+                                    <ion-col size="12" class="flex no-padding-bottom">
+                                        <h2 style="padding-bottom:0 !important; margin-bottom:0 !important">
+                                            {{atracciones.title}}
+                                        </h2>
+                                    </ion-col>
+                                    <ion-col size="12" class="flex no-padding-top">
+                                        <h5 style="color: rgba(0, 0, 0, 0.5)">
+                                            {{atracciones.subtitle}}
+                                        </h5>
+                                    </ion-col>
+
+                                    <ion-col size="12" class="flex">
+                                        <h4 class="justify">
+                                            {{atracciones.description}}
+                                        </h4>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-slide>
+                        </ion-slides>
+                    </div>
+                </mat-expansion-panel>
+
+                <div class="hr" style="position: inherit; margin: 0;"></div>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div class="user">
+                                <img src="/assets/icon/world.svg" alt="">
+                                <samp>&nbsp;</samp>
+                                <span class="h7">Where to eat?</span>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="documents">
+                        <ion-slides>
+                            <ion-slide *ngFor="let atracciones of item.cityWhereEats">
+                                <div>
+                                    <img src="{{service.url_images}}{{atracciones.photoWhereEats[0].fileRequest}}"
+                                         *ngIf="atracciones.photoWhereEats.length != 0" alt="">
+                                    <img src="https://dummyimage.com/325x216/a3a8a8/fff&text=No+image"
+                                         *ngIf="atracciones.photoWhereEats.length == 0" alt="">
+                                </div>
+                                <ion-row>
+                                    <ion-col size="12" class="flex no-padding-bottom">
+                                        <h2 style="padding-bottom:0 !important; margin-bottom:0 !important">
+                                            {{atracciones.title}}
+                                        </h2>
+                                    </ion-col>
+                                    <ion-col size="12" class="flex no-padding-top">
+                                        <h5 style="color: rgba(0, 0, 0, 0.5)">
+                                            {{atracciones.subtitle}}
+                                        </h5>
+                                    </ion-col>
+
+                                    <ion-col size="12" class="flex">
+                                        <h4 class="justify">
+                                            {{atracciones.description}}
+                                        </h4>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-slide>
+                        </ion-slides>
+                    </div>
+                </mat-expansion-panel>
+
+            </mat-accordion>
+        </div>
+    </div>
+
+</ion-content>

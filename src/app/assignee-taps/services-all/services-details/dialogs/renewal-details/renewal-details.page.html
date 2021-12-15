@@ -1,0 +1,54 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Renewal Details</p>
+    <img src="/assets/icon/contract.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+  <div class="appointments">
+    <ion-row>
+
+      <ion-col size="6" class="margin-top">
+        <span class="h15 gray">Automatically Renewed</span><br>
+        <ion-checkbox class="size" [(ngModel)]="data_.automatically"></ion-checkbox>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Renewal Notification</ion-label>
+          <ion-select interface="action-sheet" mode="ios" [(ngModel)]="data_.renewalNotification">
+            <ion-select-option [value]=true>Yes</ion-select-option>
+            <ion-select-option [value]=false>No</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Additional Rent Increase Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY"  mode="ios" [(ngModel)]="data_.additionalRentIncreaseDate">
+          </ion-datetime>
+          <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Recurrent Increase Period</ion-label>
+          <ion-input placeholder="Recurrent Increase Period" type="number" [(ngModel)]="data_.recurrentIncreasePeriod">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+    <!------------------------------------------------------------------------------------------->
+    <ion-row class="bottom">
+      <ion-col size="6" offset="2.5">
+        <ion-button class="buttom_ buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

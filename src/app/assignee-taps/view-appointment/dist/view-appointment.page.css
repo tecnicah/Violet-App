@@ -1,0 +1,107 @@
+ion-content {
+  --background: rgb(221, 221, 221);
+}
+
+.header {
+  background-image: url("/assets/backgrounds/banner_morado.svg");
+  background-position: top;
+  background-size: cover;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  justify-content: space-between;
+  padding: 10%;
+}
+.header ion-icon {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -15px;
+}
+
+.headergray {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+  margin-top: -24px;
+}
+.headergray ::before {
+  content: " ";
+}
+
+.appointments {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+}
+.appointments .title-edit {
+  display: flex;
+  justify-content: space-between;
+}
+.appointments .title {
+  color: #4435A6;
+}
+.appointments .flex {
+  display: flex;
+  align-items: center;
+}
+.appointments ion-card {
+  border-radius: 15px;
+  padding: 5px;
+  margin: 0px;
+  color: #000;
+}
+
+.status {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.status span {
+  color: gray;
+}
+.status .dot {
+  height: 5px;
+  width: 5px;
+  border-radius: 100%;
+  background: red;
+}
+.status .green {
+  background: green !important;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+}
+.card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+.card .options {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 90px;
+  height: 100px;
+}
+.card .options img {
+  width: 30px;
+}
+
+.icon .blue {
+  color: #4435A6;
+}
+.icon .purple {
+  color: #9D3292;
+}
+.icon .revers {
+  transform: rotate(180deg);
+}

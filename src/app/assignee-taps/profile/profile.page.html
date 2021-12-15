@@ -1,0 +1,227 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Assignee & Family Info</p>
+    <img src="/assets/icon/group_2.svg" style="width: 45px;" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Assignee & Family Info</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/group_2.svg" style="width: 45px;" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+  <div class="appointments">
+
+    <ion-row>
+      <ion-col size="9">
+        <span class="title_general_black">Assignee</span>
+      </ion-col>
+      <ion-col size="3" class="align__end">
+
+      </ion-col>
+    </ion-row>
+
+    <!----------------------------------assingne----------------------------------------------->
+    <ion-card (click)="edit(5, info)">
+      <ion-row>
+        <ion-col size="4" class="center"></ion-col>
+        <ion-col size="8" class="end"></ion-col>
+        <ion-col size="4" class="center">
+          <div class="box">
+            <div class="content">
+              <img class="img redondo __border__" src="{{service.url_images}}{{info.photo}}" fallimg="avatar">
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="1"></ion-col>
+
+        <ion-col size="7">
+          <div class="h15 gray"> Name <span class="h12">{{info.assigneeName}}</span> </div>
+          <div class="h15 gray"> Age <span class="h12">{{info.age}}</span> </div>
+          <div class="h15 gray"> Nationality <span class="h12">{{getNationality(info.nationalityId)}}</span> </div>
+          <div class="h15 gray"> Country of Residence <span class="h12">{{getNationality(info.homeCountryId)}}</span>
+          </div>
+          <div class="h15 gray"> E-mail 
+            <span class="h12" *ngIf="!show_name_assignee">{{info?.email}} </span> 
+            <span class="h12" *ngIf="show_name_assignee">{{(info?.email?.length>19) ?  (info?.email | slice:0:19)+'..': info?.email}}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <!---------------------------------dependents---------------------------------------------->
+
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="9" class="flex_title padding">
+        <span class="title_general_black">Dependents</span>
+      </ion-col>
+      <ion-col size="3" class="flex_filter padding" (click)="addDependent()">
+        <img src="/assets/icon/icon_add.svg" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-card *ngFor="let item of info.dependentInformations; let d = index"
+      (click)="edit(item.relationshipId,item, d)">
+      <ion-row>
+        <ion-col size="4" class="center">
+          <div class="h11" *ngIf="item.relationshipId != 3">{{getRelationShip(item.relationshipId)}}</div>
+          <div class="h11" *ngIf="item.relationshipId == 3">{{item.ifOther}}</div>
+        </ion-col>
+
+        <ion-col size="8" class="end">
+        </ion-col>
+
+        <ion-col size="4" class="center">
+          <div class="box">
+            <div class="content">
+              <img class="img redondo __border__" fallimg="avatar" src="{{service.url_images}}{{item.photo}}">
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="1"></ion-col>
+
+        <ion-col size="7">
+          <div class="h15 gray"> Name <span class="h12">{{item.name}}</span> </div>
+          <div class="h15 gray"> Age <span class="h12">{{getYears(item.birth)}}</span> </div>
+          <div class="h15 gray"> Nationality <span class="h12">{{getNationality(item.nationalityId)}}</span> </div>
+          <div class="h15 gray"> Country of Residence <span class="h12">{{getNationality(info.homeCountryId)}}</span>
+          </div>
+          <div class="h15 gray"> E-mail 
+            <!--span class="h12">{{item.email}}</span--> 
+            <span class="h12" *ngIf="!show_name_assignee">{{item?.email}} </span> 
+            <span class="h12" *ngIf="show_name_assignee">{{(item?.email.length>19) ?  (item?.email | slice:0:19)+'..': item?.email}}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <!---------------------------------------pets------------------------------------->
+
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="9" class="flex_title padding">
+        <span class="title_general_black">Pets</span>
+      </ion-col>
+      <ion-col size="3" class="flex_filter padding" (click)="addPet()">
+        <img src="/assets/icon/icon_add.svg" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+    <ion-card *ngFor="let item of info.petsNavigation; let i = index;" (click)="edit(4,item, i)">
+      <ion-row>
+        <ion-col size="4" class="center">
+          <div class="h11">{{getPetType(item.petTypeId)}}</div>
+        </ion-col>
+
+        <ion-col size="8" class="end">
+        </ion-col>
+
+        <ion-col size="4" class="center">
+          <div class="box">
+            <div class="content">
+              <img class="img redondo __border__" fallimg="avatar" src="{{service.url_images}}{{item.photo}}" alt="">
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="1"></ion-col>
+
+        <ion-col size="7">
+          <div class="h15 gray"> Name <span class="h12">{{item.name}}</span> </div>
+          <div class="h15 gray"> Age <span class="h12">{{item.age}}</span> </div>
+          <div class="h15 gray"> Breed <span class="h12">{{GetBreed(item.breedId,i)}}</span> </div>
+          <div class="h15 gray"> Size <span class="h12">{{getSize(item.sizeId)}}</span> </div>
+          <div class="h15 gray"> E-Weight <span class="h12">{{item.weight}}</span> </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <!--
+    <br>
+    <p class="h5">Housing Specifications</p>
+    <ion-card (click)="housing(hs)">
+      <ion-row>
+        <ion-col size="4" class="center">
+          <div class="h11">House</div>
+        </ion-col>
+
+        <ion-col size="8" class="end">
+         
+        </ion-col>
+
+        <ion-col size="4" class="center">
+          <div class="box">
+            <div class="content">
+              <img class="img redondo" fallimg="avatar" src="/assets/icon/housing _spect.svg" alt="">
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="8">
+          <div class="h12"> Contract Type <span class="h11" *ngIf="hs_boolean">{{hs.contractType.contractType}}</span>
+          </div>
+          <div class="h12"> Desired Property Type <span class="h11"
+              *ngIf="hs_boolean">{{hs.propertyType.propertyType}}</span> </div>
+          <div class="h12"> Budget <span class="h11" *ngIf="hs_boolean">{{hs.budget}} {{hs.currency.currency}}</span>
+          </div>
+          <div class="h12"> Bedrooms <span class="h11" *ngIf="hs_boolean">{{hs.bedroom}}</span> </div>
+          <div class="h12"> Size <span class="h11" *ngIf="hs_boolean">{{hs.size.size}}</span> </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    -->
+
+    <br>
+    <p class="title_general_black">Immigration Profile</p>
+    <br>
+
+    <ion-card (click)="immigrationProfile(1)" *ngIf="this.immPrf_boolean">
+      <ion-row>
+        <ion-col size="4" class="center">
+          <div class="h11"></div>
+        </ion-col>
+
+        <ion-col size="8" class="end">
+        </ion-col>
+
+        <ion-col size="4" class="center">
+          <div class="box">
+            <div class="content">
+              <img class="img redondo" fallimg="avatar" src="/assets/icon/imm_prof.svg" alt="">
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="1"></ion-col>
+
+        <ion-col size="7">
+          <div class="h15 gray"> 
+          Assignee / Passport No. <br>
+          <span *ngIf="immPrf_boolean" class="h12">{{immPrf?.passportInformation?.number}}</span> </div>
+          <span *ngIf="immPrf_boolean">
+            <div class="h15 gray" *ngFor="let item of immPrf.dependentImmigrationInfos">
+              {{getRelationShip(item.relationshipId)}} /  Passport No.
+              <span *ngIf="immPrf_boolean" class="h12">{{item.passportNumber}}</span>
+            </div>
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+</ion-content>

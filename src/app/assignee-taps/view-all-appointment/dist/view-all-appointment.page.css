@@ -1,0 +1,234 @@
+ion-content {
+  --background: rgb(221, 221, 221);
+}
+
+@media screen and (min-width: 1px) and (max-width: 767px) {
+  .h5 {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 !important;
+  }
+}
+.header {
+  background-image: url("/assets/backgrounds/banner_morado.svg");
+  background-position: top;
+  background-size: cover;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  justify-content: space-between;
+  padding: 10%;
+}
+.header ion-icon {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -15px;
+}
+
+.headergray {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+  margin-top: -24px;
+}
+.headergray ::before {
+  content: " ";
+}
+
+.appointments {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+}
+.appointments .title-edit {
+  display: flex;
+  justify-content: space-between;
+}
+.appointments .title {
+  color: #4435A6;
+}
+.appointments .flex {
+  display: flex;
+  align-items: center;
+}
+.appointments ion-card {
+  border-radius: 15px;
+  padding: 5px;
+  margin: 10px;
+  color: #000;
+}
+
+.status {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.status span {
+  color: gray;
+}
+.status .dot {
+  height: 5px;
+  width: 5px;
+  border-radius: 100%;
+  background: red;
+}
+.status .green {
+  background: green !important;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  margin-top: 10px;
+}
+.card .options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card .options img {
+  width: 30px;
+}
+
+.icon .blue {
+  color: #4435A6;
+}
+.icon .purple {
+  color: #9D3292;
+}
+.icon .revers {
+  transform: rotate(180deg);
+}
+
+.blue {
+  color: #4435A6;
+}
+
+.status {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.status span {
+  color: gray;
+}
+.status .dot {
+  height: 5px;
+  width: 5px;
+  border-radius: 100%;
+  background: red;
+}
+.status .green {
+  background: green !important;
+}
+
+.icon {
+  text-align: end;
+}
+
+ion-searchbar {
+  --background: white;
+  --icon-color: white;
+}
+
+ion-icon {
+  color: #9D3292;
+}
+
+button mat-icon {
+  color: #4435A6;
+}
+
+.mat-mini-fab {
+  background: #4435A6;
+}
+.mat-mini-fab mat-icon {
+  color: white;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#search_icon {
+  position: absolute;
+  top: 25px;
+  font-size: 20px;
+  right: 25px;
+}
+
+.gray {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.blue {
+  color: #4435A6;
+  font-style: italic;
+}
+
+.searchbar-search-icon.sc-ion-searchbar-ios {
+  right: 5px !important;
+}
+
+.buttom {
+  text-transform: none;
+  border-radius: 18px;
+  width: 70%;
+}
+.buttom__btn_login {
+  background: #9D3292;
+}
+.buttom__btn_login:hover {
+  background: #56004E;
+}
+.buttom__btn_blue {
+  background: #4435A6;
+}
+.buttom__btn_blue:hover {
+  background: #9D3292;
+}
+
+.white {
+  background: white;
+  border-radius: 15px;
+  margin: 0 0 0 15px;
+  height: 40px;
+}
+
+.filter {
+  background: white;
+  border-radius: 30px;
+  margin: 0 0 0 5px;
+  padding: 0 0 0 11px;
+}
+
+.white {
+  background: white;
+  border-radius: 40px;
+  margin: 0 0 0 15px;
+}
+
+.top {
+  margin-top: -20px;
+}
+
+.top_ {
+  margin-top: -32px;
+}
+
+.altura {
+  height: 30px;
+}

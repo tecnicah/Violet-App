@@ -1,0 +1,192 @@
+$purple-light: #9D3292;
+
+$purple-dark: #56004E;
+
+$blue: #4435A6;
+
+$black: rgba(0, 0, 0, 0.85);
+
+$ligth: rgba(0, 0, 0, 0.10);
+
+ion-content {
+    --background: rgb(221, 221, 221);
+}
+
+
+
+.header {
+    background-image: url("/assets/backgrounds/banner_morado.svg");
+    background-position: top;
+    background-size: cover;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    justify-content: space-between;
+    padding: 10%;
+
+    p {
+        color: #ffffff;
+    }
+
+    ion-back-button {
+        color: white;
+    }
+
+    ion-icon {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: -15px;
+    }
+}
+
+.headergray {
+    width: 100%;
+    padding: 15px 5% 10px 5%;
+    background: rgb(221, 221, 221);
+    border-radius: 25px 25px 0 0;
+    margin-top: -23px;
+
+    ::before {
+        content: " ";
+    }
+}
+
+.appointments {
+    width: 100%;
+    padding: 15px 5% 10px 5%;
+    background: rgb(221, 221, 221);
+    border-radius: 25px 25px 0 0;
+
+    .title-edit {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .title {
+        color: $blue;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+
+    ion-card {
+        border-radius: 15px;
+        padding: 5px 10px 5px 10px;
+        color: #000;
+        margin: 0;
+    }
+}
+
+.purple {
+    color: $purple-light;
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+    }
+
+    .options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        img {
+            width: 30px;
+        }
+    }
+}
+
+.status {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    span {
+        color: gray;
+    }
+
+    .dot {
+        height: 5px;
+        width: 5px;
+        border-radius: 100%;
+        background: red;
+    }
+}
+
+.icon {
+    .blue {
+        color: $blue;
+    }
+
+    .purple {
+        color: $purple-light;
+    }
+
+    .revers {
+        transform: rotate(180deg);
+    }
+}
+
+.ion-textarea {
+    border: solid 1px rgba(0, 0, 0, 0.10);
+    border-radius: 10px;
+    --background: trasparent;
+}
+
+.buttom {
+    text-transform: none;
+    border-radius: 18px;
+    width: 80%;
+    height: 25px;
+
+    &__btn_document {
+        background: $blue;
+    }
+
+}
+
+.documents2 {
+    margin-top: 20px;
+
+    .buttom {
+        text-transform: none;
+        border-radius: 18px;
+        width: 80%;
+        height: 25px;
+
+        &__btn_document {
+            background: $blue;
+        }
+
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+
+    .doc_info {
+        border-radius: 25px;
+        margin-top: 10px;
+        background: #ffffff;
+        padding: 10px 10px 0px 10px;
+    }
+}
+
+.filter{
+    background: white;
+    border-radius: 30px;
+    padding: 0 0 0 11px;
+}

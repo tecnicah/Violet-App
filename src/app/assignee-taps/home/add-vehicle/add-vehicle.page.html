@@ -1,0 +1,236 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': _services.padingios}">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Vehicle</p>
+    <img src="/assets/icon/group_2.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Vehicle Type</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Vehicle Type"
+            [(ngModel)]="data_vehiculo.vehicleType">
+            <ion-select-option *ngFor="let car of ca_vehiculo" [value]="car.id">{{car.type}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Vehicle Make</ion-label>
+          <ion-input [(ngModel)]="data_vehiculo.vehicleMake"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Vehicle Model</ion-label>
+          <ion-input [(ngModel)]="data_vehiculo.vehicleModel"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Year</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Year" [(ngModel)]="data_vehiculo.year">
+            <ion-select-option [value]=2020>2021</ion-select-option>
+            <ion-select-option [value]=2020>2020</ion-select-option>
+            <ion-select-option [value]=2019>2019</ion-select-option>
+            <ion-select-option [value]=2018>2018</ion-select-option>
+            <ion-select-option [value]=2017>2017</ion-select-option>
+            <ion-select-option [value]=2016>2016</ion-select-option>
+            <ion-select-option [value]=2015>2015</ion-select-option>
+            <ion-select-option [value]=2014>2014</ion-select-option>
+            <ion-select-option [value]=2013>2013</ion-select-option>
+            <ion-select-option [value]=2012>2012</ion-select-option>
+            <ion-select-option [value]=2011>2011</ion-select-option>
+            <ion-select-option [value]=2010>2010</ion-select-option>
+            <ion-select-option [value]=2008>2008</ion-select-option>
+            <ion-select-option [value]=2009>2009</ion-select-option>
+            <ion-select-option [value]=2008>2008</ion-select-option>
+            <ion-select-option [value]=2007>2007</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Plate Number</ion-label>
+          <ion-input [(ngModel)]="data_vehiculo.plateNumber"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Color</ion-label>
+          <ion-input [(ngModel)]="data_vehiculo.color"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Capacity</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Capacity" [(ngModel)]="data_vehiculo.capacity">
+            <ion-select-option [value]=1>1</ion-select-option>
+            <ion-select-option [value]=2>2</ion-select-option>
+            <ion-select-option [value]=3>3</ion-select-option>
+            <ion-select-option [value]=4>4</ion-select-option>
+            <ion-select-option [value]=5>5</ion-select-option>
+            <ion-select-option [value]=6>6</ion-select-option>
+            <ion-select-option [value]=7>7</ion-select-option>
+            <ion-select-option [value]=8>8</ion-select-option>
+            <ion-select-option [value]=9>9</ion-select-option>
+            <ion-select-option [value]=10>10</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Number of Doors</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Number of Doors"
+            [(ngModel)]="data_vehiculo.numberDoor">
+            <ion-select-option [value]=1>1</ion-select-option>
+            <ion-select-option [value]=2>2</ion-select-option>
+            <ion-select-option [value]=3>3</ion-select-option>
+            <ion-select-option [value]=4>4</ion-select-option>
+            <ion-select-option [value]=5>5</ion-select-option>
+            <ion-select-option [value]=6>6</ion-select-option>
+            <ion-select-option [value]=7>7</ion-select-option>
+            <ion-select-option [value]=8>8</ion-select-option>
+            <ion-select-option [value]=9>9</ion-select-option>
+            <ion-select-option [value]=10>10</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="12" class="flexdosts">
+        <span class="title_general_black"> Vehicle Photos</span>
+      </ion-col>
+      <ion-col size="9" class="flexdosts">
+        <span class="subtitle_general_black"> Interior Photos </span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)="photo(true, false, false)">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+  
+    <ion-card *ngIf="interior.length > 0">
+      <ion-slides class="app" [options]="slideOptsOne" pager="true" >
+        <ion-slide class="card-comments" *ngFor="let item of interior; let i = index">
+          <img src="{{item.b64}}" class="img" *ngIf="item.id == 0 && item.interior == true" class="img__size">
+          <img src="{{_services.url_images}}{{item.photo}}" class="img__size" *ngIf="item.id != 0 && item.interior == true">
+        </ion-slide>
+      </ion-slides>
+    </ion-card>
+
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="9" class="flexdosts">
+        <span class="subtitle_general_black"> Exterior Photos </span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)="photo(false, true, false)">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+    <ion-card *ngIf="exterior.length > 0">
+      <ion-slides class="app" [options]="slideOptsOne" pager="true" >
+        <ion-slide class="card-comments" *ngFor="let item of exterior; let i = index">
+          <img src="{{item.b64}}" class="img" *ngIf="item.id == 0 && item.exterior == true" class="img__size">
+          <img src="{{_services.url_images}}{{item.photo}}" class="img__size" *ngIf="item.id != 0 && item.exterior == true">
+        </ion-slide>
+      </ion-slides>
+    </ion-card>
+
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="9" class="flexdosts">
+        <span class="subtitle_general_black"> Safety Photos </span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)="photo(false, false, true)">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+    <ion-card *ngIf="safety.length > 0">
+      <ion-slides class="app" [options]="slideOptsOne" pager="true" >
+        <ion-slide class="card-comments" *ngFor="let item of safety; let i = index">
+          <img src="{{item.b64}}" class="img" *ngIf="item.id == 0 && item.safety == true" class="img__size">
+          <img src="{{this._services.url_images}}{{item.photo}}" class="img__size" *ngIf="item.id != 0 && item.safety == true">
+        </ion-slide>
+      </ion-slides>
+    </ion-card>
+
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="9" class="flexdosts">
+        <span class="title_general_black"> Vehicle Documents </span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)='addDocument()'>
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+
+    <div class="activitie" *ngFor="let item of data_vehiculo.documentVehicleConsultants; let i = index">
+      <ion-list lines="none">
+        <ion-item-sliding>
+          <ion-item>
+            <ion-row class="width">
+              <ion-col size="2">
+                <img src="/assets/icon/document_2.svg" class="avatar">
+              </ion-col>
+              <ion-col size="10">
+                <span class="subtitle_general_black">Document Type</span><br>
+                <span class="h15 gray">
+                  <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Uploaded
+                  <span class="h12"> {{item.createdDate | date: 'dd MMM yyyy'}}</span>
+                </span><br>
+                <span class="h15 gray">
+                  <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Expiration
+                  <span class="h12"> {{item.expirationDate | date: 'dd MMM yyyy'}}</span>
+                </span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger">
+              <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+</ion-content>

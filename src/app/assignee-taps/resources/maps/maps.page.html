@@ -1,0 +1,23 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Maps</p>
+    <img src="/assets/icon/bot_n_maps.svg" alt="" class="img_header"-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Maps</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/bot_n_maps.svg" alt="" class="img_header">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+<div id="map"></div>
+</ion-content>

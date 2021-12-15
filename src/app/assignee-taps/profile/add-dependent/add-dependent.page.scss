@@ -1,0 +1,183 @@
+$purple-light: #9D3292;
+
+$purple-dark: #56004E;
+
+$blue: #4435A6;
+
+$black: rgba(0, 0, 0, 0.85);
+
+$ligth: rgba(0, 0, 0, 0.10);
+
+ion-content{
+    --background: rgb(221, 221, 221);
+}
+
+.ancho_full{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.col_header{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.header {
+    background-image: url("/assets/backgrounds/banner_morado.svg");
+    background-position: top;
+    background-size: cover;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    justify-content: space-between;
+    padding: 5%;
+
+    ion-icon {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: -15px;
+    }
+}
+
+.headergray{
+    width: 100%;
+    padding: 15px 5% 10px 5%;
+    background: rgb(221, 221, 221);
+    border-radius: 25px 25px 0 0;
+    margin-top: -24px;
+    ::before{
+        content: " ";
+    }
+}
+
+.appointments {
+    width: 100%;
+    padding: 0;
+    background: rgb(221, 221, 221);
+    border-radius: 25px 25px 0 0;
+
+    .title-edit{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .title {
+        color: $blue;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+
+    ion-card {
+        border-radius: 15px;
+        padding: 5px;
+        color: #000;
+        margin: 20px 0;
+    }
+}
+
+.box {
+    width: 100%;
+    border-radius: 20%;
+    padding-top: 100%;
+    /* 1:1 Aspect Ratio */
+    position: relative;
+    /* If you want text inside of it */
+
+    .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 100%;
+        background-color: gray;
+
+        .img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .redondo{
+            border-radius: 100%;
+        }
+
+    }
+}
+
+.gray{
+    color: rgba(0, 0, 0, 0.5);
+}
+.buttom {
+    text-transform: none;
+    border-radius: 18px;
+    width: 100%;
+    &__btn_login {
+        background: $purple-light;
+
+        &:hover {
+            background: $purple-dark;
+        }
+    }
+}
+
+mat-expansion-panel-header {
+    height: 100% !important;
+    .header2 {
+        color: $purple-light;
+    }
+}
+
+mat-expansion-panel{
+    margin-top: 0 !important;
+    border-radius: 0 0 30px 30px !important;
+}
+
+
+.box {
+    width: 100%;
+    border-radius: 20%;
+    padding-top: 100%;
+    /* 1:1 Aspect Ratio */
+    position: relative;
+    /* If you want text inside of it */
+
+    .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 100%;
+        background-color: gray;
+
+        .icon {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 30px;
+
+        }
+
+        .text {
+            position: absolute;
+            color: white;
+            left: 40%;
+            top: 12%;
+        }
+
+        .img {
+            height: 100%;
+            width: 100%;
+            border-radius: 100%;
+        }
+
+    }
+}

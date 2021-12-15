@@ -1,0 +1,33 @@
+.modal-md {
+  --background: #ffffff;
+  --border-radius: 12px;
+  --width: 90%;
+  --height: 300px;
+  --backdrop-opacity: 0.5;
+}
+
+.modal-general-mensage {
+  --background: #ffffff;
+    --border-radius: 12px;
+    --width: 250px;
+    --height: 250px;
+    text-align: center;
+    --backdrop-opacity: 0.5;
+}
+
+.modal-general-confirm {
+  --background: #ffffff;
+    --border-radius: 12px;
+    --width: 250px;
+    --height: 270px;
+    text-align: center;
+    --backdrop-opacity: 0.5;
+}
+
+.modal-rating{
+  --background: #ffffff;
+  --border-radius: 12px;
+  --width: 350px;
+  --height: 350px;
+  --backdrop-opacity: 0.5;
+}

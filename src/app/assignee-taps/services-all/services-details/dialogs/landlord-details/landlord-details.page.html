@@ -1,0 +1,189 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Landlord Details</p>
+    <img src="/assets/icon/contract.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Landlord Name</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.name'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6"></ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Landlord Secondary E-mail (If Applies)</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.principalEmail'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Landlord Principal E-mail</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.secondaryEmail'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Landlord Principal Phone</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.principalPhone'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Landlord Secondary Phone (If Applies)</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.secundaryPhone'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <span class="title_general_black" style="margin-top: 20px">Landlord Bank Details</span>
+      </ion-col>
+
+      <ion-col size="12">
+        <span class="h15 gray">Fiscal Invoice</span><br>
+        <ion-checkbox class="size" [(ngModel)]='data_land.fiscalInvoice'></ion-checkbox>
+      </ion-col>
+
+      <ion-col size="6" *ngFor="let datacart of ca_creditCard">
+        <span class="h15 gray">{{datacart.creditCard}}</span><br>
+        <ion-checkbox class="size" (onchange)="guarda_card($event, datacart);"
+        [checked]="datacart.checked"></ion-checkbox>
+      </ion-col>
+
+      <ion-col size="12">
+        <span class="title_general_black" style="margin-top: 20px">Wire Transfer</span>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Account Type</ion-label>
+          <ion-select interface="action-sheet" mode="ios" [(ngModel)]='data_land.accountType'>
+            <ion-select-option *ngFor="let item of ca_accountType" [value]="item.id">{{item.accountType}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Account Holders Name</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.accountHoldersName'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Bank Name</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.bankName'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Account Number</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.accountNumber'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Routing Number (ABA)</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.routingNumber'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">SWIFT / BIC Code ( If Applies)</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.swiftBicCode'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Currency</ion-label>
+          <ion-select interface="action-sheet" mode="ios" [(ngModel)]='data_land.currency'>
+            <ion-select-option *ngFor="let item of ca_currency" [value]="item.id">{{item.currency}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Wire Fee Approx</ion-label>
+          <ion-input type="number" [(ngModel)]='data_land.wireFree'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Bank Address</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.bankAddress'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <span class="h15 gray">International Payment Acceptance</span><br>
+        <ion-checkbox class="size" [(ngModel)]='data_land.internationalPayment'
+        [checked]="data_land.internationalPayment"></ion-checkbox>
+      </ion-col>
+
+
+      <ion-col size="12">
+        <span class="title_general_black" style="margin-top: 20px;">Wire Transfer</span>
+      </ion-col>
+
+      <ion-col size="12">
+        <span class="h15 gray">Checks</span><br>
+        <ion-checkbox class="size"  [(ngModel)]='data_land.checks' [checked]="data_land.checks"></ion-checkbox>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Pay to the Order Of</ion-label>
+          <ion-input type="text"  [(ngModel)]='data_land.payToOrderOf'></ion-input>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col size="12">
+        <span class="title_general_black" style="margin-top:20px">Wire Transfer</span>
+      </ion-col>
+
+
+      <ion-col size="12">
+        <span class="h7 gray">Cash</span><br>
+        <ion-checkbox class="size" [(ngModel)]='data_land.cash' [checked]="data_land.cash"></ion-checkbox>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Comment</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.comment'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">General Comments</ion-label>
+          <ion-input type="text" [(ngModel)]='data_land.generalComments'></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom_ buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

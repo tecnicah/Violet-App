@@ -1,0 +1,336 @@
+<ion-header mode="ios">
+
+  <ion-row *ngIf="chat">
+    <ion-col size="2">
+      <div class="ct">
+        <ion-icon name="chevron-back" class="backicon" (click)="chat = false"></ion-icon>
+      </div>
+    </ion-col>
+
+    <ion-col size="8">
+      <div class="ct">
+        <span class="letter_ color_">{{nameChat}}</span>
+      </div>
+    </ion-col>
+
+    <ion-col size="2">
+      <div class="ct">
+        <img src="../../../assets/icon/icon_participantes_activo.svg" style="height: 30px;">
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <!--HEADER INICIAL LISTADO DE USUARIOS-->
+  <ion-grid *ngIf="!chat" style="padding: 0;">
+    <div class="header">
+      <p class="h5">Messages</p>
+    </div>
+    <div class="headergray"></div>
+
+    <!--ion-row>
+
+      <ion-col size="12">
+        <div class="ct">
+          <span class="h5 color_">Messages</span>
+        </div>
+      </ion-col>
+
+    </ion-row-->
+    <!--ion-col size="8" offset="2">
+        <ion-segment [(ngModel)]="chatSecction" (ngModelChange)="segmentChanged()">
+          <ion-segment-button [value]="1" class="h15_">
+            Premier Chats
+          </ion-segment-button>
+          <ion-segment-button [value]="2" class="h15_">
+            Services Chats
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col-->
+
+    <div class="services" [ngClass]="{'pading_ios': _services.padingios}">
+      <ion-row>
+        <ion-col size="8" offset="2">
+          <ion-segment [(ngModel)]="chatSecction" (ngModelChange)="segmentChanged()">
+            <ion-segment-button [value]="1">
+              Premier Chats
+            </ion-segment-button>
+            <ion-segment-button [value]="2">
+              Services Chats
+            </ion-segment-button>
+          </ion-segment>
+        </ion-col>
+
+
+        <ion-col size="2" *ngIf="chatSecction == 1" style="display: flex; align-items: center;">
+          <img src="/assets/icon/icon_add.svg" class="btn_size" (click)="newChat()">
+        </ion-col>
+
+      </ion-row>
+    </div>
+
+  </ion-grid>
+
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+  <ion-refresher *ngIf="!chat" slot="fixed" (ionRefresh)="segmentChanged($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!------------------------------------------------------------------------>
+  <div class="appointments" *ngIf="!chat" style="margin-bottom: 50px;">
+    <!--ESTA ES LA SECCION DONDE SE MUESTRAS LAS TARJETAS DE LOS CHATS-->
+    <!--CHAT PREMIER-->
+    <div *ngIf="chatSecction == 1">
+      <ion-row>
+        <ion-col size="12" class="padding">
+          <ion-searchbar placeholder="" mode="ios" [(ngModel)]="userFilter.name"></ion-searchbar>
+          <ion-icon name="search-outline" id="search_icon"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <div class="activitie" *ngFor="let item of table_contacts | filterBy: userFilter">
+        <ion-list lines="none" *ngIf="!item.groups">
+          <ion-item-sliding matRipple matRippleColor="rgba(158, 53, 149, 0.5)">
+            <ion-item
+              (click)="getConversation(item.conversationId, item.serviceLineId); nameChat = item.name +' '+ item.lastname">
+              <ion-row class="width_full">
+                <ion-col size="2" class="flex_img">
+                  <div class="avatares">
+                    <div class="content">
+                      <img src="{{_services.url_images}}{{item.photo}}" alt="" class="img __border__" fallimg="avatar">
+                    </div>
+                  </div>
+                </ion-col>
+
+                <ion-col size="10">
+                  <div class="flex_chat">
+                    <p class="h15 gray p">{{item.name}} / {{item.profile}}</p>
+                    <p style="margin-left: 11px;" class="h15 gray p m-1">{{item.lastMessageTime | date: 'hh:mm'}} hrs
+                    </p>
+                  </div>
+                  <div class="flex_chat">
+                    <span class="h15 gray"
+                      *ngIf="item.lastMessage != null">{{(item?.lastMessage.length>10) ?  (item?.lastMessage | slice:0:10)+'..': item?.lastMessage}}</span>
+                    <ion-badge *ngIf="item.unreadMessages == 1">1</ion-badge>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option color="danger" class="option" (click)="deleteConversation(item)">
+                <ion-icon slot="bottom" name="close-circle" class="iconslot"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+
+        <ion-list lines="none" *ngIf="item.groups">
+          <ion-item-sliding matRipple matRippleColor="rgba(158, 53, 149, 0.5)">
+            <ion-item
+              (click)="getConversation(item.conversationId, item.serviceLineId); nameChat = item.name +' '+ item.lastname">
+              <ion-row class="width_full">
+                <ion-col size="2" class="flex_img">
+                  <div class="avatares">
+                    <div class="content">
+                      <img src="./assets/avatar.svg" alt="" class="img">
+                    </div>
+                  </div>
+                </ion-col>
+
+                <ion-col size="10">
+                  <div class="flex_chat">
+                    <p class="h15 gray p">
+                      {{(item.names[0].participant.length>7) ?  (item.names[0].participant| slice:0:7)+'  ': item.names[0].participant}}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      {{(item.names[1].participant.length>7) ?  (item.names[1].participant| slice:0:7)+'  ': item.names[1].participant}}
+                    </p>
+                    <p style="margin-left: 11px;" class="h15 gray p m-1">{{item.lastMessageTime | date: 'hh:mm'}} hrs
+                    </p>
+                  </div>
+                  <div class="flex_chat">
+                    <span class="h15 gray"
+                      *ngIf="item.lastMessage != null">{{(item?.lastMessage.length>10) ?  (item?.lastMessage | slice:0:10)+'..': item?.lastMessage}}</span>
+                    <ion-badge *ngIf="item.unreadMessages == 1">1</ion-badge>
+                  </div>
+                </ion-col>
+
+              </ion-row>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option color="danger" class="option" (click)="deleteConversation(item)">
+                <ion-icon slot="bottom" name="close-circle" class="iconslot"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
+    </div>
+    <!--CHAT SERVICIOS-->
+    <div *ngIf="chatSecction == 2">
+
+      <!--ion-row>
+        <ion-col size="6">
+          <ion-item class="filter">
+            <ion-select interface="action-sheet" mode="ios"
+              placeholder="Country" [(ngModel)]="userFilters.country">
+              <ion-select-option [value]="''">All</ion-select-option>
+              <ion-select-option *ngFor="let item of caCountry" [value]="item.name">{{item.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-item class="filter">
+            <ion-select interface="action-sheet" mode="ios"
+              placeholder="Service Line" [(ngModel)]="userFilters.serviceLineName">
+              <ion-select-option [value]="''">All</ion-select-option>
+              <ion-select-option *ngFor="let item of sl" [value]="item.serviceLine">{{item.serviceLine}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row-->
+      <ion-row>
+        <ion-col size="12" class="padding">
+          <ion-searchbar placeholder="" mode="ios" [(ngModel)]="userFilter_.name.name"></ion-searchbar>
+          <ion-icon name="search-outline" id="search_icon"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <!--div class="activitie" *ngFor="let item of sr | filterBy: userFilter_">
+        <ion-list lines="none">
+          <ion-item-sliding matRipple matRippleColor="rgba(158, 53, 149, 0.5)">
+            <ion-item (click)="getConversationSr(item.numberServiceRecord, item.serviceLineId)">
+              <ion-row class="width_full">
+                <ion-col size="2" class="flex_img">
+                  <img src="{{_services.url_images}}{{item.avatar}}" alt="" class="img">
+                </ion-col>
+
+                <ion-col size="10">
+                  <div class="flex_chat">
+                    <p class="h15 p">{{item.numberServiceRecord}} - {{item.team}} - {{item.country}}</p>
+                    <p style="margin-left: 11px;" class="h15 gray p m-1">{{item.dateComment | date : 'HH:mm'}} hrs</p>
+                  </div>
+                  <span class="h15 gray">Assignee {{item.name.name}}</span><br>
+                  <span
+                    class="h12">{{(item.comment.length>40) ?  (item.comment | slice:0:40)+'..': item.comment}}</span><br>
+                </ion-col>
+
+              </ion-row>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option color="danger" class="option" (click)="deleteConversation(item)">
+                <ion-icon slot="bottom" name="close-circle" class="iconslot"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </div-->
+      <ion-card *ngFor="let item of sr | filterBy: userFilter_" matRipple
+        (click)="getConversationSr(item.serviceRecordId, item.serviceLineId)"
+        matRippleColor="rgba(158, 53, 149, 0.5)">
+        <ion-row class="width_full">
+          <ion-col size="2" class="flex_img">
+            <div class="avatares">
+              <div class="content">
+                <img src="{{_services.url_images}}{{item.avatar}}" alt="" class="img __border__" fallimg="avatar">
+              </div>
+            </div>
+          </ion-col>
+
+          <ion-col size="10">
+            <div class="flex_chat">
+              <p class="h15 p">{{item.numberServiceRecord}} - {{item.team}} - {{item.country}}</p>
+              <p style="margin-left: 11px;" class="h15 gray p m-1">{{item.dateComment | date : 'HH:mm'}} hrs</p>
+            </div>
+            <span class="h15 gray">Assignee {{item.name.name}}</span><br>
+            <span class="h12">{{(item.comment.length>40) ?  (item.comment | slice:0:40)+'..': item.comment}}</span><br>
+          </ion-col>
+
+        </ion-row>
+      </ion-card>
+    </div>
+  </div>
+  <!------------------------------------------------------------------------>
+  <!--SE DESPLIEGA HISTORICO DE MENSAJES DEL CHAT PREMIER-->
+  <div class="appointments" id="texting" *ngIf="chat">
+    <div *ngFor="let message of chat_conversations, index as index;"
+      [ngClass]="{'recibidos': message.userId != userData.id, 'enviados': message.userId == userData.id}">
+      <ion-row style="width: 100%;">
+        <ion-col size="2">
+          <!--div class="user"-->
+            <div class="avatares">
+              <div class="content">
+                <img src="{{_services.url_images}}{{message.avatar}}" alt="" fallimg="avatar" class="img __border__">
+              </div>
+            </div>
+          <!--/div-->
+        </ion-col>
+        <ion-col size="6">
+          <b class="h9_">{{message.user}}</b>
+        </ion-col>
+        <ion-col size="2">
+          <p class="h9_ gray">{{message.time | date : ' HH:mm'}}</p>
+        </ion-col>
+        <ion-col size="2" (click)="deleteMenssage(message)" *ngIf="message.userId == userData.id">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-col>
+
+        <ion-col size="10" *ngIf="message.documentMessages.length != 0">
+          <p class="h9_">{{message.message1}}</p>
+        </ion-col>
+        <ion-col size="2" *ngIf="message.documentMessages.length != 0" matRipple
+          matRippleColor="rgba(158, 53, 149, 0.5)"
+          (click)="downloadDocumentSelected( message.documentMessages[0].filePath )">
+          <img [src]="chatImageSrcStyle( message.documentMessages[0].filePath )" />
+        </ion-col>
+
+        <ion-col size="12" *ngIf="message.documentMessages.length == 0">
+          <p class="h9_">{{message.message1}}</p>
+        </ion-col>
+
+      </ion-row>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="chat" [ngStyle]="{'margin-bottom': keyboard}">
+
+  <ion-row>
+    <ion-col size="2" [ngClass]="{'pading_ios': _services.padingios}">
+      <ion-fab style="margin: 16px;">
+        <ion-fab-button size="small">
+          <ion-icon name="add" style="color: white;"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+          <ion-fab-button>
+            <ion-icon name="albums" style="color: white;" (click)="filesUpload('images_only')">
+            </ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="camera" style="color: white;" (click)="photo()">
+            </ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+    </ion-col>
+
+    <ion-col size="10">
+      <div class="messages">
+        <ion-textarea rows="1" [(ngModel)]="continuemesage.message"></ion-textarea>
+        <img src="../../../assets/icon/send.svg" class="send" (click)="sendMessage()">
+      </div>
+    </ion-col>
+  </ion-row>
+
+</ion-footer>
+
+<ngx-file-drop class="file-drop" style="display: none;" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+  (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" [multiple]="false">
+  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+    Drag and Drop or
+    <p class="browser" id="images_only" (click)="openFileSelector()">Browse File</p>
+  </ng-template>
+</ngx-file-drop>

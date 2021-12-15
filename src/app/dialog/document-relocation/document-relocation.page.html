@@ -1,0 +1,80 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Add Document</p>
+    <img src="/assets/icon/documents.svg" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Update Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY"  mode="ios" [(ngModel)]="temporalDocument.updatedDate"></ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Expiration Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY"  mode="ios" [(ngModel)]="documents.expirationDate"></ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <br>
+        <ngx-file-drop [ngClass]="{'displaynone': temporalDocument.name}" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)"
+          (onFileLeave)="fileLeave($event)" multiple="false">
+          <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+            <p class="h7">Files admited: PDF, PNG, JPEG</p>
+            <button type="button" id="doc" (click)="openFileSelector()" style="display: none;">Browse Files</button>
+          </ng-template>
+        </ngx-file-drop>
+      </ion-col>
+      <ion-col size="12" *ngIf="temporalDocument.name != null">
+        <ion-card>
+          <span>{{temporalDocument.name}}</span>
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-card>    
+      </ion-col>
+
+      <ion-col size="12" align="end">
+        <br>
+        <ion-button class="buttom buttom__btn_document" (click)="doc()">Add Document</ion-button>
+      </ion-col>
+
+      <ion-col size="12">
+        <br>
+        <ion-item>
+          <ion-label position="floating">Document Type</ion-label>
+          <ion-select [(ngModel)]="documents.documentType" [interfaceOptions]="customActionSheetOptions" interface="action-sheet"  mode="ios" placeholder="Select One">
+            <ion-select-option *ngFor="let item of caDocumentType" [value]="item.id">{{item.documentType}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+     
+      <br>
+
+      <ion-col size="12">
+        <br>
+        <ion-item>
+          <ion-label position="floating">Privacy</ion-label>
+          <ion-select [(ngModel)]="documents.privacy" [interfaceOptions]="customActionSheetOptions" interface="action-sheet"  mode="ios" placeholder="Select One">
+            <ion-select-option *ngFor="let item of ca_privacy" [value]="item.id"> {{item.privacy}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col size="6" offset="3" size-md="4" offset-md="4">
+        <br>
+        <ion-button class="buttom buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

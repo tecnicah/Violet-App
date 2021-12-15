@@ -1,0 +1,140 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': _services.padingios}">
+    <span>&nbsp;</span>
+    <p class="h5">Notifications</p>
+    <img src="/assets/icon/notifications.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="8" class="padding width_full">
+        <ion-searchbar  class="padding" placeholder="" mode="ios" [(ngModel)]="userFilter.type"></ion-searchbar>
+        <ion-icon name="search-outline" id="search_icon"></ion-icon>
+      </ion-col>
+      <ion-col size="2"  class="align__end padding flex_filter">
+        <button mat-icon-button (click)="cleanFilter()">
+          <mat-icon [ngClass]="{'refresh': filteruno}">cached</mat-icon>
+        </button>
+      </ion-col>
+      <ion-col size="2" class="align__end padding flex_filter" (click)="openFilter()">
+        <img src="/assets/icon/icon_filters.svg" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+    <div class="activitie" *ngFor="let data of ca_notification | filterBy: userFilter; let i = index">
+      <ion-list lines="none">
+        <ion-item-sliding>
+          <ion-item>
+            <ion-row style="width: 100%;">
+              <ion-col size="12">
+                <p class="h9 purple">{{data.type}}</p>
+              </ion-col>
+              <ion-col size="2" style="margin: auto;">
+                <div class="avatares">
+                  <div class="content">
+                    <img src="{{_services.url_images}}{{data.fromAvatar}}" fallimg="avatar" class="img __border__">
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="5">
+                <span class="h15 gray">From</span><br>
+                <span class="h12" *ngIf="!show_name_assignee">{{data.from}}</span>
+                <span class="h12" *ngIf="show_name_assignee">{{(data?.from?.length>7) ?  (data?.from | slice:0:7)+'..': data?.from}}</span>
+
+                <br>
+
+                <span class="h15 gray">Assignee</span><br>
+                <span class="h12" *ngIf="!show_name_assignee">{{data.assignee}}</span>
+                <span class="h12" *ngIf="show_name_assignee">{{(data?.assignee?.length>7) ?  (data?.assignee | slice:0:7)+'..': data?.assignee}}</span>
+              </ion-col>
+
+              <ion-col size="5">
+                <span class="h15 gray">Time <span class="h15">{{data.time | slice:0:5}} hrs</span></span><br>
+                <span class="h15 gray" (click)="serviceRecord(data)">Service Record <span class="purple h15">{{data.serviceRecord}}</span></span><br>
+                <span class="h15 gray">From <span class="purple h15">{{ ( data.serviceRecordCountry?.length > 6 )? ( data.serviceRecordCountry | slice:0:6 )+ '...' : ( data.serviceRecordCountry )}}, {{ ( data.serviceRecordCityHome?.length > 10 )? ( data.serviceRecordCityHome | slice:0:10 )+ '...' : ( data.serviceRecordCityHome ) }}</span></span><br>
+                <span class="h15 gray">To <span class="purple h15">{{ ( data.serviceRecordCountryHost?.length > 6 )? ( data.serviceRecordCountryHost | slice:0:6 )+ '...' : ( data.serviceRecordCountryHost )}}, {{ ( data.serviceRecordCityHost?.length > 6 )? ( data.serviceRecordCityHost | slice:0:6 )+ '...' : ( data.serviceRecordCityHost ) }}</span></span>
+              </ion-col>
+
+              <ion-col size="12">
+                <span class="h12">{{data.description}}</span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option color="success" (click)="archive(data)">
+              <ion-icon slot="bottom" name="eye-off" class="iconslot"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="tertiary" *ngIf="data.actionCall.accept != null" (click)="accept(data,data.actionCall.accept)">
+              <ion-icon slot="bottom" name="checkmark-circle" class="iconslot"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="danger" *ngIf="data.actionCall.rejected != null" (click)="decline(data,data.actionCall.rejected)">
+              <ion-icon slot="bottom" name="close-circle" class="iconslot"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+    </div>
+  </div>
+</ion-content>
+
+<!--ion-header>
+  <ion-toolbar [ngClass]="{'pading_ios': service.padingios}">
+    <ion-title class="h5 purple">Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <span class="icon">
+      <ion-icon name="close-outline" alling="end"></ion-icon>
+    </span>
+    <p class="h7">Notification Title</p>
+    <p class="h12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque faucibus, augue eu convallis
+      vulputate. <b class="purple">SR-020312</b></p>
+    <span class="icon">
+      <p class="blue h7">View</p>
+    </span>
+  </div>
+  
+  <div>
+    <span class="icon">
+      <ion-icon name="close-outline" alling="end"></ion-icon>
+    </span>
+    <p class="h7">Notification Title</p>
+    <p class="h12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque faucibus, augue eu convallis
+      vulputate. <b class="purple">SR-020312</b></p>
+    <span class="icon">
+      <p class="blue h7">View</p>
+    </span>
+  </div>
+
+  <div>
+    <span class="icon">
+      <ion-icon name="close-outline" alling="end"></ion-icon>
+    </span>
+    <p class="h7">Notification Title</p>
+    <p class="h12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque faucibus, augue eu convallis
+      vulputate. <b class="purple">SR-020312</b></p>
+    <span class="icon">
+      <p class="blue h7">View</p>
+    </span>
+  </div>
+
+  <div>
+    <span class="icon">
+      <ion-icon name="close-outline" alling="end"></ion-icon>
+    </span>
+    <p class="h7">Notification Title</p>
+    <p class="h12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque faucibus, augue eu convallis
+      vulputate. <b class="purple">SR-020312</b></p>
+    <span class="icon">
+      <p class="blue h7">View</p>
+    </span>
+  </div>
+</ion-content-->

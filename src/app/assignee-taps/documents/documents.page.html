@@ -1,0 +1,83 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Documents</p>
+    <img src="/assets/icon/documents.svg" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Documents</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/documents.svg" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+  <div class="appointments" style="margin-bottom: 20px;">
+
+    <mat-accordion class="documentos" *ngFor="let item of dependents">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="user">
+              <img class="img" src="{{item.avatar}}" fallimg="avatar">
+              <div class="data">
+                <p class="h15 gray">Dependent</p>
+                <p class="h12">{{item.dependent}}</p>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="documents">
+          <ion-row>
+            <ion-col size="7">
+              <span class="title_general_black">Documents<b class="purple">
+                  {{item.document.length}}</b></span>
+            </ion-col>
+            <ion-col size="3" class="flexdosts"></ion-col>
+            <ion-col size="2" class="align__end">
+              <img src="/assets/icon/icon_add.svg" style="height: 100%;" (click)="documentDialog();" class="btn_size">
+            </ion-col>
+          </ion-row>
+
+          <div class="activitie" *ngFor="let doc of item.document">
+            <ion-list lines="none" >
+              <ion-item-sliding>
+                <ion-item (click)="viewDoc(doc.id)">
+                  <ion-row class="width">
+                    <ion-col size="3">
+                      <img src="/assets/icon/document_2.svg" class="avatar">
+                    </ion-col>
+                    <ion-col size="9">
+                      <span class="subtitle_general_black">{{doc.documentType}}</span><br>
+                      <span class="h15 gray">
+                        <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Uploaded
+                        <span class="h12"> {{doc.createdDate | date: 'dd MMM yyyy'}}</span>
+                      </span><br>
+                      <span class="h15 gray">
+                        <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Expiration
+                        <span class="h12"> {{doc.expirationDate | date: 'dd MMM yyyy'}}</span>
+                      </span>
+                    </ion-col>
+                  </ion-row>
+                </ion-item>
+                <ion-item-options (click)="deleteDocument(doc.id)">
+                  <ion-item-option color="danger">
+                    <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-list>
+          </div>
+
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</ion-content>

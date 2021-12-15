@@ -1,0 +1,121 @@
+$purple-light: #9D3292;
+$purple-dark: #56004E;
+$blue: #4435A6; 
+$black: rgba(0,0,0,0.85);
+$ligth: #f2f2f2;
+
+.background{
+    padding: 0px 30px;
+    border-radius: 80px 80px 0px 0px;
+    width: 100%;
+    height: 70%;
+    position: fixed;
+    bottom: -1px;
+    background: url(/assets/backgrounds/banner_morado.svg) !important;
+    background-size: cover !important;
+}
+
+.principal_container{
+      --color: #fff;
+      --background:white;
+      //background: url("/assets/backgrounds/fondo_1.png") 0 0/100% 100% no-repeat fixed !important;
+      background-size: cover !important;
+}
+
+.logo{
+    text-align: center;
+    //margin: 70px 0 69px 0;
+}
+.text{
+    &__login{
+        color: white;
+        margin-top: 35px;
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }
+    &__assignee{
+        font-size: 16px;
+        color: $purple-light;
+        padding: 4%;
+        text-align: end;
+    }
+}
+.forgot_password{
+    width: 100%;
+    text-align: center;
+    color: $blue;
+}
+.buttom{
+    text-transform: none;
+    border-radius: 18px;
+    width: 100%;
+    &__btn_login{
+        background: transparent;
+        &:hover{
+            background: $purple-dark;
+        }
+    }
+
+}
+.h5_{
+    font-size: 20px;
+}
+.text__login_{
+    margin-top: 0px!important;
+}
+
+ion-button {
+    font-weight: bold;
+}
+
+.container_input{
+    margin-bottom: 30px;
+}
+
+mat-icon{
+    color: white;
+}
+
+mat-form-field{
+    color: white;
+    font-size: 16px;
+}
+
+.cdk-text-field-autofill-monitored:not(:-webkit-autofill){
+    color: white;
+}
+
+mat-label{
+    color: white;
+    font-size: 14px;
+}
+
+.end {
+    text-align: end;
+}
+
+.padding{
+    padding: 8px;
+}
+
+.text{
+    color: white;
+    font-weight: bold;
+}
+
+.position_fixed{
+    position: fixed;
+}
+
+.flex_img{
+    display: flex;          
+    justify-content: center;
+    align-items: center;   
+    height: 30%; 
+}
+
+.ios_{
+    --background: #9D3292;
+    --color: white;
+    height: 20px;
+}

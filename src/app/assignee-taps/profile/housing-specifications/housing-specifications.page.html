@@ -1,0 +1,147 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': _service.padingios}">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Housing Specifications</p>
+    <img src="/assets/icon/housing _spect.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="12">
+        <ion-label style="color: gray;" position="floating">Areas of Interest</ion-label>
+        <ion-item class="ion-textarea">
+          <ion-textarea rows="4" [(ngModel)]="info.areaInterest"></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Contract Type</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="Select One" [(ngModel)]="info.contractTypeId">
+            <ion-select-option *ngFor="let item of caContracType" [value]="item.id">{{item.contractType}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Desired Property Type</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="Select One" [(ngModel)]="info.propertyTypeId">
+            <ion-select-option *ngFor="let item of caPropertyType" [value]="item.id">{{item.propertyType}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Bedrooms</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="Select One" [(ngModel)]="info.bedroom">
+            <ion-select-option *ngFor="let item of caNumbers" [value]="item">{{item}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Bathrooms</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="Select One" [(ngModel)]="info.bathroom">
+            <ion-select-option *ngFor="let item of caNumbers" [value]="item">{{item}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Budget</ion-label>
+          <ion-input type="tel" [(ngModel)]="info.budget"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Currency</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="Select One" [(ngModel)]="info.currencyId">
+            <ion-select-option *ngFor="let item of caCurrency" [value]="item.id">{{item.currency}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Size</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="Select One" [(ngModel)]="info.sizeId">
+            <ion-select-option *ngFor="let item of caSize" [value]="item.id">{{item.size}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Metrics</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="Select One" [(ngModel)]="info.metricId">
+            <ion-select-option *ngFor="let item of caMetric" [value]="item.id">{{item.metric}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Desired Commute Time</ion-label>
+          <ion-input type="tel" [(ngModel)]="info.desiredCommuteTime"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Intended Start Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.intendedStartDate"></ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Parking Spaces</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="Select One" [(ngModel)]="info.parkingSpace">
+            <ion-select-option *ngFor="let item of caNumbers" [value]="item">{{item}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <br>
+        <p class="h5">Amenities</p>
+      </ion-col>
+
+      <ion-col size="6" *ngFor="let item of amenities">
+        <ion-item>
+          <ion-label>{{item.amenitie}}</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="item.check"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label style="color: gray;" position="floating">Additional Comments</ion-label>
+        <ion-item class="ion-textarea">
+          <ion-textarea rows="4" [(ngModel)]="info.additionalComments"></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="a" size="6" offset="3" size-md="4" offset-md="4">
+        <ion-button class="buttom buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+
+
+    </ion-row>
+  </div>
+</ion-content>

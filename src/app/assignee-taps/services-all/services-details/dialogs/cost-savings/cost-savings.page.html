@@ -1,0 +1,100 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Cost Savings</p>
+    <img src="/assets/icon/contract.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="10">
+        
+      </ion-col>
+      <ion-col size="2">
+        <img src="/assets/icon/icon_add.svg" *ngIf="!addReminder_" (click)="addReminder_ = !addReminder_"
+          style="height: 100%;" class="btn_size">
+        <img src="/assets/icon/icon_cancel.svg" *ngIf="addReminder_" (click)="addReminder_ = !addReminder_"
+          style="height: 100%; transform: rotate(45deg);"  class="btn_size">
+      </ion-col>
+    </ion-row>
+
+       <!---------------------------------------------------------------------------->
+    <!--MODAL PARA AGREGAR COST SAVINGS-->
+    <div class="editable" *ngIf="addReminder_">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Cost Type</ion-label>
+            <ion-input placeholder="Description" type="text" [(ngModel)]="reminder_data.costType">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Cost Savings</ion-label>
+            <ion-input placeholder="Description" type="text" [(ngModel)]="reminder_data.costSavings">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Currency</ion-label>
+            <ion-select interface="action-sheet" mode="ios" [(ngModel)]="reminder_data.currency">
+              <ion-select-option *ngFor='let item of ca_currency' [value]='item.id'>{{item.currency}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="6" offset="3">
+          <ion-button class="buttom buttom__btn_login" (click)="addCost()">
+            Add Cost Savings</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+    <!---------------------------------------------------------------------------->
+
+    <div class="activitie" *ngFor="let item of data_">
+      <ion-list>
+        <ion-item-sliding>
+          <ion-item lines="none">
+            <ion-row style="width: 100%;">
+              <ion-col size="2">
+                <img src="/assets/icon/payment_C.svg" class="avatar">
+              </ion-col>
+              <ion-col size="10">
+                <span class="h15 gray">
+                  Cost Type
+                  <span class="h12">{{item.costType}}</span>
+                </span><br>
+                <span class="h12">
+                  <span class="h15 gray">Cost Saving  </span>{{item.costSavings}}
+                </span><br>
+                <span class="h12">
+                  <span class="h15 gray">Cost Saving Currency </span>{{item.currency}}
+                </span><br>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger">
+              <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+    <!------------------------------------------------------------------------------------------->
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom_ buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

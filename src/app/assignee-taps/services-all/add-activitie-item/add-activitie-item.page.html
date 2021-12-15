@@ -1,0 +1,167 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Action Items</p>
+    <img src="/assets/icon/assing.svg" style="width: 45px;" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Action Items</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/assing.svg" style="width: 45px;" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+
+    <ion-row>
+      <ion-col size="6">
+        <span class="h12 gray">Status</span>
+        <p class="h12">{{getstatusname(data.statusId)}}</p>
+      </ion-col>
+
+      <ion-col size="6">
+        <span class="h12 gray">Creation Date</span>
+        <p class="h12">{{data.createdDate | date : 'dd MMM yyy'}}</p>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Action Title</ion-label>
+          <ion-input type="text" [(ngModel)]="data.actionTitle" maxlength="40"></ion-input>
+        </ion-item>
+        <!--div style="text-align: end;">
+          <span class="h10 gray">{{report.conclusion?.length || 0}}/300</span>
+        </div-->
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label style="color: gray;" class="h12" position="floating">Description</ion-label>
+        <ion-item class="ion-textarea">
+          <ion-textarea rows="6" maxlength="300" [(ngModel)]="data.taskDescription"></ion-textarea>
+        </ion-item>
+        <!--div style="text-align: end;">
+          <span class="h10 gray">{{report.conclusion?.length || 0}}/300</span>
+        </div-->
+      </ion-col>
+
+      <ion-col size="6">
+        <span class="h12 gray">From</span>
+        <p class="h12">{{userData.name}}</p>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label>To</ion-label>
+        <ion-item>
+          <ion-select multiple="true" [(ngModel)]="data.to" mode="ios" interface="action-sheet" cancelText="Cancel"
+            okText="Accept">
+            <ion-select-option *ngFor="let item of collaborators" [value]="item.id">{{item.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Due Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="data.dueDate" mode="ios"></ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6"></ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Work Order</ion-label>
+          <ion-select [(ngModel)]="data.workOrderId" (ngModelChange)="getServices()"
+            [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios" placeholder="Select One">
+            <ion-select-option *ngFor="let item of caWo" [value]="item.id">{{item.numberWorkOrder}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Service</ion-label>
+          <ion-select [(ngModel)]="data.serviceId" [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet" mode="ios" placeholder="Service">
+            <ion-select-option *ngFor="let item of caService" [value]="item.id">{{item.serviceNumber}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label>Colaborators</ion-label>
+        <ion-item>
+          <ion-select multiple="true" [(ngModel)]="data.colaborator" mode="ios" interface="action-sheet"
+            cancelText="Cancel" okText="Accept">
+            <ion-select-option *ngFor="let item of collaborators" [value]="item.id">{{item.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" style="display: flex; flex-direction: column;">
+        <ion-label>Urgent</ion-label>
+        <span>&nbsp;</span>
+        <span style="display: flex; align-items: center;">
+          <ion-checkbox [(ngModel)]="data.urgent"></ion-checkbox> Yes
+        </span>
+      </ion-col>
+
+    </ion-row>
+
+    <br>
+    <br>
+    
+    <ion-row>
+      <ion-col size="7">
+        <p class="title_general_black">Documents <b class="purple">{{data.taskDocuments.length}}</b></p>
+      </ion-col>
+      <ion-col size="3" class="flexdosts"></ion-col>
+      <ion-col size="2">
+        <img src="/assets/icon/icon_add.svg" class="btn_size" (click)="addDocuments()" style="height: 100%;">
+      </ion-col>
+    </ion-row>
+
+    <div class="activitie" *ngFor="let item of data.taskDocuments; let i = index">
+      <ion-list>
+        <ion-item-sliding>
+          <ion-item>
+            <ion-row>
+              <ion-col size="3">
+                <img src="/assets/icon/document_2.svg" class="avatar">
+              </ion-col>
+              <ion-col size="9">
+                <span class="h9 gray"><b>{{item.nameFile}}</b></span><br>
+                <span class="h9 gray">
+                  <ion-icon name="calendar-clear-outline" class="gray"></ion-icon> Uploaded:
+                  <b>{{item.createdDate | date : 'dd MMM yyy'}}</b>
+                </span><br>
+                <span class="h9 gray">Expiration: <b>-------------</b></span><br>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger" (click)="deleteActivitie(item.id, i)">
+              <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom buttom__btn_login" (click)="save()">Assign Action</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

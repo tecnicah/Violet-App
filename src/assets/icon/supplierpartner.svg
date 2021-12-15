@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <linearGradient id="afzepbphaa" x1="50%" x2="50%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#9D3292"/>
+            <stop offset="100%" stop-color="#4435A6"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g transform="translate(-24 -1137) translate(0 388) translate(0 35) translate(24 714)">
+                        <circle cx="12" cy="12" r="12" fill="url(#afzepbphaa)"/>
+                        <path fill="#FFF" fill-rule="nonzero" d="M12.667 8.667V6H6v12h13.333V8.667h-6.666zm-4 8H7.333v-1.334h1.334v1.334zm0-2.667H7.333v-1.333h1.334V14zm0-2.667H7.333V10h1.334v1.333zm0-2.666H7.333V7.333h1.334v1.334zm2.666 8H10v-1.334h1.333v1.334zm0-2.667H10v-1.333h1.333V14zm0-2.667H10V10h1.333v1.333zm0-2.666H10V7.333h1.333v1.334zm6.667 8h-5.333v-1.334H14V14h-1.333v-1.333H14v-1.334h-1.333V10H18v6.667zm-1.333-5.334h-1.334v1.334h1.334v-1.334zm0 2.667h-1.334v1.333h1.334V14z"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

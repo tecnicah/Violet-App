@@ -1,0 +1,9 @@
+<ion-header>
+  <ion-toolbar [ngClass]="{'pading_ios': service.padingios}">
+    <ion-title>translate</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content center text-center [scrollEvents]="true" (ionScroll)="Scroll($event)">
+  <iframe class='webPage' name="eventsPage" [src]="openURL()" allowfullscreen> </iframe>
+</ion-content>

@@ -1,0 +1,90 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Weather</p>
+    <img src="/assets/icon/bot_n_weather.svg" alt="" class="img_header"-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Weather</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/bot_n_weather.svg" alt="" class="img_header">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+  <ion-row *ngIf="weather != undefined">
+    <ion-col size="12" class="ion-text-center ion-margin-top">            
+      <span class="h5">{{weather.name}}</span> <br>
+      <span class="h11">{{date | date: 'dd MMM yyyy'}}</span>
+    </ion-col>
+    <ion-col size="12" class="ion-text-center ion-margin-top" (click)="convertGrade()">
+      <img class="iconWeater" [src]="urlIcon"><br>
+      <span class="h1" *ngIf="!show_grade">{{ converFC }}ºC</span> 
+      <span class="h1" *ngIf="show_grade">{{ converFC }}ºF</span> 
+    </ion-col>
+    <ion-col size="12" class="ion-text-center">
+      <span class="h9">{{weather.weather[0].description}}</span>
+    </ion-col>
+    <!-- temp max y min -->
+    <ion-col size="12">
+      <ion-card>
+        <ion-row>
+          <ion-col size="12">
+            <span class="h8">
+              <b>Temperature</b>
+            </span>
+          </ion-col>
+          <ion-col size="6" class="ion-text-center">
+            <span class="h9 span-detail" *ngIf="!show_grade">{{converCelsius(weather.main.temp_min)}}°C<br></span>
+            <span class="h9 span-detail" *ngIf="show_grade">{{converF(weather.main.temp_min)}}°F<br></span>
+            <span class="h11">Temp min</span>
+            <span></span>
+          </ion-col>
+          <ion-col size="6" class="ion-text-center">
+            <span class="h9 span-detail" *ngIf="!show_grade">{{converCelsius(weather.main.temp_max)}}°C<br></span>
+            <span class="h9 span-detail" *ngIf="show_grade">{{converF(weather.main.temp_min)}}°F<br></span>
+            <span class="h11">Temp max</span> 
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+    <!-- details -->
+    <ion-col size="12" class="ion-margin-bottom">
+      <ion-card>
+        <ion-row>
+          <ion-col size="12">
+            <span class="h8">
+              <b>Details</b>
+            </span>
+          </ion-col>
+          <ion-col size="6" class="ion-text-center">
+            <span class="h9 span-detail">{{weather.wind.speed}}Km/h</span><br>
+            <span class="h11">Speed</span>
+            <span></span>
+          </ion-col>
+          <ion-col size="6" class="ion-text-center">
+            <span class="h9 span-detail">{{weather.clouds.all}}%</span><br>
+            <span class="h11">Clouds</span> 
+          </ion-col>
+          <ion-col size="6" class="ion-text-center">
+            <span class="h9 span-detail">{{weather.main.pressure}}hPa</span><br>
+            <span class="h11">Pressure</span>
+          </ion-col>
+          <ion-col size="6" class="ion-text-center">
+            <span class="h9 span-detail">{{weather.main.humidity}}%</span><br>
+            <span class="h11">Humidity</span>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <br>
+
+</ion-content>

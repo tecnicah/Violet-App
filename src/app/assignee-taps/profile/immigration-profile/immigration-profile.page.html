@@ -1,0 +1,598 @@
+<ion-header>
+  <div class="header" [ngClass]="{'pading_ios': _service.padingios}">
+
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+
+    <p class="h5">immigration Profile</p>
+    <img src="/assets/icon/immigration_prof.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+  <div class="appointments">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="user">
+            <p class="h7">Passport Information</p>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="documents">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Passport Number</ion-label>
+              <ion-input type="text" [(ngModel)]="info.passportInformation.number"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Date of Issue</ion-label>
+              <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.passportInformation.issue">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Date of Expiration</ion-label>
+              <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.passportInformation.expiration">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Issuing Authority</ion-label>
+              <ion-input type="text" [(ngModel)]="info.passportInformation.issuingAuthority"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Place of Issue (City)</ion-label>
+              <ion-input type="text" [(ngModel)]="info.passportInformation.placeIssue"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Current Address</ion-label>
+              <ion-input type="text" [(ngModel)]="info.passportInformation.currentAddress"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-label style="color: gray;" position="floating">Additional Comments</ion-label>
+            <ion-item class="ion-textarea">
+              <ion-textarea rows="6" placeholder="Add Comments as needed"
+                [(ngModel)]="info.passportInformation.specificAttentionPoints"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="user">
+            <p class="h7">Previous Host Country Information</p>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="documents">
+        <ion-row>
+          <ion-col size="12">
+            <p class="h8">Prior Host Country Visa Issued</p>
+            <ion-checkbox [(ngModel)]="info.previousHostCountry.priorHostCountryVisaIssued"></ion-checkbox>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Visa Number</ion-label>
+              <ion-input type="text" [(ngModel)]="info.previousHostCountry.visaNumber"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Date of Issue</ion-label>
+              <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.previousHostCountry.issue">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Date of Expiration</ion-label>
+              <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.previousHostCountry.expiration">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Issuing Authority</ion-label>
+              <ion-input type="text" [(ngModel)]="info.previousHostCountry.issuingAuthority"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Place of Issue (City)</ion-label>
+              <ion-input type="text" [(ngModel)]="info.previousHostCountry.placeIssue"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Visa Category</ion-label>
+              <ion-select interface="action-sheet" mode="ios" placeholder="Select One"
+                [(ngModel)]="info.previousHostCountry.visaCategoryId">
+                <ion-select-option *ngFor="let item of caVisa" [value]="item.id">{{item.visaCategory}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">ID Assigned Number (Registration No.)</ion-label>
+              <ion-input type="text" [(ngModel)]="info.previousHostCountry.idAssignedNumber"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Position and Employer</ion-label>
+              <ion-input type="text" [(ngModel)]="info.previousHostCountry.positionEmployer"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Position Responsabilities</ion-label>
+              <ion-input type="text" [(ngModel)]="info.previousHostCountry.positionResponsabilities"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="user">
+            <p class="h7">Educational Background</p>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="documents">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Highest Level of Education</ion-label>
+              <ion-select interface="action-sheet" mode="ios" placeholder="Select One"
+                [(ngModel)]="info.educationalBackgrounds.highestLevelEducationalId">
+                <ion-select-option *ngFor="let item of caHighestLevelEducation" [value]="item.id">
+                  {{item.highestLevelEducation}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <div class="doc_info" *ngFor="let item of info.educationalBackgrounds; let i = index">
+          <div style="width: 98%; text-align: end;">
+            <ion-icon name="close-outline" slot="end" *ngIf="item.id == 0" (click)="deleteSchool(i)"></ion-icon>
+          </div>
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Institution</ion-label>
+                <ion-input type="text" [(ngModel)]="item.institution"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Field of Study</ion-label>
+                <ion-input type="text" [(ngModel)]="item.fieldStudy"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Start Date</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="item.startDate"></ion-datetime>
+                <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">End Date</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="item.endDate"></ion-datetime>
+                <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Degree</ion-label>
+                <ion-input type="text" [(ngModel)]="item.degree"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">List Professional Licenses</ion-label>
+                <ion-input type="text" [(ngModel)]="item.listProfessionalLicenses"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <br>
+        </div>
+        <ion-row>
+          <ion-col size="10" style="text-align: end;"></ion-col>
+          <ion-col size="2">
+            <img src="/assets/icon/icon_add.svg" style="height: 100%;" (click)="addSchool()">
+          </ion-col>
+        </ion-row>
+      </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="user">
+            <p class="h7">Language Proficiency</p>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="documents">
+        <div class="doc_info" *ngFor="let item of info.lenguageProficiencies; let i = index">
+          <div style="width: 98%; text-align: end;">
+            <ion-icon name="close-outline" slot="end" *ngIf="item.id == 0" (click)="removeLanguage(i)"></ion-icon>
+          </div>
+          <ion-row>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Language</ion-label>
+                <ion-select interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="item.languageId">
+                  <ion-select-option *ngFor="let item of caLanguages" [value]="item.id">{{item.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Proficiency</ion-label>
+                <ion-select  interface="action-sheet" mode="ios"
+                  placeholder="Select One" [(ngModel)]="item.proficiencyId">
+                  <ion-select-option *ngFor="let item of caProficiency" [value]="item.id">{{item.proficiency}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Comments</ion-label>
+                <ion-input type="text" [(ngModel)]="item.comments"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <br>
+        </div>
+        <ion-row>
+          <ion-col size="10" style="text-align: end;"></ion-col>
+          <ion-col size="2">
+            <img src="/assets/icon/icon_add.svg" style="height: 100%;" (click)="addLanguage()">
+          </ion-col>
+        </ion-row>
+      </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="user">
+            <p class="h7">Assignment Information</p>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="documents">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Legal Name of Home Country Entity</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.legalNameHomeCountry"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-label style="color: gray;" position="floating">Location - Full Address</ion-label>
+            <ion-item class="ion-textarea">
+              <ion-textarea rows="4" [(ngModel)]="info.assigmentInformation.locationHome"></ion-textarea>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Current Job Position Title</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.currentJobPositionTitle"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Employment Dates (From)</ion-label>
+              <ion-datetime displayFormat="DD MMM YYYY" mode="ios"
+                [(ngModel)]="info.assigmentInformation.employmentFrom"></ion-datetime>
+                <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Employment Dates (To)</ion-label>
+              <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="info.assigmentInformation.employmentTo">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Legal Name of Host Country Entity</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.legalNameHostCountry"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-label style="color: gray;" position="floating">Location - Full Address</ion-label>
+            <ion-item class="ion-textarea">
+              <ion-textarea rows="4" [(ngModel)]="info.assigmentInformation.locationHost"></ion-textarea>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">New Job Position Title</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.newJobPositionTitle"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">New Job Responsibilities</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.newJobResponsibilitie"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Estimated Start Date</ion-label>
+              <ion-datetime displayFormat="DD MMM YYYY" mode="ios"
+                [(ngModel)]="info.assigmentInformation.estimatedStartDat"></ion-datetime>
+                <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Length of Assigment (Estimate)</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.lenghtAssigment"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Current Monthly Gross Salary</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.currentGrossSalary"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Currency</ion-label>
+              <ion-select interface="action-sheet" mode="ios" placeholder="Select One">
+                <ion-select-option *ngFor="let item of caCurrency" value="item.id">{{item.currency}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">New Monthly Gross Salary</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.newGrossSalary"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Currency</ion-label>
+              <ion-select interface="action-sheet" mode="ios" placeholder="Select One">
+                <ion-select-option *ngFor="let item of caCurrency" value="item.id">{{item.currency}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Payroll Location</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.payrollLocation"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <p class="h8">Split Payroll Applicable</p>
+            <mat-radio-group aria-label="Select an option">
+              <mat-radio-button value="1" [(ngModel)]="info.assigmentInformation.splitPayrollApplicable"
+                [checked]="info.assigmentInformation.splitPayrollApplicable">Yes</mat-radio-button>
+            </mat-radio-group>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Payroll Location</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.payrollLocation"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Hiring Manager (Local Contact in Host Country)</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.hiringManager"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Hiring Manager Phone Number</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.hiringManagerPhone"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Hiring Manager Email</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.hiringManagerEmail"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Acting as Company's Legal Representative</ion-label>
+              <ion-input type="text" [(ngModel)]="info.assigmentInformation.legalRepresentative"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-label style="color: gray;" position="floating">Specific Attention Points </ion-label>
+            <ion-item class="ion-textarea">
+              <ion-textarea rows="6" placeholder="Add Comments as needed"
+                [(ngModel)]="info.assigmentInformation.specificAtention"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="user">
+            <p class="h7">Dependents Immigration Info</p>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="documents">
+
+
+        <div class="doc_info" *ngFor="let dependent of info.dependentImmigrationInfos">
+          <ion-row>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Relationship</ion-label>
+                <ion-select interface="action-sheet" mode="ios" placeholder="Select One"
+                  [(ngModel)]="dependent.relationshipId">
+                  <ion-select-option *ngFor="let item of caRelation" [value]="item.relationshipId">{{item.relationship}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Name</ion-label>
+                <ion-input type="text" [(ngModel)]="dependent.name"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Passport Number</ion-label>
+                <ion-input type="text" [(ngModel)]="dependent.passportNumber"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Date of Issue</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="dependent.issue"></ion-datetime>
+                <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Date of Expiration</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="dependent.expiration"></ion-datetime>
+                <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Issuing Authority</ion-label>
+                <ion-input type="text" [(ngModel)]="dependent.issuingAuthority"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Place of Issue (City)</ion-label>
+                <ion-input type="text" [(ngModel)]="dependent.placeIssue"></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Entry Date to Host Country</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="dependent.entryDateHostCountry">
+                </ion-datetime>
+                <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-label style="color: gray;" position="floating">Specific Attention Points </ion-label>
+              <ion-item class="ion-textarea">
+                <ion-textarea rows="6" placeholder="Add Comments as needed"
+                  [(ngModel)]="dependent.specificAttentionPoints"></ion-textarea>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+          <br>
+        </div>
+
+
+
+      </div>
+    </mat-expansion-panel>
+
+    <ion-row>
+      <ion-col size="6" offset="3" size-md="4" offset-md="4">
+        <ion-button class="buttom buttom__btn_login" (click)="save();">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

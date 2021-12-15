@@ -1,0 +1,155 @@
+ion-content {
+  --background: rgb(221, 221, 221);
+  z-index: 999999;
+}
+
+.purple {
+  color: #9D3292;
+}
+
+.ancho_full {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.col_header {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.header {
+  background-image: url("/assets/backgrounds/resources_docs.png");
+  background-position: top;
+  background-size: cover;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  justify-content: space-between;
+  padding: 5%;
+}
+.header p {
+  color: #ffffff;
+}
+.header ion-back-button {
+  color: white;
+}
+.header ion-icon {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -15px;
+}
+
+ion-icon {
+  color: #4435A6;
+}
+
+.headergray {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+  margin-top: -24px;
+}
+.headergray ::before {
+  content: " ";
+}
+
+.appointments {
+  width: 100%;
+  padding: 0px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+}
+.appointments .title-edit {
+  display: flex;
+  justify-content: space-between;
+}
+.appointments .title {
+  color: #4435A6;
+}
+.appointments .flex {
+  display: flex;
+  align-items: center;
+}
+.appointments ion-card {
+  border-radius: 15px;
+  padding: 15px;
+  color: #000;
+}
+
+.user {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user .img {
+  height: 70px;
+  border-radius: 100%;
+  width: 70px;
+  background-color: gray;
+}
+.user .data {
+  margin: 0 0 0 10px;
+}
+.user .data p {
+  margin: 0;
+}
+
+.documents .buttom {
+  text-transform: none;
+  border-radius: 18px;
+  width: 80%;
+  height: 25px;
+  color: #ffffff;
+}
+.documents .buttom__btn_document {
+  background: #4435A6;
+}
+.documents .flex {
+  display: flex;
+  align-items: center;
+}
+.documents .doc_info {
+  border-radius: 25px;
+  margin-top: 10px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.activitie {
+  margin: 10px 0 10px 0;
+}
+.activitie ion-item-sliding {
+  border-radius: 15px;
+  padding: 15px;
+  color: #000;
+  background: #f7f8fa;
+}
+.activitie ion-list {
+  background: transparent;
+}
+
+.iconslot {
+  color: white;
+  font-size: 40px;
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.gray {
+  color: gray;
+}
+
+.width {
+  width: 100%;
+}

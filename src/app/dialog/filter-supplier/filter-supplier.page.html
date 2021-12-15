@@ -1,0 +1,62 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Filters</p>
+    <img src="/assets/icon/group_2_.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+
+    <ion-row>
+      <!--ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Supplier Category</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Supplier Category" [(ngModel)]="search.supplierCategory" (ngModelChange)="filteringServiceRecordTable()">
+            <ion-select-option [value]=1>Consultant</ion-select-option>
+            <ion-select-option [value]=2>Services</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col-->
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Supplier Partner Type</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Supplier Category" [(ngModel)]="search.partnerType" (ngModelChange)="filteringServiceRecordTable()">
+            <ion-select-option *ngFor="let data of ca_supplierType" [value]="data.id">{{data.supplierType}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Country</ion-label>
+          <ion-select [disabled]="disabled" interface="action-sheet" mode="ios" placeholder="Country" [(ngModel)]="search.country" (ngModelChange)="filteringServiceRecordTable(); getCity();">
+            <ion-select-option *ngFor="let data of country_catalogue" [value]="data.id">{{data.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">City</ion-label>
+          <ion-select [disabled]="disabled" interface="action-sheet" mode="ios" placeholder="Country" [(ngModel)]="search.city" (ngModelChange)="filteringServiceRecordTable(); getCity();">
+            <ion-select-option *ngFor="let data of ca_city" [value]="data.id">{{data.city}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row class="bottom"> 
+      <ion-col size="6" offset="2.5"> 
+        <ion-button class="buttom_ buttom__btn_login" (click)="save();">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
+
+

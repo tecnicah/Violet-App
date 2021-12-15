@@ -1,0 +1,142 @@
+<ion-header>
+  <div [ngClass]="{'pading_ios': _services.padingios}">
+    <ion-row>
+      <ion-col size="2">
+        <div class="ct">
+          <ion-icon name="chevron-back" class="backicon" (click)="myBackButton()"></ion-icon>
+        </div>
+      </ion-col>
+
+      <ion-col size="8">
+        <div class="ct" *ngIf="!showMenssages">
+          <span class="title">Messages</span>
+        </div>
+
+        <div class="ct" *ngIf="showMenssages">
+          <span class="title">{{__messages__}}</span>
+        </div>
+      </ion-col>
+
+      <ion-col size="2" class="margin" *ngIf="showMenssages" (click)="showParticipantes();">
+        <img src="/assets/icon/icon_participantes_activo.svg" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-header>
+
+<ion-content>
+
+  <!--START TARJETAS-->
+  <div *ngIf="!showMenssages">
+    <div class="padding">
+      <ion-row>
+        <ion-col size="12">
+          <span class="title_general_black" class="color_text">{{userData.name}}</span>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-card (click)="chatRelocation()">
+      <ion-row style="width: 100%;">
+        <ion-col size="3">
+          <img src="/assets/icon/avatar.svg" class="avatar">
+        </ion-col>
+        <ion-col size="9">
+          <span class="h15 gray">
+            SR-{{sr}} - Relocation Team - {{getName(hostCountry)}}
+          </span><br>
+          <span class="h12">
+            {{relocation?.comment}}
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-card (click)="chatImmigration()">
+      <ion-row style="width: 100%;">
+        <ion-col size="3">
+          <img src="/assets/icon/avatar.svg" class="avatar">
+        </ion-col>
+        <ion-col size="9">
+          <span class="h15 gray">
+            SR-{{sr}} - Immigration Team - {{getName(homeCountry)}}
+          </span><br>
+          <span class="h12">
+            {{immigration?.comment}}
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+  <!--END TARJETAS-->
+
+  <!--START CONVERSACION-->
+  <div class="contenido" *ngIf="showMenssages">
+    <ion-card *ngFor="let message of chat_conversations, index as index;"
+      [ngClass]="{'sender': message.userId != userData.id}">
+      <ion-row>
+        <ion-col size="2">
+          <div class="avatares">
+            <div class="content">
+              <img src="{{_services.url_images}}{{message.avatar}}" class="img __border__">
+            </div>
+          </div>
+        </ion-col>
+        <ion-col size="7">
+          <b class="h15 gray">{{message.user}}</b>
+        </ion-col>
+        <ion-col size="3">
+          <p class="h12">{{message.dateComment | date : 'HH:mm'}} hrs</p>
+        </ion-col>
+
+        <ion-col size="8" *ngIf="message.file.length != 0">{{message.comment}}</ion-col>
+        <ion-col size="4" *ngIf="message.file.length != 0" matRipple matRippleColor="rgba(158, 53, 149, 0.5)"
+          (click)="downloadDocumentSelected( message.file[0].filePath )">
+          <img [src]="chatImageSrcStyle( message.file[0].filePath )" />
+        </ion-col>
+
+        <ion-col size="12" *ngIf="message.file.length == 0">
+          {{message.comment}}
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+  <!---------------------->
+</ion-content>
+
+<ion-footer *ngIf="showMenssages" [ngStyle]="{'margin-bottom': keyboard}">
+  <ion-row style="color: white;">
+    <ion-col size="2" [ngClass]="{'pading_ios': _services.padingios}">
+      <ion-fab style="margin: 16px;">
+        <ion-fab-button size="small">
+          <ion-icon name="add" style="color: white;"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+          <ion-fab-button>
+            <ion-icon name="albums" style="color: white;" (click)="file()">
+            </ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="camera" style="color: white;" (click)="photo()">
+            </ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+    </ion-col>
+
+    <ion-col size="10">
+      <div class="messages">
+        <ion-textarea rows="1" [(ngModel)]="chat_model.comment"></ion-textarea>
+        <img src="../../../assets/icon/send.svg" class="send" (click)="send()">
+      </div>
+    </ion-col>
+  </ion-row>
+
+</ion-footer>
+
+<ngx-file-drop class="file-drop" style="display: none;" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+  (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" [multiple]="false">
+  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+    Drag and Drop or
+    <p class="browser" id="chatfile" (click)="openFileSelector()">Browse File</p>
+  </ng-template>
+</ngx-file-drop>

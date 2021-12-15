@@ -1,0 +1,194 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Report of the Day</p>
+    <img src="/assets/icon/documents.svg" style="width: 45px;" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Report of the Day</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/documents.svg" style="width: 45px;" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+
+    <ion-row>
+      <ion-col size="6">
+        <span class="h12 gray">Report No.</span>
+        <p class="h12">{{report.reportNo}}</p>
+      </ion-col>
+
+      <ion-col size="6">
+        <span class="h12 gray">Report By</span>
+        <p class="h12">{{userData.name}} {{userData.lastName}}</p>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item style="margin: -13px 0 0 0;">
+          <ion-label position="floating">Report Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="report.reportDate" mode="ios"></ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <span class="h12 gray">Creation Date</span>
+        <p class="h12">{{report.creationDate | date: 'dd MMM yyy'}}</p>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Service Line</ion-label>
+          <ion-select [(ngModel)]="report.serviceLine" (ngModelChange)="getWO()"
+            [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios" placeholder="Select One">
+            <ion-select-option *ngFor="let item of caSl" [value]="item.id">{{item.serviceLine}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Work Order</ion-label>
+          <ion-select [(ngModel)]="report.workOrder" (ngModelChange)="getServices()" [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet" mode="ios" placeholder="Select One">
+            <ion-select-option *ngFor="let item of caWo" [value]="item.id">{{item.numberWorkOrder}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label>Start Time</ion-label>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]="report.startTime" (ionBlur)="show = false;"></ion-datetime>
+        </ion-item>
+        
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label>End Time</ion-label>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]="report.endTime" (ionBlur)="show = false;" (ngModelChange)="getHoras()"></ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" *ngIf="show">
+          <ion-label class="exceed">Time exceeds 8 hours</ion-label>
+      </ion-col>
+
+      <ion-col size="12">
+        <span class="h12 gray">Total Time</span>
+        <p class="h12">{{report.totalTime}} Hrs</p>
+      </ion-col>
+
+      <ion-col size="10">
+        <p class="title_general_black">Activity Reports <b class="purple">{{report.serviceReportDays?.length}}</b></p>
+      </ion-col>
+
+      <ion-col size="2" class="btn-right">
+        <img src="/assets/icon/icon_add.svg" *ngIf="!addService" (click)="addService = !addService"
+          style="height: 100%;" class="btn_size">
+        <img src="/assets/icon/icon_cancel.svg" *ngIf="addService" (click)="addService = !addService" style="height: 100%; transform: rotate(
+          45deg);" class="btn_size">
+      </ion-col>
+
+    </ion-row>
+
+    <!-------------------- Add service -------------------->
+
+    <div class="editable" *ngIf="addService">
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">Service</ion-label>
+            <ion-select [(ngModel)]="serviceAdd.service" (ngModelChange)="getWO()"
+              [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+              placeholder="Service">
+              <ion-select-option *ngFor="let item of caService" [value]="item.id">{{item.serviceNumber}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">Time</ion-label>
+            <ion-input type="tel" [(ngModel)]="serviceAdd.time"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-label style="color: gray;" class="h12" position="floating">Comment</ion-label>
+          <ion-item class="ion-textarea">
+            <ion-textarea rows="4" [(ngModel)]="serviceAdd.comments"></ion-textarea>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6" offset="3">
+          <ion-button class="buttom buttom__btn_login"
+          [disabled]="serviceAdd.service == null || serviceAdd.service == undefined" (click)="addServicenew()">Add Service</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <!-------------------- Services -------------------->
+    <div class="activitie" *ngFor="let item of report.serviceReportDays; let i = index">
+      <ion-list>
+        <ion-item-sliding>
+          <ion-item>
+            <ion-row>
+              <ion-col size="3">
+                <img src="/assets/icon/imm.svg" class="avatar" style="width: 120px;">
+              </ion-col>
+              <ion-col size="9">
+                <span class="h9 gray">Service: <b>{{item.service}}</b></span><br>
+                <span class="h9 gray">Time: <b>{{item.time}} Hrs</b></span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger"  (click)="deleteService(i)">
+              <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+    </div>
+
+    <!-------------------- comentarios ----------------->
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-label style="color: gray;" class="h12" position="floating">Activity</ion-label>
+        <ion-item class="ion-textarea">
+          <ion-textarea rows="6" [(ngModel)]="report.activity" maxlength="300"></ion-textarea>
+        </ion-item>
+        <div style="text-align: end;">
+          <span class="h10 gray">{{report.activity?.length || 0}}/300</span>
+        </div>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label style="color: gray;" class="h12" position="floating">Conclusion of the Day / Next Steps</ion-label>
+        <ion-item class="ion-textarea">
+          <ion-textarea rows="6" [(ngModel)]="report.conclusion" maxlength="300"></ion-textarea>
+        </ion-item>
+        <div style="text-align: end;">
+          <span class="h10 gray">{{report.conclusion?.length || 0}}/300</span>
+        </div>
+      </ion-col>
+
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom buttom__btn_login" (click)="save()">Create Report</ion-button>
+      </ion-col>
+    </ion-row>
+    
+  </div>
+
+</ion-content>

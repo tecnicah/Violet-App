@@ -1,0 +1,35 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': _services.padingios}">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Assigned Team</p>
+    <img src="/assets/icon/group_2.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+    <ion-row>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Assigned Team</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Assigned Team" [(ngModel)]="data.consultant">
+            <ion-select-option *ngFor="let item of ca_assignedTeam" [value]="item.id">{{item.name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row class="footer">
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom buttom__btn_login" (click)="save_office();">Save</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+</ion-content>

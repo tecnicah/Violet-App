@@ -1,0 +1,266 @@
+$purple-light: #9D3292;
+
+$purple-dark: #56004E;
+
+$blue: #4435A6;
+
+$black: rgba(0, 0, 0, 0.85);
+
+$ligth: rgba(0, 0, 0, 0.10);
+
+ion-content{
+    --background: rgb(221, 221, 221);
+}
+
+@media screen and (min-width: 1px) and (max-width: 767px) {
+    .h5 {
+        font-weight: bold;
+        font-size: 20px;
+        margin: 0 !important;
+    }
+}
+
+.header {
+    background-image: url("/assets/backgrounds/banner_morado.svg");
+    background-position: top;
+    background-size: cover;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    justify-content: space-between;
+    padding: 10%;
+
+    ion-icon {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: -15px;
+    }
+}
+
+.headergray{
+    width: 100%;
+    padding: 15px 5% 10px 5%;
+    background: rgb(221, 221, 221);
+    border-radius: 25px 25px 0 0;
+    margin-top: -24px;
+    ::before{
+        content: " ";
+    }
+}
+
+.appointments {
+    width: 100%;
+    padding: 15px 5% 10px 5%;
+    background: rgb(221, 221, 221);
+    border-radius: 25px 25px 0 0;
+    
+    .title-edit{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .title {
+        color: $blue;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+
+    ion-card {
+        border-radius: 15px;
+        padding: 5px;
+        margin: 10px;
+        color: #000;
+    }
+}
+
+.status{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    span{
+        color: gray;
+    }
+
+    .dot{
+        height: 5px;
+        width: 5px;
+        border-radius: 100%;
+        background: red;
+    }
+
+    .green{
+        background: green !important;
+    }
+}
+
+.card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img{
+        width: 50px;
+        height: 50px; 
+        border-radius: 100%;
+        margin-top: 10px;
+    }
+
+    .options{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        img{
+            width: 30px;
+        }
+    }
+}
+
+.icon{
+    .blue{
+        color: $blue;
+    }
+
+    .purple{
+        color: $purple-light;
+    }
+
+    .revers{
+        transform: rotate(180deg);
+    }
+}
+
+
+.blue{
+    color: $blue;
+}
+
+.status{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    span{
+        color: gray;
+    }
+
+    .dot{
+        height: 5px;
+        width: 5px;
+        border-radius: 100%;
+        background: red;
+    }
+
+    .green{
+        background: green !important;
+    }
+}
+
+.icon{
+    text-align: end;
+}
+
+ion-searchbar{
+    --background: white;
+    --icon-color: white;
+    
+}
+
+ion-icon{
+    color: $purple-light;
+}
+
+button {
+    mat-icon{
+        color: $blue;
+    }
+}
+
+.mat-mini-fab{
+    background: $blue;
+    mat-icon{
+        color: white;
+    }
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search_icon{
+    position: absolute;
+    top: 25px;
+    font-size: 20px;
+    right: 25px;
+}
+
+.gray{
+    color: rgba($color: #000000, $alpha: 0.5);
+}
+
+.blue{
+    color: $blue;
+    font-style: italic;
+}
+
+.searchbar-search-icon.sc-ion-searchbar-ios{
+    right: 5px !important;
+}
+
+.buttom{
+    text-transform: none;
+    border-radius: 18px;
+    width: 70%;
+    &__btn_login{
+        background: $purple-light;
+        &:hover{
+            background: $purple-dark;
+        }
+    }
+    &__btn_blue{
+        background: $blue;
+        &:hover{
+            background: $purple-light;
+        }
+    }
+}
+
+.white{
+    background: white;
+    border-radius: 15px;
+    margin: 0 0 0 15px;
+    height: 40px;
+}
+
+.filter{
+    background: white;
+    border-radius: 30px;
+    margin: 0 0 0 5px;
+    padding: 0 0 0 11px;
+}
+
+.white{
+    background: white;
+    border-radius: 40px;
+    margin: 0 0 0 15px;
+}
+
+.top { 
+    margin-top: -20px;
+}
+
+.top_ { 
+    margin-top: -32px;
+}
+
+.altura{
+    height: 30px;
+}
+

@@ -1,0 +1,138 @@
+ion-content {
+  --background: #f7f8fa;
+}
+
+ion-searchbar {
+  --background: white;
+  --icon-color: white;
+}
+
+#search_icon {
+  position: absolute;
+  top: 25px;
+  font-size: 20px;
+  right: 25px;
+}
+
+.blue {
+  color: #4435A6;
+}
+
+.color_ {
+  color: #9d3292;
+}
+
+ion-back-button {
+  color: #9d3292;
+}
+
+.header {
+  background: #f7f8fa;
+  height: 100px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  justify-content: space-between;
+  padding: 0 10%;
+}
+.header ion-icon {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -15px;
+}
+
+.headergray {
+  width: 100%;
+  padding: 15px 5% 10px 5%;
+  background: #dddddd;
+  border-radius: 25px 25px 0 0;
+  margin-top: -24px;
+}
+.headergray ::before {
+  content: " ";
+}
+
+.messages {
+  background-size: 26px;
+  background-position-x: right;
+  background-position-y: center;
+  width: 90%;
+  border: solid 0.2px gray;
+  border-radius: 30px;
+  margin: 8px;
+  padding: 5px;
+}
+
+.send {
+  position: absolute;
+  right: 11%;
+  top: 22px;
+  width: 33px;
+}
+
+.more {
+  width: 33px;
+  margin: 15px;
+}
+
+ion-textarea {
+  width: 88%;
+}
+
+.grupo {
+  color: gray;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.black {
+  color: black !important;
+  margin: 0;
+}
+
+.users {
+  margin-top: 50px;
+}
+
+.gray {
+  color: gray !important;
+  margin: 0;
+}
+
+.flex-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appointments {
+  width: 100%;
+  padding: 5%;
+}
+.appointments .title-edit {
+  display: flex;
+  justify-content: space-between;
+}
+.appointments .title {
+  color: #4435A6;
+}
+.appointments .flex {
+  display: flex;
+  align-items: center;
+}
+.appointments ion-card {
+  border-radius: 15px;
+  padding: 5px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  margin: 10px 0 10px 0;
+}
+.appointments ion-card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}

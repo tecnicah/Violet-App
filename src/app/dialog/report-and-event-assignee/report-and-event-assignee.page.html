@@ -1,0 +1,84 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()" *ngIf="btn_show_edicion"></ion-back-button>
+    <ion-back-button mode="ios" text="" (click)="back()" *ngIf="btn_show && !btn_show_edicion"></ion-back-button>
+    <ion-back-button mode="ios" text="" (click)="btn_show = !btn_show" *ngIf="!btn_show && !btn_show_edicion"></ion-back-button>
+    <p class="h5">Report An Event</p>
+    <img src="/assets/icon/documents.svg" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <br>
+
+  <div class="appointments" *ngIf="btn_show">
+    <ion-row>
+      <ion-col size="12" class="flexdosts">
+        <span class="title_general_black">How can we help?</span>
+      </ion-col>
+    </ion-row>
+
+    <br>
+    <br>
+
+    <ion-item *ngFor="let item of status_event" (click)="statusAssignee(item)">
+      <ion-label>
+        {{item.event}}
+      </ion-label>
+    </ion-item>
+  </div>
+
+
+
+  <div class="appointments" *ngIf="!btn_show">
+    <span class="title_general_black"> Issue: <span class="subtitle_general_black"> {{getStatus(report.statusId)}} </span></span>
+    <br>
+    <br>
+    <span class="title_general_black"> Severety: &nbsp;<span class="subtitle_general_black"> {{getSeverety(1)}}</span></span>
+    <br>
+    <br>
+    <span class="title_general_black"> Description &nbsp;</span>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-textarea rows="3" [disabled]="disabled" [(ngModel)]="report.description"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <br>
+    <br>
+    <ion-row>
+      <ion-col size="9" class="flexdosts">
+        <span class="title_general_black">Photos</span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)="photo(1)">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+    
+      <ion-col size="12">
+        <ion-card *ngIf="report.assignedPhotos.length > 0">
+          <ion-slides class="app" [options]="slideOptsOne" pager="true">
+            <ion-slide class="card-comments" *ngFor="let item of report.assignedPhotos; let i = index">
+              <img src="{{item.b64}}" class="img" *ngIf="item.id == 0" class="img__size">
+              <img src="{{_services.url_images}}{{item.photoPath}}" class="img__size" *ngIf="item.id != 0">
+              <img src="./assets/icon/quit.svg" class="delete" (click)="deletePhotoAssignee(item, i)">
+            </ion-slide>
+          </ion-slides>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <br><br>
+
+    <ion-row>
+      <ion-col size="6" offset="3" size-md="4" offset-md="4">
+        <br>
+        <ion-button class="buttom buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+</ion-content>

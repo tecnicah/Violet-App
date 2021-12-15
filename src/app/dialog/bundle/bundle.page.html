@@ -1,0 +1,64 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Services</p>
+    <img src="/assets/icon/documents.svg" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments padding_">
+    <ion-row>
+      <ion-col size="6">
+        <span class="h15 gray">Service Line</span>
+        <br>
+        <span class="h12">{{services_bundle[0]?.serviceLine}}</span>
+      </ion-col>
+
+      <ion-col size="6">
+        <span class="h15 gray">Work Order</span>
+        <br>
+        <span class="h12">{{services_bundle[0]?.numberWorkOrder}}</span>
+      </ion-col>
+
+      <ion-col size="6">
+        <span class="h15 gray">Global Projected Fee</span>
+        <br>
+        <span class="h12">{{services_bundle[0]?.projectedFee | currency}}</span>
+      </ion-col>
+
+      <ion-col size="6">
+        <span class="h15 gray">Global Time</span>
+        <br>
+        <span class="h12">{{services_bundle[0]?.totalTime}}</span>
+      </ion-col>
+
+      <ion-col size="6">
+        <span class="h15 gray">Remaining Time</span>
+        <br>
+        <span class="h12">{{services_bundle[0]?.remainignTime}}</span>
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+  
+  <div class="appointments">
+
+    <ion-card *ngFor="let item of services_bundle[0].services" (click)="openService(item)">
+      <ion-row>
+        <ion-col size="2">
+          <img src="/assets/icon/imm.svg" class="avatar">
+        </ion-col>
+        <ion-col size="10">
+          <span class="name_service">{{item.serviceName}}</span><br>
+          <span class="h15 gray">Delivered To <span class="h12">{{item.name}}</span><br></span>
+          <span class="h15 gray">Status <span class="h12">{{item.status}}</span></span><br>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+</ion-content>

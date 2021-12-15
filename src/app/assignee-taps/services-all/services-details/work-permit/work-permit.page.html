@@ -1,0 +1,656 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': _services.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Work Permit</p>
+    <img src="/assets/icon/immigration_services.svg" style="width: 45px;" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Work Permit</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/immigration_services.svg" style="width: 45px;" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+
+  <div class="appointments">
+    <!--TARJETA DEL ASIGNADO-->
+    <ion-card *ngxPermissionsOnly="['1','2','3','11','13','19']">
+      <ion-row>
+        <ion-col size="2">
+          <div class="avatares">
+            <div class="content">
+              <img class="img" src="{{_services.url_images}}{{data_dependent?.avatar}}" fallimg="avatar">
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="6">
+          <span class="h15 gray">Delivered To</span>
+          <br>
+          <span class="h12" *ngIf="!show_name_assignee">{{data_dependent?.relationship}} /
+            {{data_dependent?.name}}</span>
+          <span class="h12" *ngIf="show_name_assignee">{{data_dependent?.relationship}} /
+            {{(data_dependent?.name.length>10) ?  (data_dependent?.name | slice:0:10)+'..': data_dependent?.name}}</span>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-fab>
+            <ion-fab-button size="small" class="btn_fab_size"
+              (click)="call(data_dependent.phone, data_dependent.name)">
+              <ion-icon name="call" class="btn_fab_size__icon"></ion-icon>
+            </ion-fab-button>
+            <!--ion-fab-list side="start">
+              <ion-fab-button class="btn_fab_size">
+                <ion-icon name="business" class="btn_fab_size__icon">
+                </ion-icon>
+              </ion-fab-button>
+              <ion-fab-button class="btn_fab_size">
+                <ion-icon name="call" class="btn_fab_size__icon">
+                </ion-icon>
+              </ion-fab-button>
+            </ion-fab-list-->
+          </ion-fab>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-fab>
+            <ion-fab-button size="small" class="btn_fab_size" (click)="sendMessage()">
+              <ion-icon name="chatbox" class="btn_fab_size__icon"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <!--TARJETA DEL COORDINADOR-->
+    <div *ngFor="let item of coordinador">
+      <ion-card *ngxPermissionsOnly="['4']">
+        <ion-row>
+          <ion-col size="2">
+            <div class="avatares">
+              <div class="content">
+                <img class="img" src="{{_services.url_images}}{{item.photo}}" fallimg="avatar">
+              </div>
+            </div>
+          </ion-col>
+
+          <ion-col size="6">
+            <span class="h15 gray">Coordinator</span>
+            <br>
+            <span class="h12" *ngIf="!show_name_assignee">{{item.name}}</span>
+            <span class="h12" *ngIf="show_name_assignee">{{(item.name.length>10) ?  (item.name | slice:0:10)+'..': item.name}}</span>
+          </ion-col>
+
+          <ion-col size="2" class="top-fab">
+            <ion-fab>
+              <ion-fab-button size="small" class="btn_fab_size" (click)="call(item.phone, item.name)">
+                <ion-icon name="call" class="btn_fab_size__icon"></ion-icon>
+              </ion-fab-button>
+            </ion-fab>
+          </ion-col>
+
+          <ion-col size="2" class="top-fab">
+            <ion-fab>
+              <ion-fab-button size="small" class="btn_fab_size" (click)='sendMessage()'>
+                <ion-icon name="chatbox" class="btn_fab_size__icon"></ion-icon>
+              </ion-fab-button>
+            </ion-fab>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+    <!--TARJETA DEL CONSULTANT-->
+    <div *ngFor="let item of consultant">
+      <ion-card *ngxPermissionsOnly="['4']">
+        <ion-row>
+          <ion-col size="2">
+            <div class="avatares">
+              <div class="content">
+                <img class="img" src="{{_services.url_images}}{{item.photo}}" fallimg="avatar">
+              </div>
+            </div>
+          </ion-col>
+
+          <ion-col size="6">
+            <span class="h15 gray">Consultant</span>
+            <br>
+            <span class="h12" *ngIf="!show_name_assignee">{{item.name}}</span>
+            <span class="h12" *ngIf="show_name_assignee">{{(item.name.length>10) ?  (item.name | slice:0:10)+'..': item.name}}</span>
+          </ion-col>
+
+          <ion-col size="2" class="top-fab">
+            <ion-fab>
+              <ion-fab-button size="small" class="btn_fab_size" (click)="call(item.phone, item.name)">
+                <ion-icon name="call" class="btn_fab_size__icon"></ion-icon>
+              </ion-fab-button>
+            </ion-fab>
+          </ion-col>
+
+          <ion-col size="2" class="top-fab">
+            <ion-fab>
+              <ion-fab-button size="small" class="btn_fab_size" (click)='sendMessage()'>
+                <ion-icon name="chatbox" class="btn_fab_size__icon"></ion-icon>
+              </ion-fab-button>
+            </ion-fab>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+
+    <ion-row>
+      <ion-col size="6" *ngxPermissionsOnly="['1','2','3','11','13','19']">
+        <span class="h9 gray">Service ID</span><br>
+        <span class="h8">SN-{{workPremit.id}}</span>
+      </ion-col>
+
+      <ion-col size="6" *ngxPermissionsOnly="['4']" style="margin:auto">
+        <span class="h9 gray">Delvered To</span><br>
+        <span class="h8">{{workPremit.relationship}} / {{workPremit.applicantName}}</span>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item class="filter">
+          <ion-label position="floating">Status</ion-label>
+          <ion-select  interface="action-sheet" mode="ios" placeholder="{{getStatusName(workPremit.statusId)}}"
+            [(ngModel)]="workPremit.statusId" [disabled]="disabled">
+            <ion-select-option *ngFor="let item of ca_estatus" [value]="item.id">{{item.status}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" *ngxPermissionsOnly="['1','2','3','11','13','19']">
+        <span class="h9 gray">Autho Date</span><br>
+        <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+        <span class="h8"> {{workPremit.authoDate | date: 'dd MMM yyyy'}}</span>
+      </ion-col>
+
+      <ion-col size="6" *ngxPermissionsOnly="['1','2','3','11','13','19']">
+        <span class="h9 gray">Completion Date</span><br>
+        <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+        <span class="h8"> {{workPremit.serviceCompletionDate | date: 'dd MMM yyyy'}}</span>
+      </ion-col>
+
+      <ion-col size="6" *ngxPermissionsOnly="['1','2','3','11','13','19']">
+        <span class="h9 gray">Autho Acceptance Date</span><br>
+        <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+        <span class="h8">{{workPremit.authoAcceptanceDate | date: 'dd MMM yyyy'}}</span>
+      </ion-col>
+
+      <ion-col size="6" *ngxPermissionsOnly="['1','2','3','11','13','19']">
+        <div *ngIf="workPremit.coordination">
+          <span class="h9 gray">Coordination</span><br>
+          <ion-checkbox [(ngModel)]="workPremit.coordination" class="size"></ion-checkbox>
+        </div>
+      </ion-col>
+
+      <ion-col size="6">
+        <span class="h9 gray">Country</span><br>
+        <span class="h8">{{data.homecountry}}</span>
+      </ion-col>
+
+      <ion-col size="6">
+        <span class="h9 gray">City</span><br>
+        <span class="h8">{{data.homecity}}</span>
+      </ion-col>
+    </ion-row>
+
+  </div>
+  <!------------------------------------------------------------------------------------>
+  <mat-accordion multi>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="user">
+            <span class="title_general_black">Work Permit</span>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <ion-row>
+
+          <ion-col size="12">
+            <span class="h9 gray">Consular Service</span><br>
+            <ion-checkbox  class="size" [disabled]="disabled" [checked]="workPremit.consularServiceId === 1"
+            (ionChange)="viewConsularService($event)"></ion-checkbox>
+          </ion-col>
+
+          <ion-col size="12" *ngIf="workPremit.consularServiceId === 1">
+            <ion-item>
+              <ion-label position="floating">City</ion-label>
+              <ion-input  type="text" [disabled]="disabled" [(ngModel)]="workPremit.city"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Visa Type</ion-label>
+              <ion-input type="text"  [(ngModel)]="workPremit.visaTypeId" [disabled]="disabled"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <span class="h9">Document Dates</span>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Collection Start</ion-label>
+              <ion-datetime  displayFormat="DD MMM YYYY" [(ngModel)]="workPremit.documentCollectionStartDate" mode="ios"
+                [disabled]="disabled">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Collection Completion</ion-label>
+              <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="workPremit.documentCollectionCompletionDate"
+                mode="ios" [disabled]="disabled">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6"></ion-col>
+
+
+          <ion-col size="12">
+            <span class="h9">Process</span>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Application Submission</ion-label>
+              <ion-datetime [disabled]="disabled" displayFormat="DD MMM YYYY"
+                [(ngModel)]="workPremit.applicationSubmissionDate" mode="ios">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Application Approval</ion-label>
+              <ion-datetime [disabled]="disabled" displayFormat="DD MMM YYYY"
+                [(ngModel)]="workPremit.applicationApprovalDate" mode="ios">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Appointment Date</ion-label>
+              <ion-datetime [disabled]="disabled" displayFormat="DD MMM YYYY" [(ngModel)]="workPremit.appointmentDate"
+                mode="ios">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Delivery</ion-label>
+              <ion-datetime [disabled]="disabled" displayFormat="DD MMM YYYY"
+                [(ngModel)]="workPremit.documentDeliveryDate" mode="ios">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+        </ion-row>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <!------------------------------------------------------------------------------------>
+  <br>
+  <br>
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="7">
+        <span class="title_general_black">Service Documents<b class="purple">
+            {{workPremit.documentWorkPermits?.length + temporalDocument.length}}</b></span>
+      </ion-col>
+      <ion-col size="3" class="flexdosts"></ion-col>
+      <ion-col size="2" *ngxPermissionsOnly="['1','2','3','11','13','19']" class="align__end">
+        <img  *ngIf='__userlog__.role.id!=3' src="/assets/icon/icon_add.svg" style="height: 100%;" (click)="addDocument();" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+    <div class="activitie" *ngFor="let item of workPremit.documentWorkPermits; let i = index" (click)="viewDoc(item.fileRequest)">
+      <ion-list lines="none">
+        <ion-item-sliding>
+          <ion-item>
+            <ion-row>
+              <ion-col size="2">
+                <img src="/assets/icon/document_2.svg" class="avatar">
+              </ion-col>
+              <ion-col size="10">
+                <span class="h9">Document Type</span><br>
+                <span class="h15 gray">
+                  <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Uploaded
+                  <span class="h12"> {{item.updatedDate | date: 'dd MMM yyyy'}}</span>
+                </span><br>
+                <span class="h15 gray">
+                  <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Expiration
+                  <span class="h12"> {{item.expirationDate | date: 'dd MMM yyyy'}}</span>
+                </span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item-options *ngxPermissionsOnly="['1','2','11','13','19']">
+            <ion-item-option color="danger">
+              <ion-icon slot="bottom" name="trash" class="iconslot" (click)="deleteDocument(item.id, i)"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+
+    <div class="activitie" *ngFor="let item of temporalDocument; let i = index">
+      <ion-list lines="none">
+        <ion-item-sliding>
+          <ion-item>
+            <ion-row>
+              <ion-col size="2">
+                <img src="/assets/icon/document_2.svg" class="avatar">
+              </ion-col>
+              <ion-col size="10">
+                <span class="h9">Document Type</span><br>
+                <span class="h15 gray">
+                  <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Uploaded
+                  <span class="h12"> {{item.updatedDate | date: 'dd MMM yyyy'}}</span>
+                </span><br>
+                <span class="h15 gray">
+                  <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Expiration
+                  <span class="h12"> {{item.expirationDate | date: 'dd MMM yyyy'}}</span>
+                </span>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger" (click)="deleteDocument(item.id, i)">
+              <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+
+    <br>
+    <br>
+    <div *ngxPermissionsOnly="['1','2','3','11','13','19']">
+      <ion-row>
+        <ion-col size="7">
+          <span class="title_general_black">Request Payment <b class="purple">{{payments.length}}</b></span>
+        </ion-col>
+        <ion-col size="3" class="flexdosts">
+          <div>
+            <span class="h12 flexdosts">
+              <div class="dot late"></div>&nbsp;Urgent
+            </span>
+          </div>
+        </ion-col>
+        <ion-col size="2" class="align__end">
+          <img *ngIf="__userlog__.role.id != 3" src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+        </ion-col>
+      </ion-row>
+
+      <div class="activitie" *ngFor="let item of payments; let i = index">
+        <ion-list lines="none">
+          <ion-item-sliding [ngClass]="{'urgente': item.urgent}">
+            <ion-item>
+              <ion-row>
+                <ion-col size="2">
+                  <img src="/assets/icon/payment.svg" class="avatar">
+                </ion-col>
+                <ion-col size="10">
+                  <span class="h15 gray">
+                    Payment:<span class="h12"> {{item.desciption}}</span>
+                  </span><br>
+                  <span class="h15 gray">
+                    Amount:<span class="h12"> {{item.ammount}}</span>
+                  </span><br>
+                  <span class="h15 gray">
+                    Status:<span class="h12"> {{item.urgent}}</span>
+                  </span>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+            <ion-item-options  *ngxPermissionsOnly="['1','2','11','13','19']">
+              <ion-item-option color="danger" (click)="deleteDocument(item.id, i)">
+                <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
+      <br>
+      <br>
+    </div>
+    <!------------------------------------------------------------------------------------------->
+    <!--SECCION PARA COMENTARIOS-->
+  
+    <div *ngxPermissionsOnly="['1','2','3','11','13','19']">
+      <ion-row>
+        <ion-col size="7">
+          <span class="title_general_black">Comments<b class="purple">
+              {{workPremit.commentsWorkPermits.length}}</b></span>
+        </ion-col>
+        <ion-col size="3" class="flexdosts"></ion-col>
+        <ion-col size="2" class="align__end">
+          <img src="/assets/icon/icon_add.svg"  *ngIf="!addComment_ && __userlog__.role.id!=3" (click)="addComment_ = !addComment_"
+            style="height: 100%;" class="btn_size">
+          <img src="/assets/icon/icon_cancel.svg" *ngIf="addComment_" (click)="addComment_ = !addComment_"
+            style="height: 100%; transform: rotate(45deg);" class="btn_size">
+        </ion-col>
+      </ion-row>
+
+      <div class="editable" *ngIf="addComment_">
+        <ion-row>
+          <ion-col size="12">
+            <ion-label style="color: gray;" class="h12" position="floating">Comment</ion-label>
+            <ion-item class="ion-textarea">
+              <ion-textarea rows="4" [(ngModel)]="comment_data.comments" maxlength="300"></ion-textarea>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6" offset="3">
+            <ion-button class="buttom buttom__btn_login" [disabled]="comment_data.comments == null"
+              (click)="addComment()">Add Comment</ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div class="documents">
+        <ion-card *ngIf="workPremit.commentsWorkPermits.length > 0">
+          <ion-slides class="coments" [options]="slideOptsOne" pager="true">
+            <ion-slide class="card-comments" *ngFor="let item of workPremit.commentsWorkPermits; let i = index">
+              <ion-row style="text-align:initial;">
+                <ion-col size="2">
+                  <div class="avatares">
+                    <div class="content">
+                      <img src="{{_services.url_images}}{{item.user.avatar}}" class="img" fallimg="avatar">
+                    </div>
+                  </div>
+                </ion-col>
+
+                <ion-col size="5">
+                  <span class="h15 gray">{{item.user.role.role}}</span><br>
+                  <span class="h12" *ngIf="!show_name_assignee">{{item.user.name}} {{item.user.lastName}} {{item.user.motherLastName}}</span>
+                  <span class="h12" *ngIf="show_name_assignee">{{(item.user.name.length>10) ?  (item.user.name | slice:0:10)+'..': item.user.name}}</span>
+                </ion-col>
+
+                <ion-col size="5">
+                  <span class="h15 gray">
+                    Date: &nbsp;<br>
+                    <div class="comment-flex">
+                      <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+                      <span class="h12"> {{item.createdDate | date: 'dd MMM yyyy'}}</span>
+                    </div>
+                  </span><br>
+                </ion-col>
+
+                <ion-col size="12">
+                  <ion-label *ngIf="i == 0" style="color: gray;" class="h12" position="floating">Comment</ion-label>
+                  <ion-label *ngIf="i != 0" style="color: gray;" class="h12" position="floating">Reply</ion-label>
+                  <ion-item class="ion-textarea">
+                    <ion-textarea rows="4" [(ngModel)]="item.reply" disabled maxlength="300"></ion-textarea>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-slide>
+          </ion-slides>
+        </ion-card>
+      </div>
+      <br>
+      <br>
+    </div>
+    <!------------------------------------------------------------------------------------------->
+    <!--SECCION PARA REMINDER-->
+    <div *ngxPermissionsOnly="['1','2','3','11','13','19']">
+      <ion-row>
+        <ion-col size="7">
+          <span class="title_general_black">Reminders<b class="purple">
+              {{workPremit.reminderWorkPermits.length}}</b></span>
+        </ion-col>
+        <ion-col size="3" class="flexdosts"></ion-col>
+        <ion-col size="2" class="align__end">
+          <img src="/assets/icon/icon_add.svg"  *ngIf="!addReminder_ && __userlog__.role.id!=3" (click)="addReminder_ = !addReminder_"
+            style="height: 100%;" class="btn_size">
+          <img src="/assets/icon/icon_cancel.svg" *ngIf="addReminder_" (click)="addReminder_ = !addReminder_"
+            style="height: 100%; transform: rotate(45deg);" class="btn_size">
+        </ion-col>
+      </ion-row>
+
+      <div class="editable" *ngIf="addReminder_">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <span class="h7 gray" position="floating">Reminder Date</span><br>
+              <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="reminder_data.reminderDate" mode="ios">
+              </ion-datetime>
+              <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-label style="color: gray;" class="h12" position="floating">Reminder comment</ion-label>
+            <ion-item class="ion-textarea">
+              <ion-textarea rows="4" [(ngModel)]="reminder_data.reminderComments" maxlength="300"></ion-textarea>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6" offset="3">
+            <ion-button class="buttom buttom__btn_login"
+              [disabled]="reminder_data.reminderDate == null || reminder_data.reminderComments == undefined"
+              (click)="addReminder()">Add
+              Reminder</ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div class="activitie" *ngFor="let item of workPremit.reminderWorkPermits; let i = index">
+        <ion-list lines="none">
+          <ion-item-sliding>
+            <ion-item>
+              <ion-row style="width: 100%;">
+                <ion-col size="2">
+                  <img src="/assets/icon/reminder.svg" class="avatar">
+                </ion-col>
+                <ion-col size="10">
+                  <span class="h15 gray">
+                    Date&nbsp;
+                    <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+                    <span class="h12"> {{item.reminderDate | date: 'dd MMM yyyy'}}</span>
+                  </span><br>
+                  <span class="h15 gray">
+                    Comment&nbsp; <span class="h12">{{item.reminderComments}}</span>
+                  </span>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+            <ion-item-options [disabled]='__userlog__.role.id!=3'>
+              <ion-item-option color="danger" (click)="deleteReminder(item.id, i)">
+                <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
+      <br>
+      <br>
+    </div>
+    <!--TERMMINA SECCION REMIDERS-->
+
+    <div *ngxPermissionsOnly="['1', '2', '3', '11', '13', '19']">
+      <!--SCOPE DOCUMENTS-->
+      <ion-row>
+        <ion-col size="12">
+          <span class="title_general_black">Service Client Documents<b class="purple">
+              {{serviceScope.documentcountries.length}}</b></span>
+        </ion-col>
+      </ion-row>
+
+      <div class="activitie" *ngFor="let item of serviceScope.documentcountries; let i = index" (click)="viewDoc(item.fileRequest)">
+        <ion-list lines="none">
+          <ion-item-sliding>
+            <ion-item>
+              <ion-row class="width">
+                <ion-col size="2">
+                  <img src="/assets/icon/document_2.svg" class="avatar">
+                </ion-col>
+                <ion-col size="10">
+                  <span class="h9">Document Type &nbsp; {{item.documentType}}</span> <br>
+                  <span class="h15 gray">
+                    <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Status
+                    <span class="h12"> {{item.status}} </span>
+                  </span><br>
+                  <span class="h15 gray">
+                    <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Privacy
+                    <span class="h12"> {{item.privacy}} </span>
+                  </span><br>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
+      <br>
+      <br>
+    </div>
+
+    <div>
+      <ion-row>
+        <ion-col size="12">
+          <span class="title_general_black">Scope Client Service</span>
+        </ion-col>
+      </ion-row>
+
+      <br>
+
+      <ion-row>
+        <ion-col size="12">
+          <div class="textarea">
+            <p [innerHTML]="serviceScope?.scopeDescription"></p>
+          </div>
+        </ion-col>
+      </ion-row>
+
+    </div>
+    <!------------------------------------------------------------------------------------------->
+    <ion-row class="bottom_padding" *ngxPermissionsOnly="['1','2','3','11','13','19']">
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+</ion-content>

@@ -1,0 +1,227 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Report An Event</p>
+    <img src="/assets/icon/documents.svg" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label style="color: gray;" class="h7" position="floating">Issue Report Date</ion-label><br>
+          <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="report.eventReportDate">
+          </ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label style="color: gray;" class="h7" position="floating">Issue Close Date</ion-label><br>
+          <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="report.eventCloseDate">
+          </ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Severety</ion-label>
+          <ion-select interface="action-sheet" mode="ios" [(ngModel)]="report.severityId">
+            <ion-select-option *ngFor="let item of catalog_severity" [value]="item.id">{{item.severity}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea rows="3" [disabled]="disabled" [(ngModel)]="report.description"></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Status</ion-label>
+          <ion-select interface="action-sheet" mode="ios" [(ngModel)]="report.statusId">
+            <ion-select-option *ngFor="let item of statusReport" [value]="item.id">{{item.status}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="9" class="flexdosts">
+        <span class="title_general_black">Assignee Photos</span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)="photo(1)" *ngxPermissionsOnly="['4']">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+    <ion-col size="12">
+      <ion-card *ngIf="report.assignedPhotos.length > 0">
+        <ion-slides class="app" [options]="slideOptsOne" pager="true">
+          <ion-slide class="card-comments" *ngFor="let item of report.assignedPhotos; let i = index">
+            <img src="{{item.b64}}" class="img" *ngIf="item.id == 0" class="img__size">
+            <img src="{{_services.url_images}}{{item.photoPath}}" class="img__size" *ngIf="item.id != 0">
+          </ion-slide>
+        </ion-slides>
+      </ion-card>
+    </ion-col>
+
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="9" class="flexdosts">
+        <span class="title_general_black">Supplier Consultant Photos</span>
+      </ion-col>
+      <ion-col size="3" class="align__end" (click)="photo(2)" *ngxPermissionsOnly="['1','2','3','11','13']">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+    <ion-col size="12">
+      <ion-card *ngIf="report.supplierConsultantPhotos.length > 0">
+        <ion-slides class="app" [options]="slideOptsOne" pager="true">
+          <ion-slide class="card-comments" *ngFor="let item of report.supplierConsultantPhotos; let i = index">
+            <img src="{{item.b64}}" class="img" *ngIf="item.id == 0" class="img__size">
+            <img src="{{_services.url_images}}{{item.photoPath}}" class="img__size" *ngIf="item.id != 0">
+            <!--img src="./assets/icon/quit.svg"  (click)="deletePhoto(item,i)"-->
+          </ion-slide>
+        </ion-slides>
+      </ion-card>
+    </ion-col>
+
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="9" class="flexdosts">
+        <span class="title_general_black">Comments</span>
+      </ion-col>
+      <ion-col size="3" class="align__end">
+        <img src="/assets/icon/icon_add.svg" *ngIf="!addComment_" (click)="addComment_ = !addComment_"
+          style="height: 100%;" class="btn_size">
+        <img src="/assets/icon/icon_cancel.svg" *ngIf="addComment_" (click)="addComment_ = !addComment_"
+          style="height: 100%; transform: rotate(45deg);" class="btn_size">
+      </ion-col>
+    </ion-row>
+
+    <div class="editable" *ngIf="addComment_">
+      <ion-row>
+        <ion-col size="12">
+          <ion-label style="color: gray;" class="h12" position="floating">Comment</ion-label>
+          <ion-item class="ion-textarea">
+            <ion-textarea rows="4" [(ngModel)]="comment_data.comments" maxlength="300"></ion-textarea>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="6" offset="3">
+          <ion-button class="buttom buttom__btn_login" [disabled]="comment_data.comments == null"
+            (click)="addComment()">Add Comment</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="documents" *ngIf="report.commentReportAnEvents.length > 0 || temporalComment.length > 0">
+      <ion-card>
+        <ion-slides class="coments" [options]="slideOptsOne" pager="true">
+          <ion-slide class="card-comments" *ngFor="let item of report.commentReportAnEvents; let i = index">
+            <ion-row style="text-align:initial;">
+              <ion-col size="2">
+                <div class="avatares">
+                  <div class="content">
+                    <img src="{{_services.url_images}}{{item?.createdByNavigation?.avatar}}" class="img"
+                      fallimg="avatar">
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="5">
+                <span class="h15 gray">{{item?.createdByNavigation?.userType?.type}}</span><br>
+                <span class="h12">{{item?.createdByNavigation?.name}} {{item?.createdByNavigation?.lastName}}
+                  {{item?.createdByNavigation?.motherLastName}}</span>
+              </ion-col>
+
+              <ion-col size="5">
+                <span class="h15 gray">
+                  Date &nbsp; <br>
+                  <div class="comment-flex">
+                    <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+                    <span class="h12"> {{item.createdDate | date: 'dd MMM yyyy'}}</span>
+                  </div>
+                </span><br>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-label *ngIf="i == 0" style="color: gray;" class="h12" position="floating">Comment</ion-label>
+                <ion-label *ngIf="i != 0" style="color: gray;" class="h12" position="floating">Reply</ion-label>
+                <ion-item class="ion-textarea">
+                  <ion-textarea rows="4" [(ngModel)]="item.comment" disabled maxlength="300"></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-slide>
+
+          <ion-slide class="card-comments" *ngFor="let item of temporalComment; let i = index">
+            <ion-row style="text-align:initial;">
+              <ion-col size="2">
+                <div class="avatares">
+                  <div class="content">
+                    <img src="{{_services.url_images}}{{item.user.avatar}}" class="img" fallimg="avatar">
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="5">
+                <span class="h15 gray">{{item.user.userType.type}}</span><br>
+                <span class="h12">{{item.user.name}} {{item.user.lastName}} {{item.user.motherLastName}}</span>
+              </ion-col>
+
+              <ion-col size="5">
+                <span class="h15 gray">
+                  Date &nbsp; <br>
+                  <div class="comment-flex">
+                    <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+                    <span class="h12"> {{item.createdDate | date: 'dd MMM yyyy'}}</span>
+                  </div>
+                </span><br>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-label *ngIf="i == 0" style="color: gray;" class="h12" position="floating">Comment</ion-label>
+                <ion-label *ngIf="i != 0" style="color: gray;" class="h12" position="floating">Reply</ion-label>
+                <ion-item class="ion-textarea">
+                  <ion-textarea rows="4" [(ngModel)]="item.comment" disabled maxlength="300"></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-slide>
+        </ion-slides>
+      </ion-card>
+    </div>
+
+    <br><br>
+
+    <ion-row>
+      <ion-col size="6" offset="3" size-md="4" offset-md="4">
+        <br>
+        <ion-button class="buttom buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+</ion-content>

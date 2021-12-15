@@ -1,0 +1,541 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h7">Property Inspections / Move Out</p>
+    <img src="/assets/icon/relocation_services.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="6" style="padding: 27px 0 0 0;" *ngIf="data_moveIn.id != 0">
+        <span class="h9 gray">Creation Date</span><br>
+        <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+        <span class="h8">{{data_moveIn.createdDate | date: 'dd MMM yyyy'}}</span>
+      </ion-col>
+
+      <ion-col size="6" style="padding: 27px 0 0 0;" *ngIf="data_moveIn.id == 0">
+        <span class="h9 gray">Creation Date</span><br>
+        <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+        <span class="h8">{{fecha | date: 'dd MMM yyyy'}}</span>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Report Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="data_moveIn.reportDate">
+          </ion-datetime>
+          <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" *ngIf="data_moveIn.id != 0">
+        <span class="h9 gray">Report By</span><br>
+        <span class="h8">{{data_moveIn.createdByNavigation?.name}} {{data_moveIn.createdByNavigation?.lastName}}</span>
+      </ion-col>
+
+      <ion-col size="6" *ngIf="data_moveIn.id == 0">
+        <span class="h9 gray">Report By</span><br>
+        <span class="h8"> {{userData.name}} {{userData.lastName}}</span>
+      </ion-col>
+
+      <ion-col size="12">
+        <span class="h9 gray">Address</span><br>
+        <span class="h8">{{data_moveIn.propertyAddress}}</span>
+      </ion-col>
+
+      <ion-col size="6">
+        <span class="h9 gray">ZIP Code</span><br>
+        <span class="h8">{{data_moveIn.zipCode}}</span>
+      </ion-col>
+
+      <ion-col size="10">
+        <span class="h14">Sections</span>
+      </ion-col>
+      <ion-col size="2">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" (click)="addMoveIn()">
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+  <div class="activitie" *ngFor="let item of data_moveIn.propertyReportSections; let r = index;">
+    <mat-accordion multi style="width: 100%;">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <ion-row style="width: 100%;">
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Property Section</ion-label>
+                  <ion-select interface="action-sheet" mode="ios" [(ngModel)]="item.propertySection">
+                    <ion-select-option *ngFor="let item of ca_propertySection" [value]="item.id">
+                      {{item.propertySection}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <ion-row style="width: 100%;">
+
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Condition</ion-label>
+                <ion-select interface="action-sheet" mode="ios" [(ngModel)]="item.status">
+                  <ion-select-option *ngFor="let item of ca_statuspropertySection" [value]='item.id'>
+                    {{item.status}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Report Date</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="item.reportDate">
+                </ion-datetime>
+                <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6" style="padding: 27px 0 0 0;">
+              <span class="h9 gray">Needs Repairs</span><br>
+              <ion-checkbox [(ngModel)]="item.needRepair"></ion-checkbox>
+            </ion-col>
+
+            <ion-col size="6" style="padding: 27px 0 0 0;">
+              <span class="h7 gray">Report Details</span><br>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item class="ion-textarea">
+                <ion-textarea rows="4" maxlength="300" [(ngModel)]="item.reportDetails"></ion-textarea>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="10">
+              <span class="h14">Inventory</span>
+            </ion-col>
+            <ion-col size="2">
+              <img src="/assets/icon/icon_add.svg" *ngIf="!addInventory_" (click)="addInventory_ = !addInventory_"
+                style="height: 100%;">
+              <img src="/assets/icon/icon_cancel.svg" *ngIf="addInventory_" (click)="addInventory_ = !addInventory_"
+                style="height: 100%; transform: rotate(45deg);">
+            </ion-col>
+          </ion-row>
+
+          <!------------------------------------------------------------------------------------->
+          <!--SECCION PARA AGREGAR NUEVO INVENTORY-->
+          <div class="editable" *ngIf="addInventory_">
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">item</ion-label>
+                  <ion-input placeholder="item" type="text" [(ngModel)]="inventory_add.item">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Description</ion-label>
+                  <ion-input placeholder="Description" type="text" [(ngModel)]="inventory_add.description">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Quantity</ion-label>
+                  <ion-input placeholder="Quantity" type="number" [(ngModel)]="inventory_add.quantity">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="10">
+                <span class="h14">Photos</span>
+              </ion-col>
+              <ion-col size="2">
+                <img src="/assets/icon/icon_add.svg" (click)="photoInventory(r)" style="height: 100%;">
+              </ion-col>
+            </ion-row>
+
+            <ion-slides class="tips" [options]="slideOptsOne" pager="true">
+              <ion-slide *ngFor="let photo of inventory_add.photosInventories">
+                <img src="{{photo.url}}" style="height: 200px;">
+              </ion-slide>
+            </ion-slides>
+
+            <ion-row style="width: 100%;">
+              <ion-col size="6" offset="3">
+                <ion-button class="buttom buttom__btn_login"
+                  [disabled]="inventory_add.quantity == undefined || inventory_add.description.length == 0 || inventory_add.item == null"
+                  (click)="addInventory(r)">Save Inventory</ion-button>
+              </ion-col>
+            </ion-row>
+          </div>
+          <!------------------------------------------------------------------------------------->
+
+          <div class="inventory" *ngFor="let inventory of item.sectionInventories; let j = index">
+            <ion-list>
+              <ion-item-sliding>
+                <ion-item lines="none">
+                  <ion-row style="width: 100%;" *ngIf="!inventory.edit">
+                    <ion-col size="3">
+                      <img src="/assets/icon/inventory.svg" class="avatar">
+                    </ion-col>
+                    <ion-col size="9">
+                      <span class="h9 gray">
+                        Item
+                        <span class="h9"> {{inventory.item}}</span>
+                      </span><br>
+                      <span class="h9">
+                        <span class="gray">Description</span> {{inventory.description}}
+                      </span><br>
+                      <span class="h9">
+                        <span class="gray">Quantity</span> {{inventory.quantity}}
+                      </span>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row *ngIf="inventory.edit">
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-label position="floating">Item</ion-label>
+                        <ion-input placeholder="Quantity" type="text" [(ngModel)]="inventory.item">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-label position="floating">Description</ion-label>
+                        <ion-input placeholder="Quantity" type="text" [(ngModel)]="inventory.description">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-label position="floating">Quantity</ion-label>
+                        <ion-input placeholder="Description" type="text" [(ngModel)]="inventory.quantity">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+
+                  </ion-row>
+
+                  <ion-slides class="tips" [options]="slideOptsOne" pager="true">
+                    <ion-slide *ngFor="let photo of inventory.photosInventories">
+                      <img src="{{_services.url_images}}{{photo.photo}}" style="height: 200px;">
+                    </ion-slide>
+                  </ion-slides>
+                </ion-item>
+                <ion-item-options>
+                  <ion-item-option color="danger" *ngIf="!item.edit">
+                    <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+                  </ion-item-option>
+                  <ion-item-option color="warning" *ngIf="!inventory.edit" (click)="inventory.edit = !inventory.edit">
+                    <ion-icon slot="bottom" name="pencil" class="iconslot"></ion-icon>
+                  </ion-item-option>
+                  <ion-item-option color="warning" *ngIf="inventory.edit" (click)="inventory.edit = !inventory.edit">
+                    <ion-icon slot="bottom" name="close" class="iconslot"></ion-icon>
+                  </ion-item-option>
+                  <ion-item-option color="success" *ngIf="inventory.edit" (click)="inventory.edit = !inventory.edit">
+                    <ion-icon slot="bottom" name="checkmark" class="iconslot"></ion-icon>
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-list>
+          </div>
+
+          <ion-row style="width: 100%;">
+            <ion-col size="10">
+              <span class="h14">Photos</span>
+            </ion-col>
+            <ion-col size="2">
+              <img src="/assets/icon/icon_add.svg" style="height: 100%;" (click)="photo(r)">
+            </ion-col>
+          </ion-row>
+
+          <div class="documents">
+            <ion-slides class="tips" pager="true">
+              <ion-slide *ngFor="let image of item.photosPropertyReportSections">
+                <img src="{{_services.url_images}}{{image.photo}}" style="height: 200px;">
+              </ion-slide>
+            </ion-slides>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="7">
+        <span class="h14">Keys Inventory</span>
+      </ion-col>
+      <ion-col size="3" class="flexdosts"></ion-col>
+      <ion-col size="2">
+        <img src="/assets/icon/icon_add.svg" *ngIf="!addKey_" (click)="addKey_ = !addKey_" style="height: 100%;">
+        <img src="/assets/icon/icon_cancel.svg" *ngIf="addKey_" (click)="addKey_ = !addKey_"
+          style="height: 100%; transform: rotate(45deg);">
+      </ion-col>
+    </ion-row>
+    <!------------------------------------------------------------------------------------->
+    <!--SECCION PARA AGREGAR UNA KEY INVENTORY-->
+    <div class="editable" *ngIf="addKey_">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Quantity</ion-label>
+            <ion-input placeholder="Quantity" type="number" [(ngModel)]="key_add.quantity">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-input placeholder="Description" type="text" [(ngModel)]="key_add.description">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item class="filter">
+            <ion-label position="floating">Property Section</ion-label>
+            <ion-select interface="action-sheet" mode="ios" [(ngModel)]="key_add.section">
+              <ion-select-option *ngFor="let item of ca_propertySection" [value]='item.id'>{{item.propertySection}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="6" offset="3">
+          <ion-button class="buttom buttom__btn_login"
+            [disabled]="key_add.quantity == undefined || key_add.description.length == 0 || key_add.section == null"
+            (click)="addKeyInventory()">Save Keys Inventory</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+    <!------------------------------------------------------------------------------------->
+    <div class="activitie" *ngFor="let item of data_moveIn.keyInventories; let j = index">
+      <ion-list lines="none">
+        <ion-item-sliding>
+          <ion-item>
+            <ion-row style="width: 100%" *ngIf="!item.edit">
+              <ion-col size="3">
+                <img src="/assets/icon/keys.svg" class="avatar">
+              </ion-col>
+              <ion-col size="9">
+                <span class="h9 gray">Quantity
+                  <span class="black">{{item.quantity}}</span>
+                </span><br>
+                <span class="h9 gray">Section
+                  <span class="black">{{getSectionName(item.section)}}</span>
+                </span><br>
+                <span class="h9 gray">Description
+                  <span class="black">{{item.description}}</span>
+                </span><br>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="item.edit">
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Quantity</ion-label>
+                  <ion-input placeholder="Quantity" type="number" [(ngModel)]="item.quantity">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12">
+                <ion-item class="filter">
+                  <ion-label position="floating">Property Section</ion-label>
+                  <ion-select interface="action-sheet" mode="ios" [(ngModel)]="item.section">
+                    <ion-select-option *ngFor="let item of ca_propertySection" [value]='item.id'>
+                      {{item.propertySection}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Description</ion-label>
+                  <ion-input placeholder="Description" type="text" [(ngModel)]="item.description">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger" *ngIf="!item.edit">
+              <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="warning" *ngIf="!item.edit" (click)="item.edit = !item.edit">
+              <ion-icon slot="bottom" name="pencil" class="iconslot"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="warning" *ngIf="item.edit" (click)="item.edit = !item.edit">
+              <ion-icon slot="bottom" name="close" class="iconslot"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="success" *ngIf="item.edit" (click)="Putkey(item, j)">
+              <ion-icon slot="bottom" name="checkmark" class="iconslot"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+
+    <ion-row>
+      <ion-col size="7">
+        <span class="h14">Attendees</span>
+      </ion-col>
+      <ion-col size="3" class="flexdosts"></ion-col>
+      <ion-col size="2">
+        <img src="/assets/icon/icon_add.svg" *ngIf="!addAtteend_" (click)="addAtteend_ = !addAtteend_"
+          style="height: 100%;">
+        <img src="/assets/icon/icon_cancel.svg" *ngIf="addAtteend_" (click)="addAtteend_ = !addAtteend_"
+          style="height: 100%; transform: rotate(45deg);">
+      </ion-col>
+    </ion-row>
+
+    <!------------------------------------------------------------------------------------->
+    <!--SECCION PARA AGREGAR UNA KEY INVENTORY-->
+    <div class="editable" *ngIf="addAtteend_">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">name</ion-label>
+            <ion-input placeholder="Name" type="text" [(ngModel)]="atteend_add.name">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input placeholder="Email" type="text" [(ngModel)]="atteend_add.email">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item class="filter">
+            <ion-label position="floating">RelationShip</ion-label>
+            <ion-select interface="action-sheet" mode="ios" [(ngModel)]="atteend_add.relationship">
+              <ion-select-option *ngFor="let item of ca_relation" [value]='item.id'>{{item.relationship}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="6" offset="3">
+          <ion-button class="buttom buttom__btn_login"
+            [disabled]="atteend_add.name.length == 0 || atteend_add.email.length == 0 || atteend_add.relationship == null"
+            (click)="addatteend()">Save Atteend</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+    <!------------------------------------------------------------------------------------->
+
+    <div class="activitie" *ngFor="let item of data_moveIn.attendees; let j = index">
+      <ion-list lines="none">
+        <ion-item-sliding>
+          <ion-item>
+            <ion-row style="width: 100%" *ngIf="!item.edit">
+              <ion-col size="3">
+                <img src="/assets/icon/attendees.svg" class="avatar">
+              </ion-col>
+              <ion-col size="9">
+                <span class="h9 gray">Name
+                  <span class="black">{{item.name}}</span>
+                </span><br>
+                <span class="h9 gray">Email
+                  <span class="black">{{item.email}}</span>
+                </span><br>
+                <span class="h9 gray">RelationShip
+                  <span class="black">{{relationName(item.relationship)}}</span>
+                </span><br>
+              </ion-col>
+            </ion-row>
+
+            <ion-row style="width: 100%;" *ngIf="item.edit">
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">name</ion-label>
+                  <ion-input placeholder="Name" type="text" [(ngModel)]="item.name">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Email</ion-label>
+                  <ion-input placeholder="Email" type="text" [(ngModel)]="item.email">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-item class="filter">
+                  <ion-label position="floating">RelationShip</ion-label>
+                  <ion-select interface="action-sheet" mode="ios" [(ngModel)]="item.relationship">
+                    <ion-select-option *ngFor="let item of ca_relation" [value]='item.id'>{{item.relationship}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger" *ngIf="!item.edit">
+              <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="warning" *ngIf="!item.edit" (click)="item.edit = !item.edit">
+              <ion-icon slot="bottom" name="pencil" class="iconslot"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="warning" *ngIf="item.edit" (click)="item.edit = !item.edit">
+              <ion-icon slot="bottom" name="close" class="iconslot"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="success" *ngIf="item.edit" (click)="PutAttendee(item, j)">
+              <ion-icon slot="bottom" name="checkmark" class="iconslot"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+
+    <ion-row>
+      <ion-col size="12">
+        <span class="h14">Notes</span>
+      </ion-col>
+
+      <ion-col size="12">
+        <span class="h7 gray">Comment</span>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item class="ion-textarea">
+          <ion-textarea rows="4" maxlength="300" placeholder="Comment" [(ngModel)]="data_moveIn.notes"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom buttom__btn_login" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

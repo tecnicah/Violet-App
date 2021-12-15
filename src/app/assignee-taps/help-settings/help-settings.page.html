@@ -1,0 +1,61 @@
+<ion-header mode="ios">
+  <div class="header" *ngIf="userData.role.id == 4" [ngClass]="{'pading_ios': service.padingios}">
+    <img src="/assets/logo/logo_horizontal_blanco.svg" alt="">
+    <p class="h5"></p>
+  </div>
+
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}" *ngIf="userData.role.id != 4" style="justify-content: center;">
+    <img src="assets/prueba.png" style="width: 160px;">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+
+  <div class="appointments">
+
+    <ion-row>
+      <ion-col size="12">
+        <p class="h7 purple">Menu</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="faq()">
+      <span class="hy">FAQ</span>
+      <img src="/assets/icon/bot_n_faq.svg" alt="">
+    </ion-card>
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="whyPremier()">
+      <span class="hy">Why Premier</span>
+      <img src="/assets/icon/bot_n_why.svg" alt="">
+    </ion-card>
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="policies()">
+      <span class="hy">Compliance Policies</span>
+      <img src="/assets/icon/bot_n_policies.svg" alt="">
+    </ion-card>
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="tips()">
+      <span class="hy">Tips</span>
+      <img src="/assets/icon/bot_n_tips.svg" alt="">
+    </ion-card>
+
+    <!--ion-row>
+      <ion-col size="12">
+        <p class="h7 purple">Setting</p>
+      </ion-col>
+    </ion-row-->
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="settings()">
+      <span class="hy">Settings</span>
+      <img src="/assets/icon/bot_n_settings.svg" alt="">
+    </ion-card>
+
+    <ion-card (click)="logout()" matRipple matRippleColor="rgba(158, 53, 149, 0.5)">
+      <span class="hy">Logout</span>
+      <img src="/assets/icon/bot_n_logout.svg" alt="">
+    </ion-card>
+
+  </div>
+
+</ion-content>

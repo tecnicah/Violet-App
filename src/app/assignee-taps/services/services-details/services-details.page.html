@@ -1,0 +1,168 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Entry Visa</p>
+    <img src="/assets/icon/documents.svg" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+    <ion-card>
+      <div class="card">
+        <img src="{{service.url_images}}{{userData.avatar}}" alt="">
+        <div style="width: 55%;">
+          <ion-row>
+            <ion-col size="12">
+              <span class="h12" style="color: gray;">Coordinator</span><br>
+              <span class="h11">About Premier</span>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="options">
+          <ion-row>
+            <ion-col size="12">
+              <span class="h12" style="color: gray;">Location</span><br>
+              <span class="h11">Country Name</span>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </ion-card>
+    <br>
+    <ion-card>
+      <div class="card">
+        <img src="{{service.url_images}}{{userData.avatar}}" alt="">
+        <div style="width: 55%;">
+          <ion-row>
+            <ion-col size="12">
+              <span class="h12" style="color: gray;">Coordinator</span><br>
+              <span class="h11">About Premier</span>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="options">
+          <ion-row>
+            <ion-col size="12">
+              <span class="h12" style="color: gray;">Location</span><br>
+              <span class="h11">Country Name</span>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </ion-card>
+    <ion-row>
+      <ion-col size="6">
+        <span class="h12" style="color: gray;">Service Line</span><br>
+        <span class="h12">Immigration</span>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item class="filter">
+          <ion-label position="floating">Status</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios">
+            <ion-select-option value="null">All</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" class="icon">
+        <span class="h12" style="color: gray;">Autho Date</span><br>
+        <span class="h12">
+          <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>20 Sep 2020
+        </span>
+      </ion-col>
+
+      <ion-col size="6" class="icon">
+        <span class="h12" style="color: gray;">Autho Acceptance Date</span><br>
+        <span class="h12">
+          <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>20 Sep 2020
+        </span>
+      </ion-col>
+
+      <ion-col size="6" class="icon">
+        <span class="h12" style="color: gray;">Country</span><br>
+        <span class="h12">About Premier</span>
+      </ion-col>
+
+      <ion-col size="6" class="icon">
+        <span class="h12" style="color: gray;">City</span><br>
+        <span class="h12">About Premier</span>
+      </ion-col>
+    </ion-row>
+    <br>
+    <div class="hr"></div>
+    <br>
+    <p class="h5">Comments</p>
+
+    <ion-card>
+      <div class="card">
+        <img src="{{service.url_images}}{{userData.avatar}}" alt="">
+        <div style="width: 55%;">
+          <ion-row>
+            <ion-col size="12">
+              <span class="h12" style="color: gray;">Coordinator</span><br>
+              <span class="h11">About Premier</span>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="options">
+          <ion-row>
+            <ion-col size="12" class="icon">
+              <span class="h12" style="color: gray;">Date&nbsp;</span>
+              <span class="h12">
+                <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>20 Sep 2020
+              </span>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+      <ion-col size="12">
+        <ion-label style="color: gray;" class="h12" position="floating">Comment</ion-label>
+        <ion-item class="ion-textarea">
+          <ion-textarea rows="4"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-card>
+    <br>
+    <ion-card>
+      <div class="card">
+        <img src="{{service.url_images}}{{userData.avatar}}" alt="">
+        <div style="width: 55%;">
+          <ion-row>
+            <ion-col size="12">
+              <span class="h12" style="color: gray;">Coordinator</span><br>
+              <span class="h11">About Premier</span>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="options">
+          <ion-row>
+            <ion-col size="12" class="icon">
+              <span class="h12" style="color: gray;">Date&nbsp;</span>
+              <span class="h12">
+                <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>20 Sep 2020
+              </span>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+      <ion-col size="12">
+        <ion-label style="color: gray;" class="h12" position="floating">Reply</ion-label>
+        <ion-item class="ion-textarea">
+          <ion-textarea rows="4"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-card>
+
+    <ion-row>
+      <ion-col size="6"></ion-col>
+      <ion-col size="6" align="end">
+        <ion-button class="buttom buttom__btn_document">Add Reply</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Resources</p>
+    <img src="/assets/icon/resources_.svg" style="width: 45px;" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Resources</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/resources_.svg" style="width: 45px;" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+  <div class="appointments">
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="countyCityInfo()">
+      <p class="h8 ancho">Country & City Info</p>
+      <img src="/assets/icon/bot_n_country.svg" alt="">
+    </ion-card>
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="currencyExchangeInfo()">
+      <p class="h8 ancho">Currency Exchange</p>
+      <img src="/assets/icon/bot_n_exchange.svg" alt="">
+    </ion-card>
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="mapsInfo()">
+      <p class="h8 ancho">Maps</p>
+      <img src="/assets/icon/bot_n_maps.svg" alt="">
+    </ion-card>
+
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="supplierList()" *ngIf="userData.role.id != 4">
+      <p class="h8 ancho">Supplier List</p>
+      <img src="/assets/icon/bot_n_supplier_list.svg" alt="">
+    </ion-card>
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="timeZoneInfo()">
+      <p class="h8 ancho">Time Zone</p>
+      <img src="/assets/icon/bot_n_time_zone.svg" alt="">
+    </ion-card>
+
+    <!--ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="translate()">
+      <p class="h7">Translator</p>
+      <img src="/assets/icon/bot_n_translate.svg" alt="">
+    </ion-card-->
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="unitConverterInfo()">
+      <p class="h8 ancho">Unit Converter</p>
+      <img src="/assets/icon/bot_n_converter.svg" alt="">
+    </ion-card>
+
+    <ion-card matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="weatherInfo()">
+      <p class="h8 ancho">Weather</p>
+      <img src="/assets/icon/bot_n_weather.svg" alt="">
+    </ion-card>
+  </div>
+</ion-content>

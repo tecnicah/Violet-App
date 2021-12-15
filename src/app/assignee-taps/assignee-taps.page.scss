@@ -1,0 +1,90 @@
+$purple-light: #9D3292;
+
+$purple-dark: #56004E;
+
+$blue: #4435A6;
+
+$black: rgba(0, 0, 0, 0.85);
+
+$ligth: rgba(0, 0, 0, 0.10);
+
+ion-tabs {
+    background: #ffffff;
+}
+
+ion-tab-bar {
+    //width: 90%;
+    //border-radius: 25px;
+    //box-shadow: 1px -9px 20px 0px rgba(0, 0, 0, 0.5);
+    //margin: auto;
+    //margin-bottom: 7px;
+    //height: 40px;
+    --background: white;
+}
+
+/*ion-tab-button{
+    border-radius: 25px;
+}*/
+
+.sombra1 {
+    right: 15px;
+    width: 70%;
+    background: #f2f2f2;
+    height: 28px;
+    position: fixed;
+    bottom: 0;
+    z-index: -1;
+    transform: matrix(1, 0, 1, 1, 0, 0);
+}
+
+.sombra2 {
+    left: 15px;
+    width: 70%;
+    background: #f2f2f2;
+    height: 28px;
+    position: fixed;
+    bottom: 0;
+    z-index: -1;
+    transform: matrix(1, 0, -1, 1, 0, 0);
+}
+
+.active{
+    display: none;
+}
+
+.normal{
+    display: block;
+}
+
+ion-icon {
+    color: $purple-light;
+}
+
+.tab-selected {
+    &::before {
+        width: 5px !important;
+        height: 5px !important;
+        background-color: #9D3292 !important;
+        position: absolute !important;
+        content: " " !important;
+        border-radius: 100% !important;
+        margin-left: -2px;
+        bottom: 3px;
+    }
+
+    .normal{
+        display: none;
+    }
+
+    .active{
+        display: block;
+    }
+
+}
+
+.notificacion{
+    background: #9D3292 !important;
+    color: white;
+    margin-top: -5px;
+}
+

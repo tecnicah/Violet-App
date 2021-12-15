@@ -1,0 +1,609 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">{{dataSR.numberServiceRecord}}</p>
+    <img src="/assets/icon/sr.svg" style="width: 45px;" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">{{dataSR.numberServiceRecord}}</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/sr.svg" style="width: 45px;" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+
+  <div class="appointments">
+
+    <ion-row>
+      <ion-col size="10">
+        <span class="title_general_black">Assignee</span>
+      </ion-col>
+      <ion-col size="2" class="btn-right">
+      </ion-col>
+    </ion-row>
+
+    <!--------------------Assignee info-------------------->
+    <ion-card *ngFor="let item of dataSR.assigneeInformations">
+      <ion-row>
+        <ion-col size="6" class="nameassignee">
+        </ion-col>
+
+        <ion-col size="2"></ion-col>
+
+        <ion-col size="2" class="flex_filter">
+          <ion-fab>
+            <ion-fab-button size="small" class="btn_fab_size">
+              <ion-icon name="call" class="btn_fab_size__icon"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list style="margin: -10px 51px;" side="start">
+              <ion-fab-button style="margin: 0px 0 0 10px;" class="btn_fab_size"
+                (click)="call(item.workPhone, item.assigneeName)">
+                <ion-icon name="business" class="btn_fab_size__icon">
+                </ion-icon>
+              </ion-fab-button>
+              <ion-fab-button style="margin: 0px 0 0 10px;" class="btn_fab_size"
+                (click)="call(item.mobilePhone, item.assigneeName)">
+                <ion-icon name="call" class="btn_fab_size__icon">
+                </ion-icon>
+              </ion-fab-button>
+            </ion-fab-list>
+          </ion-fab>
+        </ion-col>
+
+        <ion-col size="2" class="flex_filter">
+          <ion-fab>
+            <ion-fab-button size="small" class="btn_fab_size" (click)='sendMessage()'>
+              <ion-icon name="chatbox" class="btn_fab_size__icon"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-col>
+
+        <ion-col size="4">
+          <div class="avatares">
+            <div class="content">
+              <img src="{{service.url_images}}{{item.photo}}" fallimg="avatar" class="img __border__">
+            </div>
+          </div>
+          <br>
+          <span class="h15 gray">
+            <ion-checkbox style="width: 10px !important;
+              height: 10px !important;" disabled [(ngModel)]="dataSR.confidentialMove"></ion-checkbox> Confidential
+            Move
+          </span><br>
+        </ion-col>
+
+        <ion-col size="8">
+          <span class="h15 gray" *ngIf="!show_name_assignee">Name <span
+              class="h12">{{item.assigneeName}}</span><br></span>
+          <span class="h15 gray" *ngIf="show_name_assignee">Name <span
+              class="h12">{{(item.assigneeName.length>23) ?  (item.assigneeName | slice:0:23)+'..': item.assigneeName}}</span><br></span>
+          <span class="h15 gray">Age <span class="h12">{{ calculateHowOld(item.birth)}}</span></span><br>
+          <span class="h15 gray">Nationality <span class="h12">{{item.homeCountry}}</span></span><br>
+          <span class="h15 gray">Home Country <span class="h12">{{item.homeCountry}}</span></span><br>
+          <span class="h15 gray">Host Country <span class="h12">{{item.homeCountry}}</span></span><br>
+          <span class="h15 gray" *ngIf="!show_name_assignee">E-mail <span class="h12">{{item.email}}</span><br></span>
+          <span class="h15 gray" *ngIf="show_name_assignee">E-mail <span
+              class="h12">{{(item.email.length>23) ?  (item.email | slice:0:23)+'..': item.email}}</span><br></span>
+          <span class="h15 gray" *ngIf="!show_name_assignee">Partner <span
+              class="h12">{{getpartner(dataSR.partnerId)}}</span><br></span>
+          <span class="h15 gray" *ngIf="show_name_assignee">Partner <span
+              class="h12">{{(getpartner(dataSR.partnerId)?.length>23) ?  (getpartner(dataSR.partnerId) | slice:0:23)+'..': getpartner(dataSR.partnerId)}}</span><br></span>
+          <span class="h15 gray">Client <span class="h12">{{getCliente(dataSR.clientId)}}</span></span><br>
+          <span class="h15 gray">Policy type <span class="h12">{{getPolicy(item.policyTypeId)}}</span></span>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-row>
+      <ion-col size="12" style="text-align: end;">
+        <b class="h15 blue" (click)="viewAssineInfo()">Assignee & Family Info</b>
+      </ion-col>
+    </ion-row>
+
+    <br>
+
+    <ion-row>
+      <ion-col size="10">
+        <span class="title_general_black">Appointments</span>
+      </ion-col>
+      <ion-col size="2" class="btn-right">
+      </ion-col>
+    </ion-row>
+
+    <div class="documents" *ngIf="apointments.length > 0">
+      <ion-card>
+        <ion-slides class="app" [options]="slideOptsOne" pager="true">
+          <ion-slide class="card-comments" *ngFor="let item of apointments; let i = index">
+            <ion-row style="text-align:initial; width: 100%;">
+
+              <ion-col size="6">
+                <div class="card" style="flex-direction: column;">
+                  <div style="display: flex; width: 100%;">
+                    <img src="{{service.url_images}}{{item?.avatar_assignee}}" fallimg="avatar" alt="" class="__border__">
+                    <div>
+                      <ion-row>
+                        <ion-col size="12">
+                          <b class="h15 gray">Assignee<br></b>
+                          <p class="h12 top" *ngIf="show_name_assignee">
+                            <br>{{(item.assignee.length>12) ?  (item.assignee | slice:0:12)+'..': item.assignee}}
+                          </p>
+                          <p class="h15 top" *ngIf="!show_name_assignee">
+                            <br>{{item.assignee}}
+                          </p>
+                          <p class="h15 top_ blue"><br>Company</p>
+                        </ion-col>
+                      </ion-row>
+                    </div>
+                  </div>
+
+                  <div style="display: flex; width: 100%;">
+                    <img fallimg="avatar" src="{{service.url_images}}{{item.avatar_supplier}}" alt="" class="__border__">
+                    <div>
+                      <ion-row>
+                        <ion-col size="12">
+                          <b class="h15 gray">Consultant</b><br>
+                          <p class="h12 top" *ngIf="show_name_assignee && item.supplier!=null">
+                            <br>{{(item?.supplier.length>12) ?  (item?.supplier | slice:0:12)+'..': item?.supplier}}
+                          </p>
+                          <p class="h12 top" *ngIf="!show_name_assignee && item.supplier!=null"><br>{{item?.supplier}}
+                          </p>
+                          <br *ngIf="item.supplier == null"><br *ngIf="item.supplier == null">
+                          <p class="h15 _top_ blue" *ngIf="show_name_assignee">
+                            {{(item?.location?.length>10) ?  (item?.location | slice:0:10)+'..': item?.location}}</p>
+                          <p class="h15 _top_ blue" *ngIf="!show_name_assignee">{{item?.location}}</p>
+                        </ion-col>
+                      </ion-row>
+                    </div>
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="6">
+                <div class="options">
+                  <ion-row>
+                    <ion-col size="12" class="icon">
+                      <div style="text-align: end;">
+                        <span class="h15 status">{{item.status ?'Active' : 'Finish'}}&nbsp;<div class="dot"
+                            [ngClass]="{'green': item.status}"></div></span>
+                        <span class="h15" style="color: gray;">Services
+                          <span class="h15">1</span></span><br>
+                        <span class="h15" style="color: gray;" *ngIf="!show_name_assignee">Coord
+                          <span class="h15">{{item.coordinador}}</span><br></span>
+                        <span class="h15" style="color: gray;" *ngIf="show_name_assignee">Coord
+                          <span
+                            class="h15">{{(item?.coordinador?.length>12) ?  (item?.coordinador | slice:0:12)+'..': item.coordinador}}</span><br></span>
+                        <span class="h15" style="color: gray;">Start&nbsp;</span>
+                        <span class="h15">
+                          <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+                          &nbsp;{{item.date | date: 'dd MMM yyy'}}
+                        </span><br>
+                        <span class="h12">
+                          <ion-icon class="icon_" name="time-outline"></ion-icon>
+                          <ion-icon class="icon_" name="triangle"></ion-icon>
+                          <span class="h15"> {{item.startTime}} hrs</span>
+                        </span><br>
+                      </div>
+                      <ion-button class="buttom buttom__btn_login altura_" (click)="startAppoitment(i+1,item)"
+                        *ngIf="item.start == false && item.ended == false">Start</ion-button>
+                      <ion-button class="buttom buttom__btn_blue altura_" (click)="endAppoitment(i+1,item)"
+                        *ngIf="item.start == true && item.ended == false">End</ion-button>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-slide>
+        </ion-slides>
+      </ion-card>
+    </div>
+
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="10">
+        <span class="title_general_black">Services</span>
+      </ion-col>
+    </ion-row>
+
+    <br>
+
+
+    <div class="services">
+      <ion-row>
+        <!--immigration y relocation-->
+        <ion-col size="8" offset="2" *ngIf="!rel && !imm">
+          <ion-segment [(ngModel)]="immRel" (ngModelChange)="geIMREL()">
+            <ion-segment-button [value]="1">
+              Immigration
+            </ion-segment-button>
+            <ion-segment-button [value]="2">
+              Relocation
+            </ion-segment-button>
+          </ion-segment>
+        </ion-col>
+        <!--immigration-->
+        <ion-col size="8" offset="2" *ngIf="imm && !rel">
+          <ion-segment [(ngModel)]="immRel" (ngModelChange)="geIMREL()">
+            <ion-segment-button [value]="1">
+              Immigration
+            </ion-segment-button>
+          </ion-segment>
+        </ion-col>
+        <!--relocation-->
+        <ion-col size="8" offset="2" *ngIf="rel && !imm">
+          <ion-segment [(ngModel)]="immRel" (ngModelChange)="geIMREL()">
+            <ion-segment-button [value]="2">
+              Relocation
+            </ion-segment-button>
+          </ion-segment>
+        </ion-col>
+      </ion-row>
+    </div>
+
+
+    <!--------------------Coordinators-------------------->
+
+
+    <ion-card *ngIf="immRel == 1 && dataSR.immigrationCoodinators?.length > 0">
+      <ion-row>
+        <ion-col size="3">
+          <div class="avatares  __top__">
+            <div class="content">
+              <img src="{{service.url_images}}{{coordinator.photo}}" fallimg="avatar" class=" __border__">
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="5">
+          <span class="h15 gray">Coordinator <br>
+            <span class="h12" *ngIf="!show_name_assignee">{{coordinator?.name}} {{coordinator?.lastName}}
+              {{coordinator?.motherLastName}}</span>
+            <span class="h12" *ngIf="show_name_assignee">{{coordinator?.name}}
+              {{(coordinator?.lastName?.length>15) ?  (coordinator?.lastName | slice:0:15)+'..': coordinator?.lastName}}</span>
+          </span><br>
+          <span class="h15 gray">
+            <ion-checkbox style="width: 10px !important;
+            height: 10px !important;" disabled [(ngModel)]="dataSR.spocImmigration"></ion-checkbox> SPOC
+          </span><br>
+          <!--span class="h11 gray">Country: <br> <b>{{getCountry(coordinator.country)}}</b></span--><br>
+        </ion-col>
+
+
+        <ion-col size="2" class="flex_filter_">
+          <ion-fab>
+            <ion-fab-button size="small" class="btn_fab_size">
+              <ion-icon name="call" class="btn_fab_size__icon"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list style="margin: -10px 51px;" side="start">
+              <ion-fab-button style="margin: 0px 0 0 10px;" class="btn_fab_size"
+                (click)="call(coordinator.phoneNumber, coordinator.name)">
+                <ion-icon name="business" class="btn_fab_size__icon">
+                </ion-icon>
+              </ion-fab-button>
+            </ion-fab-list>
+          </ion-fab>
+        </ion-col>
+        <ion-col size="2" class="flex_filter_">
+          <ion-fab>
+            <ion-fab-button size="small" class="btn_fab_size" (click)="sendMessage()">
+              <ion-icon name="chatbox" class="btn_fab_size__icon"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-col>
+
+      </ion-row>
+    </ion-card>
+
+    <ion-card *ngIf="immRel == 2 && dataSR.relocationCoordinators?.length > 0">
+      <ion-row>
+        <ion-col size="3">
+          <div class="avatares  __top__">
+            <div class="content">
+              <img src="{{service.url_images}}{{coordinator.photo}}" fallimg="avatar" class="img __border__">
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="5">
+
+          <span class="h15 gray">Coordinador <br>
+            <!--span class="h12">{{coordinator.name}} {{coordinator.lastName}} {{coordinator.motherLastName}}</span-->
+            <span class="h12" *ngIf="!show_name_assignee">{{coordinator?.name}} {{coordinator?.lastName}}
+              {{coordinator.motherLastName}}</span>
+            <span class="h12" *ngIf="show_name_assignee">{{coordinator?.name}}
+              {{(coordinator?.lastName.length>5) ?  (coordinator?.lastName | slice:0:15)+'..': coordinator?.lastName}}</span>
+          </span><br>
+          <span class="h15 gray">
+            <ion-checkbox style="width: 10px !important;
+            height: 10px !important;" disabled [(ngModel)]="dataSR.spocImmigration"></ion-checkbox> SPOC
+          </span><br>
+          <!--span class="h15 gray">Country <br>
+            <span class="h12">{{getCountry(coordinator.country)}}</span>
+          </span><br-->
+
+        </ion-col>
+
+
+        <ion-col size="2">
+          <ion-fab>
+            <ion-fab-button size="small" class="btn_fab_size">
+              <ion-icon name="call" class="btn_fab_size__icon"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list style="margin: -10px 51px;" side="start">
+              <ion-fab-button style="margin: 0px 0 0 10px;" class="btn_fab_size"
+                (click)="call(coordinator.phoneNumber, coordinator.name)">
+                <ion-icon name="business" class="btn_fab_size__icon">
+                </ion-icon>
+              </ion-fab-button>
+            </ion-fab-list>
+          </ion-fab>
+        </ion-col>
+        <ion-col size="2">
+          <ion-fab>
+            <ion-fab-button size="small" class="btn_fab_size">
+              <ion-icon name="chatbox" class="btn_fab_size__icon"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-col>
+
+      </ion-row>
+    </ion-card>
+
+    <!--------------------Services---------------------->
+
+    <ion-row>
+      <ion-col size="4">
+        <ion-item class="filter">
+          <ion-label position="floating">Delivered To</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="All" [(ngModel)]="userFilter.deliveredToId">
+            <ion-select-option [value]="''">All</ion-select-option>
+            <ion-select-option *ngFor="let item of deliveryTo" [value]="item.dependentId">{{item.name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="4">
+        <ion-item class="filter">
+          <ion-label position="floating">Status</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="All" [(ngModel)]="userFilter.statusServiceId">
+            <ion-select-option [value]="''">All</ion-select-option>
+            <ion-select-option *ngFor="let item of caStatus" [value]="item.id">{{item.status}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="4">
+        <ion-item class="filter">
+          <ion-label position="floating">Country</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" mode="ios"
+            placeholder="All" [(ngModel)]="userFilters.homeHost">
+            <ion-select-option [value]="3">All</ion-select-option>
+            <ion-select-option [value]="1">Home</ion-select-option>
+            <ion-select-option [value]="2">Host</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+
+    <div *ngIf="userFilters.homeHost == 1">
+      <ion-card *ngFor="let item of services.home | filterBy: userFilter" (click)="switchModal(item,1)">
+        <ion-row>
+          <ion-col size="2">
+            <img src="/assets/icon/imm.svg" *ngIf="immRel == 1" class="avatar">
+            <img src="/assets/icon/relocation.svg" *ngIf="immRel == 2" class="avatar">
+          </ion-col>
+          <ion-col size="10">
+            <span class="name_service">{{item.service_name}}</span><br>
+            <span class="h15 gray" *ngIf="!show_name_assignee">Delivered To <span class="h12">{{item.deliveredTo}} /
+                {{getDelname(item.deliveredToId)}}</span><br></span>
+            <span class="h15 gray" *ngIf="show_name_assignee">Delivered To <span span class="h12"> {{item.deliveredTo}}
+                /
+                {{(getDelname(item.deliveredToId).length>13) ?  (getDelname(item.deliveredToId) | slice:0:13)+'..': getDelname(item.deliveredToId)}}</span><br></span>
+            <span class="h15 gray">Status <span class="h12"
+                *ngIf="item.statusService != null && item.statusService.length > 0">{{item.statusService}}</span></span><br>
+            <span class="h15 gray">Country <span class="h12">{{item.country}}</span></span><br>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+
+    <div *ngIf="userFilters.homeHost == 2">
+      <ion-card *ngFor="let item of services.host | filterBy: userFilter" (click)="switchModal(item,2)">
+        <ion-row>
+          <ion-col size="2">
+            <img src="/assets/icon/imm.svg" *ngIf="immRel == 1" class="avatar">
+            <img src="/assets/icon/relocation.svg" *ngIf="immRel == 2" class="avatar">
+          </ion-col>
+          <ion-col size="10">
+            <span class="name_service">{{item.service_name}}</span><br>
+            <!--span class="h15 gray">Delivered To <span class="h12">{{item.deliveredTo}}</span></span><br-->
+            <span class="h15 gray" *ngIf="!show_name_assignee">Delivered To <span class="h12">{{item.deliveredTo}} /
+                {{getDelname(item.deliveredToId)}}</span><br></span>
+            <span class="h15 gray" *ngIf="show_name_assignee">Delivered To <span> {{item.deliveredTo}} /
+                {{(getDelname(item.deliveredToId).length>13) ?  (getDelname(item.deliveredToId) | slice:0:13)+'..': getDelname(item.deliveredToId)}}</span><br></span>
+            <span class="h15 gray">Status <span class="h12"
+                *ngIf="item.statusService != null && item.statusService.length > 0">{{item.statusService}}</span></span><br>
+            <span class="h15 gray">Country <span class="h12">{{item.country}}</span></span><br>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+
+    <div *ngIf="userFilters.homeHost == 3">
+      <ion-card *ngFor="let item of services.all | filterBy: userFilter" (click)="switchModalAll(item)">
+        <ion-row>
+          <ion-col size="2">
+            <img src="/assets/icon/imm.svg" *ngIf="immRel == 1" class="avatar">
+            <img src="/assets/icon/relocation.svg" *ngIf="immRel == 2" class="avatar">
+          </ion-col>
+          <ion-col size="10">
+            <span class="name_service">{{item.service_name}}</span><br>
+            <span class="h15 gray" *ngIf="!show_name_assignee">Delivered To <span class="h12">{{item.deliveredTo}} /
+                {{getDelname(item.deliveredToId)}}</span><br></span>
+            <span class="h15 gray" *ngIf="show_name_assignee">Delivered To <span span class="h12"> {{item.deliveredTo}}
+                /
+                {{(getDelname(item.deliveredToId).length>13) ?  (getDelname(item.deliveredToId) | slice:0:13)+'..': getDelname(item.deliveredToId)}}</span><br></span>
+            <span class="h15 gray">Status <span class="h12"
+                *ngIf="item.statusService != null && item.statusService.length > 0">{{item.statusService}}</span></span><br>
+            <span class="h15 gray">Country <span class="h12">{{item.country}}</span></span><br>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+
+
+    <!--------------------Activity Items-------------------->
+    <br>
+    <br>
+    <ion-row>
+      <ion-col size="7">
+        <p class="title_general_black">Action Items &nbsp;&nbsp;&nbsp;<b class="purple">{{dataActivityItems.length}}</b>
+        </p><br>
+        <span class="h12 flexdosts" style="margin-top: -20px;">
+          <div class="dot late"></div>&nbsp;Overdue Activity
+        </span>
+      </ion-col>
+      <ion-col size="3" class="flexdosts">
+
+      </ion-col>
+      <ion-col size="2" class="btn-right">
+        <img src="/assets/icon/icon_add.svg" *ngIf="userData.role.id!=3" (click)="addActionItem()" style="height: 100%;"
+          class="btn_size">
+      </ion-col>
+
+      <ion-col size="12" class="flexdosts">
+        <!--div>
+          <span class="h12 flexdosts">
+            <div class="dot late"></div>&nbsp;Overdue Activity
+          </span>
+        </div-->
+      </ion-col>
+
+    </ion-row>
+
+    <div class="activitie" *ngFor="let item of dataActivityItems">
+      <ion-list lines="none">
+        <ion-item-sliding>
+          <ion-item (click)="editActionItem(item.id)">
+            <ion-row style="width: 100%;">
+              <ion-col size="2" style="margin: auto;">
+                <div class="avatares">
+                  <div class="content">
+                    <img src="{{service.url_images}}{{item.avatarTaskFrom.photo}}" fallimg="avatar" class="img ">
+                  </div>
+                </div>
+              </ion-col>
+              <ion-col size="10">
+                <span class="h15 gray">Action Title &nbsp;<span class="h12">{{item.taskDescription}}</span></span><br>
+                <span class="h15 gray">Due Date &nbsp;<ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+                  &nbsp;<span class="h12">{{item.dueDate | date : 'dd MMM yyy'}}</span></span><br>
+                <span class="h15 gray">To &nbsp;<span class="h12">{{item.taskTo}}</span></span><br>
+                <span class="h15 gray">Status &nbsp;<span class="h12">{{item.status}}</span></span><br>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger" (click)="deleteActivitie(item.id)">
+              <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+    </div>
+
+    <br>
+    <br>
+    <!--------------------Activity Reports-------------------->
+    <ion-row>
+      <ion-col size="8">
+        <p class="title_general_black">Activity Reports &nbsp;&nbsp;&nbsp;<b
+            class="purple">{{dataSourceReport.length}}</b></p><br>
+        <div class="flexdosts" style="margin-top:-20px;">
+          <span class="h12 flexdosts">
+            <div class="dot late"></div>&nbsp;Late
+          </span>
+
+          <span class="h12 flexdosts">
+            <div class="dot pending"></div>&nbsp;Pending
+          </span>
+        </div>
+      </ion-col>
+      <ion-col size="2" class="btn-right">
+        <!--img src="/assets/icon/icon_request_time.svg" (click)="rat()" style="height: 100%;" class="btn_size"-->
+      </ion-col>
+      <ion-col size="2" class="btn-right">
+        <img src="/assets/icon/icon_add.svg" (click)="addReport()" style="height: 100%;" class="btn_size">
+      </ion-col>
+
+      <ion-col size="12" class="flexdosts">
+        <!--div>
+          <span class="h12 flexdosts">
+            <div class="dot late"></div>&nbsp;Late
+          </span>
+        </div>
+        <span>&nbsp;</span>
+        <div>
+          <span class="h12 flexdosts">
+            <div class="dot pending"></div>&nbsp;Pending
+          </span>
+        </div-->
+      </ion-col>
+    </ion-row>
+
+    <div class="activitie" *ngFor="let item of dataSourceReport">
+      <ion-list lines="none">
+        <ion-item-sliding>
+          <ion-item (click)="editReport(item)">
+            <ion-row style="text-align:initial; width: 100%;">
+              <ion-col size="2">
+                <div class="avatares altura">
+                  <div class="content">
+                    <img src="/assets/avatar.svg" class="img" fallimg="avatar">
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="5">
+                <span class="h15 gray">Report by</span><br>
+                <span class="h12">{{item.reprortedBy}}</span><br>
+                <span class="h15 color_report">{{item.country}} - {{item.serviceLine}}</span>
+              </ion-col>
+
+              <ion-col size="5" class="align__initial">
+                <ion-row style="width: 100%;">
+                  <ion-col size="12" class="icon">
+                    <span class="h15 gray">Services <span class="h15">{{item.services}}</span></span><br>
+                    <span class="h15 gray">Date &nbsp;<ion-icon name="calendar-clear-outline" class="blue"></ion-icon>
+                      <span class="h15"> {{item.creationDate | date : 'dd MMM yyy'}}</span></span><br>
+                    <span class="h15 gray">Time Used <span class="h15">{{item.totalTime}} hrs</span></span><br>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger">
+              <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+    </div>
+  </div>
+
+</ion-content>

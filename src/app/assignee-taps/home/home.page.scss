@@ -1,0 +1,326 @@
+$purple-light: #9D3292;
+
+$purple-dark: #56004E;
+
+$blue: #4435A6;
+
+$black: rgba(0, 0, 0, 0.85);
+
+$ligth: #f7f8fa;
+
+ion-content {
+    --background: white !important;
+}
+
+@media screen and (min-width: 1px) and (max-width: 767px) {
+    .h5 {
+        font-weight: bold;
+        font-size: 20px;
+    }
+}
+
+.welcome {
+    color: $purple-light;
+    padding-top: 25px;
+}
+
+.company {
+    color: gray !important;
+    margin: 0 0 -22px;
+}
+
+.option {
+    width: 100%;
+    border-radius: 20%;
+    padding-top: 50%;
+    /* 1:2 Aspect Ratio */
+    position: relative;
+    border-radius: 30px;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.title {
+    color: $blue;
+}
+
+.end_ {
+    text-align: end;
+    right: 6%;
+}
+
+.appointments {
+    width: 100%;
+    padding: 5%;
+    background: #f7f8fa !important;
+    border-radius: 25px 25px 0 0;
+
+    .title {
+        color: #4435A6;
+        width: 85%;
+        font-weight: bold;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+
+    ion-card {
+        border-radius: 15px;
+        padding: 5px;
+        color: #000;
+        margin: 20px 6px;
+    }
+}
+
+.padding {
+
+    padding: 15px 5% 10px 5%;
+
+    .box {
+        width: 100%;
+        border-radius: 20% !important;
+        padding-top: 100%;
+        /* 1:1 Aspect Ratio */
+        position: relative;
+        /* If you want text inside of it */
+
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: gray;
+
+            .icon {
+                position: absolute;
+                top: 11px;
+                left: 12%;
+                width: 45px;
+            }
+
+            .text {
+                position: absolute;
+                color: white;
+                left: 44%;
+                top: 12%;
+            }
+
+            .img {
+                height: 100%;
+                width: 100%;
+            }
+
+        }
+    }
+
+    .boxdos {
+        width: 100%;
+        padding-top: 50%;
+        border-radius: 29px;
+        /* 1:1 Aspect Ratio */
+        position: relative;
+        /* If you want text inside of it */
+
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+
+            .icon {
+                position: absolute;
+                top: 11px;
+                left: 5%;
+                width: 45px;
+            }
+
+            .text {
+                position: absolute;
+                color: white;
+                left: 20%;
+                top: 12%;
+            }
+
+            .img {
+                height: 100%;
+                width: 100%;
+            }
+
+        }
+    }
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        margin-top: 10px;
+    }
+
+    .options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        ion-icon {
+            color: $purple-light;
+        }
+
+        img {
+            width: 30px;
+        }
+    }
+}
+
+.blue {
+    color: $blue;
+    font-style: italic;
+}
+
+.status {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    span {
+        color: gray;
+    }
+
+    .dot {
+        height: 5px;
+        width: 5px;
+        border-radius: 100%;
+        background: red;
+    }
+
+    .green {
+        background: green !important;
+    }
+}
+
+.icon {
+    text-align: end;
+}
+
+ion-searchbar {
+    --background: white;
+    --icon-color: white;
+
+}
+
+ion-icon {
+    color: $purple-light;
+}
+
+.altura {
+    height: 30px;
+}
+
+button {
+    mat-icon {
+        color: $blue;
+    }
+}
+
+.mat-mini-fab {
+    background: $blue;
+
+    mat-icon {
+        color: white;
+    }
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex_ {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#search_icon {
+    position: absolute;
+    top: 25px;
+    font-size: 20px;
+    right: 25px;
+}
+
+.gray {
+    color: rgba($color: #000000, $alpha: 0.5);
+}
+
+.searchbar-search-icon.sc-ion-searchbar-ios {
+    right: 5px !important;
+}
+
+.buttom {
+    text-transform: none;
+    border-radius: 18px;
+    width: 70%;
+
+    &__btn_login {
+        background: $purple-light;
+
+        &:hover {
+            background: $purple-dark;
+        }
+    }
+
+    &__btn_blue {
+        background: $blue;
+
+        &:hover {
+            background: $purple-light;
+        }
+    }
+}
+
+.white {
+    background: white;
+    border-radius: 40px;
+    margin: 0 0 0 15px;
+}
+
+.top {
+    margin-top: -20px;
+}
+
+.top_ {
+    margin-top: -33px;
+}
+
+.btn_size_ {
+    width: 31px !important;
+    height: 31px !important;
+}
+
+.margin_derecho{
+  right: 3%;
+}
+
+.ios_{
+    --background: #9D3292;
+    --color: white;
+    height: 20px;
+}

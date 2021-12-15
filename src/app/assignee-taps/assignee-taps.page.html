@@ -1,0 +1,33 @@
+<ion-tabs mode="ios">
+  <ion-tab-bar slot="bottom" *ngIf="!_services.footerHidden">
+    <ion-tab-button tab="home">
+      <ion-icon name="home-outline" class="normal"></ion-icon>
+      <ion-icon name="home" class="active"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="chat-assignado" *ngIf="userData.role.id == 4" (click)="hide = false">
+      <ion-icon name="chatbox-outline" class="normal"></ion-icon>
+      <ion-icon name="chatbox" class="active"></ion-icon>
+      <ion-badge class="notificacion"  *ngIf="hide">{{numberChat}}</ion-badge>
+    </ion-tab-button>
+
+    <ion-tab-button tab="chat-premier" *ngIf="userData.role.id != 4" (click)="chatPremier = false">
+      <ion-icon name="chatbox-outline" class="normal"></ion-icon>
+      <ion-icon name="chatbox" class="active"></ion-icon>
+      <ion-badge class="notificacion"  *ngIf="chatPremier">{{table_contacts.length}}</ion-badge>
+    </ion-tab-button>
+
+    <ion-tab-button tab="notifications" (click)="hideNotificacion = false">
+      <ion-icon name="notifications-outline" class="normal"></ion-icon>
+      <ion-icon name="notifications" class="active"></ion-icon>
+      <ion-badge class="notificacion"  *ngIf="hideNotificacion">{{ca_notification}}</ion-badge>
+    </ion-tab-button>
+
+    <ion-tab-button tab="help-settings">
+      <ion-icon name="grid-outline" class="normal"></ion-icon>
+      <ion-icon name="grid" class="active"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+<!--div class="sombra1"></div>
+<div class="sombra2"></div-->

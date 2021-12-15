@@ -1,0 +1,64 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Filters</p>
+    <img src="/assets/icon/group_2_.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Notification Type</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Notification Type" [(ngModel)]="filter_data.notificationType" (ngModelChange)="searchData()">
+            <ion-select-option *ngFor="let data of ca_notificationType" [value]="data.id">{{data.type}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Service Record</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Service Record" [(ngModel)]="filter_data.serviceRecord" (ngModelChange)="searchData()">
+            <ion-select-option *ngFor="let data of ca_SR" [value]="data.id">{{data.numberServiceRecord}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-label position="floating" style="color: gray;
+        font-size: 11px !important;">  Archived </ion-label>
+        <ion-item lines="none">
+          <ion-checkbox [(ngModel)]="filter_data.archive"  (ngModelChange)="filteringServiceRecordTable();"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <mat-form-field appearance="legacy">
+          <mat-label style="color: gray;
+          font-size: 11px !important;">Date Range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate [(ngModel)]="dates.dateRange1">
+            <input matEndDate [(ngModel)]="dates.dateRange2" (ngModelChange)="filteringServiceRecordTable();">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker" style="font-size: 20px;">
+            <mat-icon matDatepickerToggleIcon style="color: #4435A6;">calendar_today</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-date-range-picker touchUi #picker></mat-date-range-picker>
+        </mat-form-field>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row class="bottom"> 
+      <ion-col size="6" offset="2.5"> 
+        <ion-button class="buttom_ buttom__btn_login" (click)="save();">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

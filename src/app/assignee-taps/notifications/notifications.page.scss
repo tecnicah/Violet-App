@@ -1,0 +1,354 @@
+$purple-light: #9D3292;
+
+$purple-dark: #56004E;
+
+$blue: #4435A6;
+
+$black: rgba(0, 0, 0, 0.85);
+
+$ligth: rgba(0, 0, 0, 0.10);
+
+ion-content {
+    --background: rgb(221, 221, 221);
+}
+
+.header {
+    background-image: url("/assets/backgrounds/banner_morado.svg");
+    background-position: top;
+    background-size: cover;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    justify-content: space-between;
+    padding: 10%;
+
+    ion-icon {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: -15px;
+        color: #ffffff;
+    }
+
+    .img {
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 80%;
+        }
+    }
+
+    p {
+        color: #ffffff;
+    }
+
+    ion-back-button {
+        color: white;
+    }
+}
+
+.headergray {
+    width: 100%;
+    padding: 15px 5% 10px 5%;
+    background: rgb(221, 221, 221);
+    border-radius: 25px 25px 0 0;
+    margin-top: -24px;
+
+    ::before {
+        content: " ";
+    }
+}
+
+.appointments {
+    width: 100%;
+    padding: 15px 5% 10px 5%;
+    background: rgb(221, 221, 221);
+    border-radius: 25px 25px 0 0;
+
+    .title-edit {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .title {
+        color: $blue;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+
+    ion-card {
+        border-radius: 15px;
+        padding: 15px;
+        color: #000;
+        margin: 10px 0 10px 0;
+    }
+}
+
+.purple {
+    color: $purple-light;
+}
+
+ion-toggle {
+    --background: #9D3292;
+    --background-checked: #9D3292;
+
+    --handle-background: white;
+    --handle-background-checked: white;
+}
+
+.buttom {
+    text-transform: none;
+    border-radius: 18px;
+    width: 100%;
+
+    &__btn_login {
+        background: $purple-light;
+
+        &:hover {
+            background: $purple-dark;
+        }
+    }
+
+    &__btn_blue {
+        background: $blue;
+
+        &:hover {
+            background: $purple-light;
+        }
+    }
+}
+
+ion-item {
+    margin: 0 0 0 -20px;
+}
+
+.options {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nameassignee {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+.avatar {
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.gray {
+    color: gray;
+}
+
+b {
+    font-weight: bold;
+    color: black;
+}
+
+.blue {
+    color: $blue;
+}
+
+.services {
+    left: auto;
+    right: auto;
+    width: 100%;
+    margin: 25px 0;
+
+    #group {
+        position: relative;
+        margin: 10px auto;
+        background: #ffffff;
+        border-radius: 30px;
+        width: 300px;
+    }
+
+    #group:after {
+        content: " ";
+        position: absolute;
+        z-index: 1;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        border-radius: 5px;
+    }
+
+    .switch {
+        position: relative;
+        border: 0;
+        padding: 0;
+        width: 300px;
+        font-family: lato;
+        font-weight: bold;
+        font-size: 12px;
+        color: $blue;
+    }
+
+
+
+    .switch input {
+        position: absolute;
+        opacity: 0;
+    }
+
+    .switch label {
+        position: relative;
+        z-index: 2;
+        float: left;
+        width: 50%;
+        margin-top: 2px;
+        padding: 5px 0 3px 0;
+        text-align: center;
+        color: $blue;
+        cursor: pointer;
+        transition: color 0s ease .1s;
+    }
+
+    .switch input:checked+label {
+        color: #ffffff;
+    }
+
+    .switch input:focus+label {
+        outline: none;
+    }
+
+    .switch .switch-button {
+        clear: both;
+        position: absolute;
+        top: -1px;
+        left: 0%;
+        z-index: 1;
+        width: 50%;
+        height: 100%;
+        margin: 2px;
+        background-color: $blue;
+        border-radius: 30px;
+        transition: all .3s ease-out;
+    }
+
+    .switch .switch-button:after {
+        content: " ";
+        position: absolute;
+        z-index: 1;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        border-radius: 3px;
+    }
+
+    .switch input:last-of-type:checked~.switch-button {
+        left: 50%
+    }
+}
+
+.filter {
+    background: white;
+    border-radius: 30px;
+    margin: 0 0 0 5px;
+    padding: 0 0 0 11px;
+}
+
+.activitie {
+    margin: 10px 0 10px 0;
+
+    ion-item-sliding {
+        border-radius: 15px;
+        //padding: 5px;
+        color: #000;
+        background: white;
+    }
+
+    ion-list{
+        background: transparent;
+    }
+
+    ion-item{
+        margin: 0;
+        padding: 5px;
+        background: white;
+    }
+
+}
+
+
+.dot{
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+}
+ .late{
+     background: #ffe0e0;
+ }
+
+ .pending{
+     background: #fff7d3;
+ }
+
+ .flexdosts{
+    display: flex;
+    align-items: center;
+ }
+
+ .iconslot{
+     color: white;
+     font-size: 40px;
+ }
+
+.sizeletter{
+  font-size: 10px !important;
+}
+
+.status{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    span{
+        color: gray;
+    }
+
+    .dot{
+        height: 5px;
+        width: 5px;
+        border-radius: 100%;
+        background: red;
+    }
+
+    .green{
+        background: green !important;
+    }
+}
+
+
+ion-searchbar{
+    --background: white;
+    --icon-color: white;
+    
+}
+
+ion-icon{
+    color: $purple-light;
+}
+
+#search_icon{
+    position: absolute;
+    top: 25px;
+    font-size: 20px;
+    right: 25px;
+}

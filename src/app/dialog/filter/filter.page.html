@@ -1,0 +1,114 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Filters</p>
+    <img src="/assets/icon/group_2_.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Country</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Country" [(ngModel)]="filter_data.country"
+          (ngModelChange)="getcity(); getSupplierPartner(); filteringServiceRecordTable();">
+            <ion-select-option *ngFor="let item of country_catalogue;" [value]="item.id">
+              {{ item.name }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">City</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="City" [(ngModel)]="filter_data.city"
+          (ngModelChange)="getSupplierPartner(); filteringServiceRecordTable();" [disabled]="city_catalogue.length == 0">
+            <ion-select-option *ngFor="let item of city_catalogue;" [value]="item.id">
+              {{ item.city }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Service Line</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Service Line" [(ngModel)]="filter_data.serviceLine"
+          (ngModelChange)=" getSupplierPartner(); getCoordinator(); filteringServiceRecordTable();">
+            <ion-select-option *ngFor="let item of caServiceLine" [value]="item.id">{{item.serviceLine}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <mat-form-field appearance="legacy">
+          <mat-label>Date Range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate [(ngModel)]="dates.start">
+            <input matEndDate [(ngModel)]="dates.end" (ngModelChange)="filteringServiceRecordTable();">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker" style="font-size: 20px;">
+            <mat-icon matDatepickerToggleIcon style="color: #4435A6;">calendar_today</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-date-range-picker touchUi #picker></mat-date-range-picker>
+        </mat-form-field>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Partner</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Partner" [(ngModel)]="filter_data.partner"
+          (ngModelChange)="getClient(); filteringServiceRecordTable();">
+            <ion-select-option *ngFor="let item of parther_catalogue;" [value]="item.id">
+              {{ item.coordinator }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Client</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Client" [(ngModel)]="filter_data.client"
+          (ngModelChange)=" getCoordinator(); filteringServiceRecordTable();" [disabled]="client_catalogue.length == 0">
+            <ion-select-option *ngFor="let item of client_catalogue;" [value]="item.id">
+              {{ item.name }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Coordinator</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Coordinator" [(ngModel)]="filter_data.coordinator"
+          (selectionChange)="filteringServiceRecordTable();" [disabled]="coordinator_catalogue.length == 0">
+            <ion-select-option *ngFor="let item of coordinator_catalogue;" [value]="item.id">
+              {{ item.coordinator }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Supplier Partner</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Supplier Partner" [(ngModel)]="filter_data.supplier" [disabled]="supplier_catalogue.length == 0"
+          (selectionChange)="filteringServiceRecordTable()">
+            <ion-select-option *ngFor="let item of supplier_catalogue;" [value]="item.id">
+              {{ item.comercialName }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    
+    </ion-row>
+
+    <ion-row class="bottom"> 
+      <ion-col size="6" offset="2.5"> 
+        <ion-button class="buttom_ buttom__btn_login" (click)="save();">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

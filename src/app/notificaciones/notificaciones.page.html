@@ -1,0 +1,14 @@
+<ion-content class="content">
+  <div class="content">
+    <div class="close">
+      <mat-icon (click)="cancel()">close</mat-icon>
+    </div>
+    <p class="title_">New Notification</p>
+    <p class="desccription">{{data_show.title}}</p>
+    <p class="desccription">{{data_show.body}}</p>
+    <div class="footer footer_aux">
+      <ion-button class="cancel size_btn" (click)="cancel()">Cancel</ion-button>
+      <ion-button class="confirm size_btn" (click)="confirm()">Go</ion-button>
+    </div>
+  </div>
+</ion-content>

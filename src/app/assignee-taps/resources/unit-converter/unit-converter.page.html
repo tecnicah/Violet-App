@@ -1,0 +1,69 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': service.padingios}">
+   
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Unit Converter</p>
+    <img src="/assets/icon/bot_n_converter.svg" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Unit Converter</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/bot_n_converter.svg" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="Scroll($event)">
+  <div>
+    <ion-row>
+      <ion-col size="11" offset="1">
+        <span class="h5">Unit Converter</span> <br>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5" offset="1" class="ion-text-center ion-margin-top">
+        <ion-item >
+          <ion-label position="floating">Value</ion-label>
+          <ion-input type="tel" [(ngModel)]="valueUser"  min="1" (ngModelChange)="getUnitConverter()">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="1" class="ct">
+        <span class="h8 span-detail ion-text-center ion-margin-top"> = </span>
+      </ion-col>
+      <ion-col size="5" class="ion-text-center ion-margin-top ct ">        
+        <span class="h8 "><b class="span-detail">{{resultado}} {{unitConvert}}</b></span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <!-- valores de cambio  -->
+      <ion-col size="5" offset="1" class="ion-text-center ion-margin-top ">
+        <ion-item >
+            <ion-label position="floating">Unit</ion-label>
+            <ion-select interface="action-sheet" mode="ios"
+              placeholder="mts" [(ngModel)]="unitUser1" (ngModelChange)="getUnitConverter()">
+              <ion-select-option *ngFor="let item of uniMedida" [value]="item.name">
+                {{item.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+      </ion-col>      
+      <ion-col size="5" class="ion-text-center ion-margin-top ">
+        <ion-item >
+            <ion-label position="floating">Unit</ion-label>
+            <ion-select interface="action-sheet" mode="ios"
+              placeholder="mts" [(ngModel)]="unitConvert" (ngModelChange)="getUnitConverter()">
+              <ion-select-option *ngFor="let item of uniMedida" [value]="item.name">
+                {{item.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+      </ion-col>    
+    </ion-row>
+  </div>
+
+</ion-content>

@@ -1,0 +1,65 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': _services.padingios}">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Emergency Contact</p>
+    <img src="/assets/icon/group_2.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments">
+    <ion-row>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Contact Name</ion-label>
+          <ion-input [(ngModel)]="data_.contactName"></ion-input>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Relation Ship</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="Relation Ship" [(ngModel)]="data_.relationship">
+            <ion-select-option *ngFor='let item of ca_relation' [value]='item.id'>{{item.relationship}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Phone Number</ion-label>
+          <ion-input [(ngModel)]="data_.phoneNumber"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Home Number</ion-label>
+          <ion-input [(ngModel)]="data_.homeNumber"></ion-input>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Home Number</ion-label>
+          <ion-input [(ngModel)]="data_.location"></ion-input>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom buttom__btn_login" (click)="save();">Save</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+</ion-content>

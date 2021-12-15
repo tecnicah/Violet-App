@@ -1,0 +1,104 @@
+<ion-header mode="ios">
+  <div class="header">
+    <!--ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Availability</p>
+    <img src="/assets/icon/calendario.svg" style="width: 45px;" alt=""-->
+    <ion-row class="ancho_full">
+      <ion-col size="2" class="col_header" (click)="back()">
+        <ion-back-button mode="ios" text=""></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="col_header">
+        <p class="h5">Availability</p>
+      </ion-col>
+      <ion-col size="2" class="col_header">
+        <img src="/assets/icon/calendario.svg" style="width: 45px;" alt="">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+  <div class="appointments">
+    <br>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div class="time size_" style="display: flex; justify-content: center;">
+        08:00 - 12:00
+        <div class="circuloMorning" style="margin: 5px;"></div>
+      </div>
+      <div class="time size_" style="display: flex; justify-content: center;">
+        12:00 - 16:00
+        <div class="circuloMidday" style="margin: 5px;"></div>
+      </div>
+      <div class="time size_" style="display: flex; justify-content: center;
+      justify-content: center;">
+        16:00 - 20:00 
+        <div class="circuloafternoon" style="margin: 5px;"></div>
+      </div>
+    </div>
+
+    <br>
+    
+    <div class="mat-elevation-z5" style="padding: 10px 10px 10px 10px;">
+      <div class="row text-center">
+        <div class=" header_calendar">
+          <div style="text-align: initial; margin: auto 0 auto 15px;">
+            <br>
+            <div class="btn-group" style="display: flex; justify-content: space-between;">
+              <div id="month" class="btn  color_button" (click)="[setView(CalendarView.Month), colorBtn('month')]"
+                [class.active]="view === CalendarView.Month">
+                Month
+              </div>
+              <div id="week" class="btn  color_button" (click)="[setView(CalendarView.Week), colorBtn('week') ]"
+                [class.active]="view === CalendarView.Week">
+                Week
+              </div>
+              <div id="day" class="btn  color_button" (click)="[setView(CalendarView.Day), colorBtn('day')]"
+                [class.active]="view === CalendarView.Day">
+                Day
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+          <div style="display: flex; margin: auto; justify-content: center;">
+            <div mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()">
+              <mat-icon style="color:#9d3292;" class="browser">arrow_back_ios</mat-icon>
+            </div>
+
+            <h3 class="text">{{ viewDate | date: 'EEEE, dd MMM yyy' }}</h3>
+
+            <div mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+              <mat-icon style="color:#9d3292;" class="browser">arrow_forward_ios</mat-icon>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <br />
+
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+          (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
+          (beforeViewRender)="updateCalendarEvents($event)">
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)" (beforeViewRender)="updateCalendarEvents($event)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)" (beforeViewRender)="updateCalendarEvents($event)">
+        </mwl-calendar-day-view>
+      </div>
+      <br>
+      <br>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,156 @@
+$purple-light: #9D3292;
+
+$purple-dark: #56004E;
+
+$blue: #4435A6;
+
+$black: rgba(0, 0, 0, 0.85);
+
+$ligth: rgba(0, 0, 0, 0.10);
+
+ion-content{
+    --background: rgb(221, 221, 221);
+}
+
+.header {
+    background-image: url("/assets/backgrounds/banner_morado.svg");
+    background-position: top;
+    background-size: cover;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    justify-content: space-between;
+    padding: 10%;
+
+    p{
+        color: #ffffff;
+    }
+
+    ion-back-button{
+        color: white;
+    }
+
+    ion-icon {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: -15px;
+    }
+}
+
+.headergray{
+    width: 100%;
+    padding: 15px 5% 10px 5%;
+    background: rgb(221, 221, 221);
+    border-radius: 25px 25px 0 0;
+    margin-top: -23px;
+    ::before{
+        content: " ";
+    }
+}
+
+.appointments {
+    width: 100%;
+    padding: 0px 5% 10px 5%;
+    background: rgb(221, 221, 221);
+
+    .title-edit{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .title {
+        color: $blue;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+
+    ion-card {
+        border-radius: 15px;
+        padding: 15px;
+        color: #000;
+    }
+}
+
+.box {
+    width: 100%;
+    border-radius: 20%;
+    padding-top: 100%;
+    /* 1:1 Aspect Ratio */
+    position: relative;
+    /* If you want text inside of it */
+
+    .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 100%;
+        background-color: gray;
+
+        .img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .redondo{
+            border-radius: 100%;
+        }
+
+    }
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-datepicker-toggle{
+    color: $blue;
+}
+
+.buttom {
+    text-transform: none;
+    border-radius: 18px;
+    color: #ffffff;
+
+    &__btn_document {
+        background: $blue;
+        width: 120px;
+        height: 25px;
+    }
+
+    &__btn_login{
+        background: $purple-light;
+        width: 100%;
+        &:hover{
+            background: $purple-dark;
+        }
+    }
+}
+
+ion-item{
+    --background: transparent;
+}
+
+ion-card{
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ion-icon{
+        color: $purple-light;
+        font-size: 20px !important;
+    }
+
+}
+
+.displaynone{
+    display: none;
+}

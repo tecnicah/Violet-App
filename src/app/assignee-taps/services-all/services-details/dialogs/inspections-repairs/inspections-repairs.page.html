@@ -1,0 +1,200 @@
+<ion-header mode="ios">
+  <div class="header">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">Inspections & Repairs</p>
+    <img src="/assets/icon/relocation_services.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="7">
+        <span class="h14">Inspections</span>
+      </ion-col>
+      <ion-col size="3" class="flexdosts"></ion-col>
+      <ion-col size="2">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;" (click)="addInspection()">
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="activitie" *ngFor="let item of data_inspection; let i = index">
+    <ion-list lines="none">
+      <ion-item-sliding>
+        <ion-item>
+          <ion-row style="width: 100%">
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label style="color: gray;" class="h7" position="floating">Initial Inspection Date</ion-label><br>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="item.initialInspectionDate">
+                </ion-datetime>
+                <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label style="color: gray;" class="h7" position="floating">Final Inspection Date</ion-label><br>
+                <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="item.finalInspectionDate">
+                </ion-datetime>
+                <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+        </ion-item>
+        <ion-item-options>
+          <ion-item-option color="danger">
+            <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+
+  <div class="appointments">
+    <ion-row>
+      <ion-col size="7">
+        <span class="h14">Repairs</span>
+      </ion-col>
+      <ion-col size="3" class="flexdosts"></ion-col>
+      <ion-col size="2" (click)="addRepairs()">
+        <img src="/assets/icon/icon_add.svg" style="height: 100%;">
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="activitie">
+    <div class="margin-bottom" *ngFor="let item of data_repairs; let i = index">
+      <ion-list lines="none">
+        <ion-item-sliding>
+          <ion-item style="margin: -43px -30px -18px -17px;">
+            <mat-accordion multi style="width: 100%;">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <ion-row style="width: 100%;">
+                      <ion-col size="12">
+                        <ion-item>
+                          <ion-label position="floating">Repair Type</ion-label>
+                          <ion-select interface="action-sheet" mode="ios" [(ngModel)]="item.repairType">
+                            <ion-select-option *ngFor="let item of ca_repairType" [value]="item.id">{{item.repairType}}
+                            </ion-select-option>
+                          </ion-select>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-label position="floating">Supplier Partner</ion-label>
+                        <ion-select interface="action-sheet" mode="ios" [(ngModel)]="item.supplierPartner">
+                          <ion-select-option *ngFor="let item of SupplierCompany" [value]="item.id">
+                            {{item.comercialName}}
+                          </ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-col size="6">
+                      <ion-item>
+                        <ion-label style="color: gray;" class="h7" position="floating">Repair Start Date</ion-label><br>
+                        <ion-datetime displayFormat="DD MMM YYYY" mode="ios" [(ngModel)]="item.repairStartDate">
+                        </ion-datetime>
+                        <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-col size="6"></ion-col>
+
+                    <ion-col size="6">
+                      <ion-item>
+                        <ion-label position="floating">Total Cost Of Repair</ion-label>
+                        <ion-input type="number" [(ngModel)]="item.totalDays"></ion-input>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-col size="6">
+                      <ion-item>
+                        <ion-label position="floating">Currency</ion-label>
+                        <ion-select interface="action-sheet" mode="ios" [(ngModel)]="item.currency">
+                          <ion-select-option *ngFor="let item of ca_currency" [value]="item.id">
+                            {{item.currency}}
+                          </ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-col size="12">
+                      <ion-item class="ion-textarea">
+                        <ion-textarea rows="4" maxlength="300" placeholder="Comment" [(ngModel)]="item.comments"></ion-textarea>
+                      </ion-item>
+                    </ion-col>
+
+
+                    <ion-col size="7" style="margin-top: 10px;">
+                      <span class="h14">Service Documents <b class="purple"> {{item.documentRepairs.length}}</b></span>
+                    </ion-col>
+                    <ion-col size="3" class="flexdosts"></ion-col>
+                    <ion-col size="2">
+                      <img src="/assets/icon/icon_add.svg" style="height: 100%;" (click)="addDocument(item.id, i)">
+                    </ion-col>
+
+                  </ion-row>
+
+                  <div class="activitie" *ngFor="let doc of item.documentRepairs; let d = index">
+                    <ion-list lines="none">
+                      <ion-item-sliding>
+                        <ion-item>
+                          <ion-row class="width">
+                            <ion-col size="3">
+                              <img src="/assets/icon/document_2.svg" class="avatar">
+                            </ion-col>
+                            <ion-col size="9">
+                              <span class="h9">Document Type</span><br>
+                              <span class="h9 gray">
+                                <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Uploaded
+                                <span class="black">{{doc.createdDate | date: 'dd MMM yyyy'}}</span>
+                              </span><br>
+                              <span class="h9 gray">
+                                <ion-icon name="calendar-clear-outline" class="blue"></ion-icon>Expiration
+                                <span class="black">{{doc.createdDate | date: 'dd MMM yyyy'}}</span>
+                              </span>
+                            </ion-col>
+                          </ion-row>
+                        </ion-item>
+                        <ion-item-options (click)="deleteDocument(item.id, i , d)">
+                          <ion-item-option color="danger">
+                            <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+                          </ion-item-option>
+                        </ion-item-options>
+                      </ion-item-sliding>
+                    </ion-list>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </ion-item>
+          <ion-item-options (click)="deleteRepair(item.id, i)">
+            <ion-item-option color="danger">
+              <ion-icon slot="bottom" name="trash" class="iconslot"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom_ buttom__btn_login" (click)="save();">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

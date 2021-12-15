@@ -1,0 +1,125 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': _services.padingios}">
+    <ion-back-button mode="ios" text="" (click)="back()" *ngIf="!grupo && !create"></ion-back-button>
+    <ion-back-button mode="ios" text="" (click)="grupo = false" *ngIf="grupo && !create"></ion-back-button>
+
+    <ion-back-button mode="ios" text="" (click)="createfalse()" *ngIf="create"></ion-back-button>
+    <p class="h5 color_">New Chat</p>
+    <span class="h7 blue" *ngIf="grupo" (click)="create = true">Create</span>
+    <span class="h7 blue" *ngIf="!grupo">&nbsp;</span>
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+  <div class="appointments" *ngIf="!create">
+    <ion-row>
+      <ion-col size="12" class="padding">
+        <ion-searchbar placeholder="" mode="ios" [(ngModel)]="userFilter.name"></ion-searchbar>
+        <ion-icon name="search-outline" id="search_icon"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-card *ngIf="!grupo" matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="grupo = true">
+      <ion-row style="width: 100%;">
+        <ion-col size="2" class="flex-img">
+          <img src="./assets/avatar.svg" alt="">
+        </ion-col>
+
+        <ion-col size="8">
+          <p class="h9 grupo">New Group</p>
+        </ion-col>
+
+        <ion-col size="2" class="flex-img">
+          <img src="/assets/icon/icon_add.svg" class="btn_size">
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-row *ngIf="grupo">
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Group Name</ion-label>
+          <ion-input [(ngModel)]="newMessageToSend.groupName"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <div *ngIf="!grupo" class="users">
+      <ion-card *ngFor="let item of caUsers" (click)="selectUser(item.id)" matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="grupo = true">
+        <ion-row style="width: 100%;">
+          <ion-col size="2" class="flex-img">
+            <img src="{{_services.url_images}}{{item.avatar}}" fallimg="avatar" alt="">
+          </ion-col>
+
+          <ion-col size="8">
+            <p class="h15" *ngFor="let user of getDetails(item.user); let i = index"
+              [ngClass]="{'black': i > 0,'h12': i > 0, 'gray': i == 0}">
+              {{user}}
+            </p>
+          </ion-col>
+
+          <ion-col size="2" class="flex-img">
+
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+
+    <div *ngIf="grupo" class="users">
+
+      <ion-row>
+        <ion-col size="3" *ngFor="let item of newMessageToSend.userList" style="text-align: center;">
+          <img src="./assets/avatar.svg" alt="">
+          <p class="h12"><b>{{getNameUser(item)}}</b></p>
+        </ion-col>
+      </ion-row>
+
+      <ion-card *ngFor="let item of caUsers; let i = index" (click)="selectUserGroup(item.id, i)" matRipple matRippleColor="rgba(158, 53, 149, 0.5)" (click)="grupo = true">
+        <ion-row style="width: 100%;">
+          <ion-col size="2" class="flex-img">
+            <img src="./assets/avatar.svg" alt="">
+          </ion-col>
+
+          <ion-col size="8">
+            <p class="h15" *ngFor="let user of getDetails(item.user); let i = index"
+              [ngClass]="{'black': i > 0,'h12': i > 0, 'gray': i == 0}">
+              {{user}}
+            </p>
+          </ion-col>
+
+          <ion-col size="2" class="flex-img">
+            <ion-checkbox [checked]='item.checke'></ion-checkbox>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+
+
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="create">
+
+  <ion-row>
+    <ion-col size="2">
+      <img src="../../../assets/icon/icon_add.svg" class="more" (click)="filesUpload()">
+    </ion-col>
+
+    <ion-col size="10">
+      <div class="messages">
+        <ion-textarea rows="1" [(ngModel)]="newMessageToSend.message"></ion-textarea>
+        <img src="../../../assets/icon/send.svg" class="send" (click)="send()">
+      </div>
+    </ion-col>
+  </ion-row>
+
+</ion-footer>
+
+<ngx-file-drop class="file-drop" style="display: none;" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+  (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" [multiple]="false">
+  <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+    Drag and Drop or
+    <p class="browser" id="ndm" (click)="openFileSelector()">Browse File</p>
+  </ng-template>
+</ngx-file-drop>

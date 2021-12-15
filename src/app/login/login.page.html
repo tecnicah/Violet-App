@@ -1,0 +1,226 @@
+<!--/logo/logo.svg ion-content class="principal_container">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="logo">
+        <img src="assets/logo/logo.svg" alt="">
+      </ion-col>
+    </ion-row>
+
+    <mat-tab-group headerPosition="below">
+      <mat-tab label="Login"> 
+        <ion-row>
+          <ion-col size="12" size-md="8" offset-md="2" size-xl="8" offset-xl="2">
+            <div class="h5 text__login">
+              Login
+            </div>
+          </ion-col>
+    
+          <ion-col size="4" size-md="3">
+    
+          </ion-col>
+        </ion-row>
+        <form [formGroup]="loginform" onsubmit="document.getElementById('login')">
+          <ion-row>
+            <ion-col size="12"  size-md="8" offset-md="2" size-xl="8" offset-xl="2" class="container_input">
+              <div>
+                <ion-row>
+                  <ion-col size="12">
+                    <mat-label>E-mail</mat-label>
+                    <mat-form-field>
+                      <input type="email" matInput formControlName="email" required>
+                      <mat-icon matSuffix>mail_outline</mat-icon>
+                      <mat-error>{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                  </ion-col>
+    
+                  <ion-col size="12" >
+                    <mat-label>Password</mat-label>
+                    <mat-form-field>
+                      <input type="{{type}}" matInput formControlName="password" required (keyup)="onKey($event)">
+                      <mat-icon matSuffix *ngIf="type === 'password'" (click)="onClick()">visibility</mat-icon>
+                      <mat-icon matSuffix *ngIf="type === 'text'" (click)="onClick()">visibility_off</mat-icon>
+                      <mat-error *ngIf="loginform.get('password').hasError('required')">Password required</mat-error>
+                    </mat-form-field>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6" offset="3" size-md="4" offset-md="4">
+              <ion-button id="login" class="buttom buttom__btn_login" [ngClass]="{'disabled': !loginform.valid}"
+                [disabled]="!loginform.valid" (click)="login()">Login</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>  
+      </mat-tab>
+      <mat-tab label="Forgot Password">
+        <ion-row>
+          <ion-col size="12" size-md="8" offset-md="2" size-xl="8" offset-xl="2">
+            <div class="h5 text__login">
+              Forgot Password
+            </div>
+            <p class="h8" style="color: white;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque faucibus, augue eu convallis
+              vulputate.</p>
+          </ion-col>
+    
+          <ion-col size="4" size-md="3">
+    
+          </ion-col>
+        </ion-row>
+        <form [formGroup]="resertform" onsubmit="document.getElementById('reset')">
+          <ion-row>
+            <ion-col size="12"  size-md="8" offset-md="2" size-xl="8" offset-xl="2" class="container_input">
+              <div>
+                <ion-row>
+                  <ion-col size="12">
+                    <mat-label>E-mail</mat-label>
+                    <mat-form-field>
+                      <input (Keyboard.enter)="hideKey()" type="email" matInput formControlName="email" required (keyup)="pass($event)">
+                      <mat-icon matSuffix>mail_outline</mat-icon>
+                      <mat-error>{{getErrorMessagereset()}}</mat-error>
+                    </mat-form-field>
+                  </ion-col>
+    
+                  <ion-col size="12" >
+                   <br>&nbsp;<br>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6" offset="3" size-md="4" offset-md="4">
+              <ion-button id="reset" class="buttom buttom__btn_login" [ngClass]="{'disabled': !resertform.valid}"
+                [disabled]="!resertform.valid" (click)="changePassword()">Change Password</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>  
+      </mat-tab>
+    </mat-tab-group>
+
+  </ion-grid>
+</ion-content-->
+
+<ion-header class="ion-no-border" *ngIf="show_header">
+  <ion-toolbar class="ios_">
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  
+    <div class="logo flex_img">
+      <img src="assets/prueba.png" alt="" class="position_fixed" style="width: 70%;">
+    </div>
+  
+
+  <div class="background">
+
+    <mat-tab-group headerPosition="below">
+      <mat-tab label="Login" *ngIf="!show_password">
+        <ion-row>
+          <ion-col size="12" size-md="8" offset-md="2" size-xl="8" offset-xl="2">
+            <div class="h5_login text__login">
+              LOGIN
+            </div>
+          </ion-col>
+
+          <ion-col size="4" size-md="3">
+
+          </ion-col>
+        </ion-row>
+        <form [formGroup]="loginform" onsubmit="document.getElementById('login')">
+          <ion-row>
+            <ion-col size="12" size-md="8" offset-md="2" size-xl="8" offset-xl="2" class="container_input">
+              <div class="padding">
+                <ion-row>
+                  <ion-col size="12">
+                    <mat-label>E-mail</mat-label>
+                    <mat-form-field>
+                      <input type="email" matInput formControlName="email" required>
+                      <mat-icon matSuffix>mail_outline</mat-icon>
+                      <mat-error>{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                  </ion-col>
+
+                  <ion-col size="12">
+                    <mat-label>Password</mat-label>
+                    <mat-form-field>
+                      <input type="{{type}}" matInput formControlName="password" required (keyup)="onKey($event)">
+                      <mat-icon matSuffix *ngIf="type === 'password'" (click)="onClick()">visibility</mat-icon>
+                      <mat-icon matSuffix *ngIf="type === 'text'" (click)="onClick()">visibility_off</mat-icon>
+                      <mat-error *ngIf="loginform.get('password').hasError('required')">Password required</mat-error>
+                    </mat-form-field>
+                  </ion-col>
+
+                  <ion-col size="12" class="end" (click)="recuperarPassword()">
+                    <mat-label class="end">Forgot Password</mat-label>
+                  </ion-col>
+
+                </ion-row>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6" offset="3" size-md="4" offset-md="4" style="text-align: center;">
+              <span id="login" class="h5_ text" [ngClass]="{'disabled': !loginform.valid}" [disabled]="!loginform.valid"
+                (click)="login()">SIGN-IN</span>
+              <!--ion-button id="login" class="buttom buttom__btn_login h5_ text__login_" [ngClass]="{'disabled': !loginform.valid}"
+                [disabled]="!loginform.valid" (click)="login()">SIGN-IN</ion-button-->
+            </ion-col>
+          </ion-row>
+        </form>
+      </mat-tab>
+      <mat-tab label="Forgot Password" *ngIf="show_password">
+        <ion-row>
+          <ion-col size="12" size-md="8" offset-md="2" size-xl="8" offset-xl="2">
+            <div class="h5_login text__login">
+              Forgot Password
+            </div>
+            <p class="h8" style="color: white;">Enter your email to send the new password.</p>
+          </ion-col>
+
+          <ion-col size="4" size-md="3">
+
+          </ion-col>
+        </ion-row>
+        <form [formGroup]="resertform" onsubmit="document.getElementById('reset')">
+          <ion-row>
+            <ion-col size="12" size-md="8" offset-md="2" size-xl="8" offset-xl="2" class="container_input">
+              <div>
+                <ion-row>
+                  <ion-col size="12">
+                    <mat-label>E-mail</mat-label>
+                    <mat-form-field>
+                      <input (Keyboard.enter)="hideKey()" type="email" matInput formControlName="email" required
+                        (keyup)="pass($event)">
+                      <mat-icon matSuffix>mail_outline</mat-icon>
+                      <mat-error>{{getErrorMessagereset()}}</mat-error>
+                    </mat-form-field>
+                  </ion-col>
+
+                  <ion-col size="12" class="end" (click)="login_()">
+                    <mat-label class="end">Login</mat-label>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6" offset="3" size-md="4" offset-md="4" style="text-align: center;">
+              <span id="reset" class="h5_ text" [ngClass]="{'disabled': !resertform.valid}"
+                [disabled]="!resertform.valid" (click)="changePassword()">Change Password</span>
+
+              <!--ion-button id="reset" class="buttom buttom__btn_login h5_ text__login_" [ngClass]="{'disabled': !resertform.valid}"
+                [disabled]="!resertform.valid" (click)="changePassword()">Change Password</ion-button-->
+            </ion-col>
+          </ion-row>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+</ion-content>

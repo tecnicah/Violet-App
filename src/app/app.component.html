@@ -1,0 +1,20 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+
+  <body class="padre zindex" *ngIf="splash">
+    <div class="welcome">
+      <img src="../assets/logo/splash-logo.svg" alt="">
+      <!--span id="splash-overlay" class="splash"></span-->
+      <!--span id="welcome" class="z-depth-4"></span-->
+    </div>
+  </body>
+
+  <!--div class='container' *ngIf="service.loader && !splash">
+    <img src="/assets/logo/logo_horizontal_blanco.svg">
+  </div-->
+  <audio preload="auto" id="back"></audio>
+  <audio preload="auto" id="lock"></audio>
+  <audio preload="auto" id="unlock"></audio>
+  <audio preload="auto" id="success"></audio>
+  <audio preload="auto" autoplay="true" id="error"></audio>
+</ion-app>

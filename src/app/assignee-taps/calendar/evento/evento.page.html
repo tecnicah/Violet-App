@@ -1,0 +1,109 @@
+<ion-header mode="ios">
+  <div class="header" [ngClass]="{'pading_ios': _services.padingios}">
+    <ion-back-button mode="ios" text="" (click)="back()"></ion-back-button>
+    <p class="h5">New Event</p>
+    <img src="/assets/icon/calendario.svg" style="width: 45px;" alt="">
+  </div>
+  <div class="headergray"></div>
+</ion-header>
+
+<ion-content>
+
+  <div class="appointments" *ngFor="let item of appointment; let i = index">
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="item.date" mode="ios">
+          </ion-datetime>
+          <ion-icon slot="end" name="calendar-clear-outline" class="blue icon-calendar"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6"></ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">End Time</ion-label>
+          <ion-input type="time" [(ngModel)]="item.startTime"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Start Time</ion-label>
+          <ion-input type="time" [(ngModel)]="item.endTime"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <!--ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Event Name</ion-label>
+          <ion-input type="text" [(ngModel)]="item.description"></ion-input>
+        </ion-item>
+      </ion-col-->
+
+      <!--ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Participants</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="">
+            <ion-select-option>Participants</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col-->
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Service Record</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="" [(ngModel)]="item.serviceRecordId"
+            (ngModelChange)="getWorkOrder()">
+            <ion-select-option *ngFor="let data_ of sr" [value]="data_.id">{{data_.serviceRecordNo}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Work Order</ion-label>
+          <ion-select interface="action-sheet" mode="ios" placeholder="" [(ngModel)]="item.workOrder"
+            (ngModelChange)="getServices(i)">
+            <ion-select-option *ngFor="let data_ of workOrder" [value]="data_.id">{{data_.numberWorkOrder}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <span>Service</span>
+      </ion-col>
+
+      <ion-col size="6" *ngFor="let servicios of data_check[i]; let j = index">
+        <div class="textarea">
+          <ion-item lines='none'>
+            <ion-checkbox (ionChange)="pushCheckbox(i, j, $event , servicios)">
+            </ion-checkbox>
+            <span style="font-size: 12px;"> {{servicios.serviceNumber}} </span>
+          </ion-item>
+        </div>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label style="color: gray;" class="h12" position="floating">Description</ion-label>
+        <ion-item class="ion-textarea">
+          <ion-textarea rows="4" [(ngModel)]="item.description" maxlength="300"></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-button class="buttom buttom__btn_login" (click)="save()">Create Event</ion-button>
+      </ion-col>
+    </ion-row>
+
+
+  </div>
+
+</ion-content>
